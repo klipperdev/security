@@ -22,8 +22,6 @@ interface ObjectFilterVoterInterface
      * Check if the value is supported by this voter.
      *
      * @param mixed $value
-     *
-     * @return bool
      */
     public function supports($value): bool;
 

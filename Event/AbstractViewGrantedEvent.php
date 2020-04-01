@@ -74,8 +74,6 @@ abstract class AbstractViewGrantedEvent extends Event
 
     /**
      * Check if the user has the view access of this object.
-     *
-     * @return bool
      */
     public function isGranted(): bool
     {
@@ -98,8 +96,6 @@ abstract class AbstractViewGrantedEvent extends Event
 
     /**
      * Check if the permission authorization checker must be skipped or not.
-     *
-     * @return bool
      */
     public function isSkipAuthorizationChecker(): bool
     {

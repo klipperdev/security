@@ -75,8 +75,6 @@ abstract class AbstractIdentityVoter extends Voter
      *
      * @param string                    $attribute The attribute
      * @param SecurityIdentityInterface $sid       The security identity
-     *
-     * @return bool
      */
     protected function isValidIdentity($attribute, SecurityIdentityInterface $sid): bool
     {
@@ -86,15 +84,11 @@ abstract class AbstractIdentityVoter extends Voter
 
     /**
      * Get the valid type of identity.
-     *
-     * @return string
      */
     abstract protected function getValidType(): string;
 
     /**
      * Get the default prefix.
-     *
-     * @return string
      */
     abstract protected function getDefaultPrefix(): string;
 }

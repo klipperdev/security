@@ -135,8 +135,6 @@ class SharingIdentityConfig implements SharingIdentityConfigInterface
      *
      * @param string      $classname The class name
      * @param null|string $alias     The alias
-     *
-     * @return string
      */
     private function buildAlias(string $classname, ?string $alias): string
     {

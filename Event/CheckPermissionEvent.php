@@ -87,8 +87,6 @@ class CheckPermissionEvent extends Event
 
     /**
      * Get the map of permissions.
-     *
-     * @return array
      */
     public function getPermissionMap(): array
     {
@@ -97,8 +95,6 @@ class CheckPermissionEvent extends Event
 
     /**
      * Get the operation.
-     *
-     * @return string
      */
     public function getOperation(): string
     {
@@ -107,8 +103,6 @@ class CheckPermissionEvent extends Event
 
     /**
      * Get the subject.
-     *
-     * @return null|SubjectIdentityInterface
      */
     public function getSubject(): ?SubjectIdentityInterface
     {
@@ -117,8 +111,6 @@ class CheckPermissionEvent extends Event
 
     /**
      * Get the field.
-     *
-     * @return null|string
      */
     public function getField(): ?string
     {
@@ -141,8 +133,6 @@ class CheckPermissionEvent extends Event
 
     /**
      * Check if the permission is granted or not.
-     *
-     * @return null|bool
      */
     public function isGranted(): ?bool
     {

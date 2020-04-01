@@ -20,8 +20,6 @@ interface PermissionFactoryInterface
 {
     /**
      * Create the permission configurations.
-     *
-     * @return PermissionConfigCollection
      */
     public function createConfigurations(): PermissionConfigCollection;
 }

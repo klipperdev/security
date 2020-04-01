@@ -46,8 +46,6 @@ class ObjectFilterListener extends AbstractPermissionListener
 
     /**
      * This method is executed after every load that doctrine performs.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function postLoad(LifecycleEventArgs $args): void
     {
@@ -104,8 +102,6 @@ class ObjectFilterListener extends AbstractPermissionListener
      * Get the Object Filter.
      *
      * @throws
-     *
-     * @return ObjectFilterInterface
      */
     protected function getObjectFilter(): ObjectFilterInterface
     {

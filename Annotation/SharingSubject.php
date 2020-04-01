@@ -28,17 +28,11 @@ class SharingSubject extends AbstractAnnotation
      */
     protected $visibility;
 
-    /**
-     * @return null|string
-     */
     public function getVisibility(): ?string
     {
         return $this->visibility;
     }
 
-    /**
-     * @param null|string $visibility
-     */
     public function setVisibility(?string $visibility): void
     {
         $this->visibility = $visibility;

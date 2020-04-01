@@ -45,8 +45,6 @@ class FieldVote
 
     /**
      * Get the subject.
-     *
-     * @return SubjectIdentityInterface
      */
     public function getSubject(): SubjectIdentityInterface
     {
@@ -55,8 +53,6 @@ class FieldVote
 
     /**
      * Get the field name.
-     *
-     * @return string
      */
     public function getField(): string
     {

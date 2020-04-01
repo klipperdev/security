@@ -20,9 +20,6 @@ use Klipper\Component\Security\Model\Traits\PermissionsInterface;
  */
 interface RoleInterface extends PermissionsInterface
 {
-    /**
-     * @return string
-     */
     public function __toString(): string;
 
     /**

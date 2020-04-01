@@ -78,8 +78,6 @@ class RoleHierarchyListener implements EventSubscriber
 
     /**
      * On flush action.
-     *
-     * @param OnFlushEventArgs $args
      */
     public function onFlush(OnFlushEventArgs $args): void
     {
@@ -123,8 +121,6 @@ class RoleHierarchyListener implements EventSubscriber
      * Get the merged collection of all scheduled collections.
      *
      * @param UnitOfWork $uow The unit of work
-     *
-     * @return array
      */
     protected function getAllCollections(UnitOfWork $uow): array
     {
@@ -162,8 +158,6 @@ class RoleHierarchyListener implements EventSubscriber
      * Check if the object is cacheable or not.
      *
      * @param object $object The object
-     *
-     * @return bool
      */
     protected function isCacheableObject($object): bool
     {
@@ -176,8 +170,6 @@ class RoleHierarchyListener implements EventSubscriber
      * @param array $mapping The mapping
      *
      * @throws
-     *
-     * @return bool
      */
     protected function isRequireAssociation(array $mapping): bool
     {
@@ -200,8 +192,6 @@ class RoleHierarchyListener implements EventSubscriber
      * Get the cache prefix key.
      *
      * @param object $object
-     *
-     * @return string
      */
     protected function getPrefix($object): string
     {

@@ -54,8 +54,6 @@ final class SubjectIdentity extends AbstractBaseIdentity implements SubjectIdent
 
     /**
      * Returns a textual representation of this object identity.
-     *
-     * @return string
      */
     public function __toString(): string
     {
@@ -68,8 +66,6 @@ final class SubjectIdentity extends AbstractBaseIdentity implements SubjectIdent
      * @param object $object The object
      *
      * @throws InvalidSubjectIdentityException
-     *
-     * @return SubjectIdentityInterface
      */
     public static function fromObject($object): SubjectIdentityInterface
     {

@@ -93,7 +93,7 @@ class ObjectFilter implements ObjectFilterInterface
     public function __construct(
         ObjectFilterExtensionInterface $ofe,
         PermissionManagerInterface $pm,
-        AuthorizationCheckerInterface  $ac,
+        AuthorizationCheckerInterface $ac,
         EventDispatcherInterface $dispatcher,
         ?UnitOfWorkInterface $uow = null
     ) {
@@ -256,8 +256,6 @@ class ObjectFilter implements ObjectFilterInterface
      * @param FieldVote $fieldVote The field vote
      * @param mixed     $value     The value
      * @param bool      $clearAll  Check if all fields must be filtered
-     *
-     * @return bool
      */
     protected function isFilterViewGranted(FieldVote $fieldVote, $value, bool $clearAll): bool
     {
@@ -271,8 +269,6 @@ class ObjectFilter implements ObjectFilterInterface
      *
      * @param FieldVote $fieldVote The field vote
      * @param array     $values    The map of old and new values
-     *
-     * @return bool
      */
     protected function isRestoreViewGranted(FieldVote $fieldVote, array $values): bool
     {
@@ -291,8 +287,6 @@ class ObjectFilter implements ObjectFilterInterface
      * Check if the object or object field can be seen.
      *
      * @param FieldVote|object $object The object or field vote
-     *
-     * @return bool
      */
     protected function isViewGranted($object): bool
     {
@@ -318,8 +312,6 @@ class ObjectFilter implements ObjectFilterInterface
      *
      * @param FieldVote $fieldVote The field vote
      * @param mixed     $value     The value
-     *
-     * @return bool
      */
     protected function isIdentifier(FieldVote $fieldVote, $value): bool
     {
@@ -332,8 +324,6 @@ class ObjectFilter implements ObjectFilterInterface
      * Check if the object is an excluded class.
      *
      * @param object $object The object
-     *
-     * @return bool
      */
     protected function isExcludedClass($object): bool
     {

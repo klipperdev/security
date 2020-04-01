@@ -21,26 +21,18 @@ interface SecurityIdentityInterface
 {
     /**
      * Get the identity type.
-     *
-     * @return string
      */
     public function getType(): string;
 
     /**
      * Get the identifier.
      * Typically, the name of subject.
-     *
-     * @return string
      */
     public function getIdentifier(): string;
 
     /**
      * This method is used to compare two security identities in order to
      * not rely on referential equality.
-     *
-     * @param SecurityIdentityInterface $identity
-     *
-     * @return bool
      */
     public function equals(SecurityIdentityInterface $identity): bool;
 }

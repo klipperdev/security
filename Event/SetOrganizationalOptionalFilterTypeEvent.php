@@ -37,8 +37,6 @@ class SetOrganizationalOptionalFilterTypeEvent extends Event
 
     /**
      * Get the optional filter type.
-     *
-     * @return string
      */
     public function getOptionalFilterType(): string
     {

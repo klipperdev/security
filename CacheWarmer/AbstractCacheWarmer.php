@@ -33,8 +33,6 @@ abstract class AbstractCacheWarmer implements CacheWarmerInterface, ServiceSubsc
 
     /**
      * Constructor.
-     *
-     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {

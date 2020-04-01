@@ -202,8 +202,6 @@ class SharingProvider implements SharingProviderInterface
      * @param QueryBuilder                $qb       The query builder
      * @param SubjectIdentityInterface[]  $subjects The subjects
      * @param SecurityIdentityInterface[] $sids     The security identities
-     *
-     * @return QueryBuilder
      */
     private function addWhereForSharing(QueryBuilder $qb, array $subjects, array $sids): QueryBuilder
     {
@@ -233,8 +231,6 @@ class SharingProvider implements SharingProviderInterface
      *
      * @param QueryBuilder                $qb   The query builder
      * @param SecurityIdentityInterface[] $sids The security identities
-     *
-     * @return QueryBuilder
      */
     private function addWhereSecurityIdentitiesForSharing(QueryBuilder $qb, array $sids): QueryBuilder
     {
@@ -267,8 +263,6 @@ class SharingProvider implements SharingProviderInterface
      * Group the security identities definition.
      *
      * @param SecurityIdentityInterface[] $sids The security identities
-     *
-     * @return array
      */
     private function groupSecurityIdentities(array $sids): array
     {
@@ -306,8 +300,6 @@ class SharingProvider implements SharingProviderInterface
 
     /**
      * Get the role repository.
-     *
-     * @return EntityRepository
      */
     private function getRoleRepository(): EntityRepository
     {
@@ -320,8 +312,6 @@ class SharingProvider implements SharingProviderInterface
 
     /**
      * Get the sharing repository.
-     *
-     * @return EntityRepository
      */
     private function getSharingRepository(): EntityRepository
     {
@@ -336,8 +326,6 @@ class SharingProvider implements SharingProviderInterface
      * Get the repository.
      *
      * @param string $classname The class name
-     *
-     * @return EntityRepository
      */
     private function getRepository($classname): EntityRepository
     {

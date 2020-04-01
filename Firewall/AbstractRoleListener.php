@@ -59,8 +59,6 @@ abstract class AbstractRoleListener
 
     /**
      * Check if the listener is enabled.
-     *
-     * @return bool
      */
     public function isEnabled(): bool
     {

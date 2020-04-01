@@ -191,8 +191,6 @@ class PermissionProvider implements PermissionProviderInterface
 
     /**
      * Get the permission repository.
-     *
-     * @return EntityRepository
      */
     private function getPermissionRepository(): EntityRepository
     {

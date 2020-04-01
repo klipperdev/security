@@ -32,8 +32,6 @@ interface PermissionsInterface
      * Check if the role has the permission.
      *
      * @param PermissionInterface $permission The permission
-     *
-     * @return bool
      */
     public function hasPermission(PermissionInterface $permission): bool;
 

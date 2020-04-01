@@ -39,8 +39,6 @@ interface SharingInterface extends PermissionsInterface, RoleableInterface
 
     /**
      * Get the classname of subject.
-     *
-     * @return null|string
      */
     public function getSubjectClass(): ?string;
 
@@ -55,8 +53,6 @@ interface SharingInterface extends PermissionsInterface, RoleableInterface
 
     /**
      * Get the id of subject.
-     *
-     * @return null|string
      */
     public function getSubjectId(): ?string;
 
@@ -71,8 +67,6 @@ interface SharingInterface extends PermissionsInterface, RoleableInterface
 
     /**
      * Get the classname of identity.
-     *
-     * @return null|string
      */
     public function getIdentityClass(): ?string;
 
@@ -87,8 +81,6 @@ interface SharingInterface extends PermissionsInterface, RoleableInterface
 
     /**
      * Get the unique name of identity.
-     *
-     * @return null|string
      */
     public function getIdentityName(): ?string;
 
@@ -103,8 +95,6 @@ interface SharingInterface extends PermissionsInterface, RoleableInterface
 
     /**
      * Check if the sharing entry is enabled.
-     *
-     * @return bool
      */
     public function isEnabled(): bool;
 
@@ -119,8 +109,6 @@ interface SharingInterface extends PermissionsInterface, RoleableInterface
 
     /**
      * Get the date when the sharing entry must start.
-     *
-     * @return null|\DateTime
      */
     public function getStartedAt(): ?\DateTime;
 
@@ -135,8 +123,6 @@ interface SharingInterface extends PermissionsInterface, RoleableInterface
 
     /**
      * Get the date when the sharing entry must end.
-     *
-     * @return null|\DateTime
      */
     public function getEndedAt(): ?\DateTime;
 }

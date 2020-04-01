@@ -67,8 +67,6 @@ class AnonymousRoleListener extends AbstractRoleListener
 
     /**
      * Check if the anonymous role is present in config.
-     *
-     * @return bool
      */
     private function hasRole(): bool
     {
@@ -79,8 +77,6 @@ class AnonymousRoleListener extends AbstractRoleListener
 
     /**
      * Check if the token is a anonymous token.
-     *
-     * @return bool
      */
     private function isAnonymous(): bool
     {

@@ -93,8 +93,6 @@ class ExpressionVoter implements VoterInterface
      *
      * @param TokenInterface $token   The token
      * @param mixed          $subject The subject to secure
-     *
-     * @return array
      */
     protected function getVariables(TokenInterface $token, $subject): array
     {

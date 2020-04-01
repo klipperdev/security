@@ -40,8 +40,6 @@ interface OrganizationRolesInterface extends OrganizationInterface
      * Check the presence of role in organization.
      *
      * @param string $role The role name
-     *
-     * @return bool
      */
     public function hasOrganizationRole(string $role): bool;
 

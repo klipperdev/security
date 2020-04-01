@@ -43,8 +43,6 @@ interface ExpressionVariableStorageInterface
      * Check if the variable is defined.
      *
      * @param string $name The variable name
-     *
-     * @return bool
      */
     public function has(string $name): bool;
 
@@ -59,8 +57,6 @@ interface ExpressionVariableStorageInterface
 
     /**
      * Get all variables.
-     *
-     * @return array
      */
     public function getAll(): array;
 

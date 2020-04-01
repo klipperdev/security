@@ -36,8 +36,6 @@ interface PermissionInterface
 
     /**
      * Get the operation.
-     *
-     * @return null|string
      */
     public function getOperation(): ?string;
 
@@ -68,8 +66,6 @@ interface PermissionInterface
 
     /**
      * Get the classname.
-     *
-     * @return null|string
      */
     public function getClass(): ?string;
 
@@ -84,8 +80,6 @@ interface PermissionInterface
 
     /**
      * Get the field.
-     *
-     * @return null|string
      */
     public function getField(): ?string;
 }

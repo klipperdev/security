@@ -201,8 +201,6 @@ class PermissionManager extends AbstractPermissionManager
      * @param null|FieldVote|object|string|SubjectIdentityInterface $subject   The object or class name or field vote
      * @param null|string                                           $class     The class name
      * @param null|string                                           $field     The field name
-     *
-     * @return null|PermissionChecking
      */
     private function getConfigPermission(RoleSecurityIdentity $sid, string $operation, $subject = null, ?string $class = null, ?string $field = null): ?PermissionChecking
     {
@@ -226,8 +224,6 @@ class PermissionManager extends AbstractPermissionManager
      * @param string                                                $operation The operation
      * @param null|FieldVote|object|string|SubjectIdentityInterface $subject   The object or class name or field vote
      * @param null|string                                           $class     The class name
-     *
-     * @return bool
      */
     private function isConfigGranted(RoleSecurityIdentity $sid, string $operation, $subject = null, ?string $class = null): bool
     {
@@ -247,8 +243,6 @@ class PermissionManager extends AbstractPermissionManager
 
     /**
      * Get the config permissions.
-     *
-     * @return array
      */
     private function getConfigPermissions(): array
     {
@@ -274,8 +268,6 @@ class PermissionManager extends AbstractPermissionManager
      * @param string                        $operation The operation
      * @param null|SubjectIdentityInterface $subject   The subject
      * @param null|string                   $field     The field of subject
-     *
-     * @return bool
      */
     private function doIsGrantedPermission($id, array $sids, string $operation, ?SubjectIdentityInterface $subject = null, ?string $field = null): bool
     {
@@ -345,8 +337,6 @@ class PermissionManager extends AbstractPermissionManager
      * @param string      $operation The permission operation
      * @param null|string $class     The class name
      * @param null|string $field     The field
-     *
-     * @return bool
      */
     private function isConfigPermission(string $operation, ?string $class = null, ?string $field = null): bool
     {
@@ -381,8 +371,6 @@ class PermissionManager extends AbstractPermissionManager
 
     /**
      * Get the map of the config permissions.
-     *
-     * @return array
      */
     private function getMapConfigPermissions(): array
     {
@@ -423,8 +411,6 @@ class PermissionManager extends AbstractPermissionManager
      * @param string                        $operation The operation
      * @param null|SubjectIdentityInterface $subject   The subject
      * @param null|string                   $field     The field of subject
-     *
-     * @return bool
      */
     private function isSharingGranted(string $operation, ?SubjectIdentityInterface $subject = null, ?string $field = null): bool
     {

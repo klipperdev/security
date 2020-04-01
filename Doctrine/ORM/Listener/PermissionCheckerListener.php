@@ -90,8 +90,6 @@ class PermissionCheckerListener extends AbstractPermissionListener
      * Gets security authorization checker.
      *
      * @throws
-     *
-     * @return AuthorizationCheckerInterface
      */
     protected function getAuthorizationChecker(): AuthorizationCheckerInterface
     {

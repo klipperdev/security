@@ -27,8 +27,6 @@ abstract class AbstractSecurityEvent extends Event
 
     /**
      * Check if the permission manager is enabled.
-     *
-     * @return bool
      */
     public function isPermissionEnabled(): bool
     {

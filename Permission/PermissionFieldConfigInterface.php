@@ -20,8 +20,6 @@ interface PermissionFieldConfigInterface
 {
     /**
      * Get the field name.
-     *
-     * @return string
      */
     public function getField(): string;
 
@@ -29,8 +27,6 @@ interface PermissionFieldConfigInterface
      * Check if the operation is defined.
      *
      * @param string $operation The operation name
-     *
-     * @return bool
      */
     public function hasOperation(string $operation): bool;
 
@@ -43,15 +39,11 @@ interface PermissionFieldConfigInterface
 
     /**
      * Check if the field permission is editable.
-     *
-     * @return bool
      */
     public function isEditable(): bool;
 
     /**
      * Get the value of editable.
-     *
-     * @return null|bool
      */
     public function getEditable(): ?bool;
 
@@ -64,8 +56,6 @@ interface PermissionFieldConfigInterface
      * ]
      *
      * @param string $aliasPermission The operation or alias of operation
-     *
-     * @return string
      */
     public function getMappingPermission(string $aliasPermission): string;
 

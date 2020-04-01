@@ -56,8 +56,6 @@ abstract class AbstractListener implements EventSubscriber
      * Gets security token storage.
      *
      * @throws
-     *
-     * @return TokenStorageInterface
      */
     public function getTokenStorage(): TokenStorageInterface
     {
@@ -84,8 +82,6 @@ abstract class AbstractListener implements EventSubscriber
      * Get the Permission Manager.
      *
      * @throws
-     *
-     * @return PermissionManagerInterface
      */
     public function getPermissionManager(): PermissionManagerInterface
     {
@@ -116,8 +112,6 @@ abstract class AbstractListener implements EventSubscriber
 
     /**
      * Get the map of properties and methods required on the init.
-     *
-     * @return array
      */
     abstract protected function getInitProperties(): array;
 }

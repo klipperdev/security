@@ -135,8 +135,6 @@ class SharingDeleteListener implements EventSubscriber
      * Get the sharing manager.
      *
      * @throws
-     *
-     * @return SharingManagerInterface
      */
     public function getSharingManager(): SharingManagerInterface
     {

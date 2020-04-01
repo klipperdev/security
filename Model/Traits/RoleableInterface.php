@@ -22,8 +22,6 @@ interface RoleableInterface
      * Check if the role exist.
      *
      * @param string $role The role name
-     *
-     * @return bool
      */
     public function hasRole(string $role): bool;
 

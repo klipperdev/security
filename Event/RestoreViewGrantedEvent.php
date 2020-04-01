@@ -53,8 +53,6 @@ class RestoreViewGrantedEvent extends AbstractViewGrantedEvent
 
     /**
      * Get the permission field vote.
-     *
-     * @return FieldVote
      */
     public function getFieldVote(): FieldVote
     {

@@ -84,8 +84,6 @@ abstract class AbstractGetFilterEvent extends Event
 
     /**
      * Get the entity manager.
-     *
-     * @return EntityManagerInterface
      */
     public function getEntityManager(): EntityManagerInterface
     {
@@ -94,8 +92,6 @@ abstract class AbstractGetFilterEvent extends Event
 
     /**
      * Get the doctrine connection.
-     *
-     * @return Connection
      */
     public function getConnection(): Connection
     {
@@ -106,8 +102,6 @@ abstract class AbstractGetFilterEvent extends Event
      * Get the doctrine metadata of class name.
      *
      * @param string $classname The class name
-     *
-     * @return ClassMetadata
      */
     public function getClassMetadata($classname): ClassMetadata
     {
@@ -116,8 +110,6 @@ abstract class AbstractGetFilterEvent extends Event
 
     /**
      * Get the doctrine metadata of sharing class.
-     *
-     * @return ClassMetadata
      */
     public function getSharingClassMetadata(): ClassMetadata
     {
@@ -144,8 +136,6 @@ abstract class AbstractGetFilterEvent extends Event
      * Check if a parameter was set for the filter.
      *
      * @param string $name The name of the parameter
-     *
-     * @return bool
      */
     public function hasParameter(string $name): bool
     {
@@ -156,8 +146,6 @@ abstract class AbstractGetFilterEvent extends Event
      * Get a parameter to use in a query.
      *
      * @param string $name The name of the parameter
-     *
-     * @return string
      */
     public function getParameter(string $name): string
     {
@@ -190,8 +178,6 @@ abstract class AbstractGetFilterEvent extends Event
 
     /**
      * Get the target entity.
-     *
-     * @return ClassMetadata
      */
     public function getTargetEntity(): ClassMetadata
     {
@@ -200,8 +186,6 @@ abstract class AbstractGetFilterEvent extends Event
 
     /**
      * Get the target table alias.
-     *
-     * @return string
      */
     public function getTargetTableAlias(): string
     {
@@ -224,8 +208,6 @@ abstract class AbstractGetFilterEvent extends Event
 
     /**
      * Get the filter constraint.
-     *
-     * @return string
      */
     public function getFilterConstraint(): string
     {

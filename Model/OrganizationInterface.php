@@ -20,9 +20,6 @@ use Doctrine\Common\Collections\Collection;
  */
 interface OrganizationInterface
 {
-    /**
-     * @return string
-     */
     public function __toString(): string;
 
     /**
@@ -66,8 +63,6 @@ interface OrganizationInterface
 
     /**
      * Check if the organization is a dedicated organization for the user.
-     *
-     * @return bool
      */
     public function isUserOrganization(): bool;
 
@@ -89,8 +84,6 @@ interface OrganizationInterface
      * Check the presence of username in organization.
      *
      * @param string $username The username
-     *
-     * @return bool
      */
     public function hasOrganizationUser(string $username): bool;
 

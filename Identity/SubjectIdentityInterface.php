@@ -20,15 +20,11 @@ interface SubjectIdentityInterface
 {
     /**
      * Get the type of the subject. Typically, this is the PHP class name.
-     *
-     * @return string
      */
     public function getType(): string;
 
     /**
      * Get the unique identifier.
-     *
-     * @return string
      */
     public function getIdentifier(): string;
 
@@ -49,8 +45,6 @@ interface SubjectIdentityInterface
      * Example for Subject Equality: $subject1->getId() === $subject2->getId()
      *
      * @param SubjectIdentityInterface $identity The subject identity
-     *
-     * @return bool
      */
     public function equals(SubjectIdentityInterface $identity): bool;
 }

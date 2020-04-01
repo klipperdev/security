@@ -177,8 +177,6 @@ class SharingManager extends AbstractSharingManager
      * @param string                        $operation The operation
      * @param null|SubjectIdentityInterface $subject   The subject
      * @param null|string                   $field     The field of subject
-     *
-     * @return bool
      */
     private function isSharingGranted(string $operation, ?SubjectIdentityInterface $subject = null, ?string $field = null): bool
     {

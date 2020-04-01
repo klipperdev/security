@@ -91,8 +91,6 @@ trait OrganizationGroupsTrait
 
     /**
      * Check if the organization is a user organization or not.
-     *
-     * @return bool
      */
     abstract public function isUserOrganization(): bool;
 }

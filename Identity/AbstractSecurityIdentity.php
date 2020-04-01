@@ -22,8 +22,6 @@ abstract class AbstractSecurityIdentity extends AbstractBaseIdentity implements 
      * This is not used for equality comparison, but only for debugging.
      *
      * @throws
-     *
-     * @return string
      */
     public function __toString(): string
     {

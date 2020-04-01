@@ -162,8 +162,6 @@ class SharingFilterSubscriber extends AbstractFilterSubscriber
      * Get the map of the security identities.
      *
      * @param SecurityIdentityInterface[] $sids The security identities
-     *
-     * @return array
      */
     private function getMapSecurityIdentities(array $sids): array
     {

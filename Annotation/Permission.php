@@ -106,65 +106,41 @@ class Permission extends AbstractAnnotation
         }
     }
 
-    /**
-     * @return null|string
-     */
     public function getMaster(): ?string
     {
         return $this->master;
     }
 
-    /**
-     * @param null|string $master
-     */
     public function setMaster(?string $master): void
     {
         $this->master = $master;
     }
 
-    /**
-     * @return array
-     */
     public function getMasterFieldMappingPermissions(): array
     {
         return $this->masterFieldMappingPermissions;
     }
 
-    /**
-     * @param array $masterFieldMappingPermissions
-     */
     public function setMasterFieldMappingPermissions(array $masterFieldMappingPermissions): void
     {
         $this->masterFieldMappingPermissions = $masterFieldMappingPermissions;
     }
 
-    /**
-     * @return null|bool
-     */
     public function getBuildFields(): ?bool
     {
         return $this->buildFields;
     }
 
-    /**
-     * @param null|bool $buildFields
-     */
     public function setBuildFields(?bool $buildFields): void
     {
         $this->buildFields = $buildFields;
     }
 
-    /**
-     * @return null|bool
-     */
     public function getBuildDefaultFields(): ?bool
     {
         return $this->buildDefaultFields;
     }
 
-    /**
-     * @param null|bool $buildDefaultFields
-     */
     public function setBuildDefaultFields(?bool $buildDefaultFields): void
     {
         $this->buildDefaultFields = $buildDefaultFields;

@@ -51,8 +51,6 @@ class PostLoadPermissionsEvent extends AbstractLoadPermissionsEvent
 
     /**
      * Get the map of permissions.
-     *
-     * @return array
      */
     public function getPermissionMap(): array
     {

@@ -25,8 +25,6 @@ final class UserSecurityIdentity extends AbstractSecurityIdentity
      * Creates a user security identity from a UserInterface.
      *
      * @param UserInterface $user The user
-     *
-     * @return UserSecurityIdentity
      */
     public static function fromAccount(UserInterface $user): UserSecurityIdentity
     {
@@ -39,8 +37,6 @@ final class UserSecurityIdentity extends AbstractSecurityIdentity
      * @param TokenInterface $token The token
      *
      * @throws InvalidArgumentException When the user class not implements "Klipper\Component\Security\Model\UserInterface"
-     *
-     * @return UserSecurityIdentity
      */
     public static function fromToken(TokenInterface $token): UserSecurityIdentity
     {

@@ -72,8 +72,6 @@ abstract class IdentityUtils
      * Check if the security identity is valid.
      *
      * @param SecurityIdentityInterface $sid The security identity
-     *
-     * @return bool
      */
     public static function isValid(SecurityIdentityInterface $sid): bool
     {

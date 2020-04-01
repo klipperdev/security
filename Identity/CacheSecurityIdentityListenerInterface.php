@@ -20,8 +20,6 @@ interface CacheSecurityIdentityListenerInterface
 {
     /**
      * Get the cache id for the event security identities.
-     *
-     * @return string
      */
     public function getCacheId(): string;
 }

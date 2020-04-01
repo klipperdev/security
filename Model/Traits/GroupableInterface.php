@@ -24,8 +24,6 @@ interface GroupableInterface
      * Indicates whether the model belongs to the specified group or not.
      *
      * @param string $name The name of the group
-     *
-     * @return bool
      */
     public function hasGroup(string $name): bool;
 

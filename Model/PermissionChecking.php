@@ -49,8 +49,6 @@ class PermissionChecking
 
     /**
      * Get the permission.
-     *
-     * @return PermissionInterface
      */
     public function getPermission(): PermissionInterface
     {
@@ -59,8 +57,6 @@ class PermissionChecking
 
     /**
      * Check if the permission is granted.
-     *
-     * @return bool
      */
     public function isGranted(): bool
     {
@@ -69,8 +65,6 @@ class PermissionChecking
 
     /**
      * Check if the permission is locked.
-     *
-     * @return bool
      */
     public function isLocked(): bool
     {

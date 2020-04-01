@@ -33,8 +33,6 @@ trait SecurityIdentityEventTrait
 
     /**
      * Get the token.
-     *
-     * @return TokenInterface
      */
     public function getToken(): TokenInterface
     {

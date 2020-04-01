@@ -159,19 +159,19 @@ final class PrivateSharingSubscriberTest extends TestCase
         ;
 
         $validFilter = <<<'SELECTCLAUSE'
-t0.id IN (SELECT
-    s.subject_id
-FROM
-    test_sharing s
-WHERE
-    s.subject_class = 'Klipper\Component\Security\Tests\Fixtures\Model\MockObject'
-    AND s.enabled IS TRUE
-    AND (s.started_at IS NULL OR s.started_at <= CURRENT_TIMESTAMP)
-    AND (s.ended_at IS NULL OR s.ended_at >= CURRENT_TIMESTAMP)
-    AND ((s.identity_class = 'Klipper\Component\Security\Tests\Fixtures\Model\MockRole' AND s.identity_name IN ('ROLE_USER')) OR (s.identity_class = 'Klipper\Component\Security\Tests\Fixtures\Model\MockUserRoleable' AND s.identity_name IN ('user.test')))
-GROUP BY
-    s.subject_id)
-SELECTCLAUSE;
+            t0.id IN (SELECT
+                s.subject_id
+            FROM
+                test_sharing s
+            WHERE
+                s.subject_class = 'Klipper\Component\Security\Tests\Fixtures\Model\MockObject'
+                AND s.enabled IS TRUE
+                AND (s.started_at IS NULL OR s.started_at <= CURRENT_TIMESTAMP)
+                AND (s.ended_at IS NULL OR s.ended_at >= CURRENT_TIMESTAMP)
+                AND ((s.identity_class = 'Klipper\Component\Security\Tests\Fixtures\Model\MockRole' AND s.identity_name IN ('ROLE_USER')) OR (s.identity_class = 'Klipper\Component\Security\Tests\Fixtures\Model\MockUserRoleable' AND s.identity_name IN ('user.test')))
+            GROUP BY
+                s.subject_id)
+            SELECTCLAUSE;
 
         $this->listener->getFilter($this->event);
         static::assertSame($validFilter, $this->event->getFilterConstraint());
@@ -256,21 +256,21 @@ SELECTCLAUSE;
         }
 
         $validFilter = <<<SELECTCLAUSE
-{$ownerFilter}
-    OR
-(t0.id IN (SELECT
-    s.subject_id
-FROM
-    test_sharing s
-WHERE
-    s.subject_class = '{$objectClass}'
-    AND s.enabled IS TRUE
-    AND (s.started_at IS NULL OR s.started_at <= CURRENT_TIMESTAMP)
-    AND (s.ended_at IS NULL OR s.ended_at >= CURRENT_TIMESTAMP)
-    AND ((s.identity_class = 'Klipper\\Component\\Security\\Tests\\Fixtures\\Model\\MockRole' AND s.identity_name IN ('ROLE_USER')) OR (s.identity_class = 'Klipper\\Component\\Security\\Tests\\Fixtures\\Model\\MockUserRoleable' AND s.identity_name IN ('user.test')))
-GROUP BY
-    s.subject_id))
-SELECTCLAUSE;
+            {$ownerFilter}
+                OR
+            (t0.id IN (SELECT
+                s.subject_id
+            FROM
+                test_sharing s
+            WHERE
+                s.subject_class = '{$objectClass}'
+                AND s.enabled IS TRUE
+                AND (s.started_at IS NULL OR s.started_at <= CURRENT_TIMESTAMP)
+                AND (s.ended_at IS NULL OR s.ended_at >= CURRENT_TIMESTAMP)
+                AND ((s.identity_class = 'Klipper\\Component\\Security\\Tests\\Fixtures\\Model\\MockRole' AND s.identity_name IN ('ROLE_USER')) OR (s.identity_class = 'Klipper\\Component\\Security\\Tests\\Fixtures\\Model\\MockUserRoleable' AND s.identity_name IN ('user.test')))
+            GROUP BY
+                s.subject_id))
+            SELECTCLAUSE;
 
         $this->listener->getFilter($this->event);
         static::assertSame($validFilter, $this->event->getFilterConstraint());

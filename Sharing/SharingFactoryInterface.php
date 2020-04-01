@@ -22,8 +22,6 @@ interface SharingFactoryInterface
      * Create the sharing subject configurations.
      *
      * @throws
-     *
-     * @return SharingSubjectConfigCollection
      */
     public function createSubjectConfigurations(): SharingSubjectConfigCollection;
 
@@ -31,8 +29,6 @@ interface SharingFactoryInterface
      * Create the sharing identity configurations.
      *
      * @throws
-     *
-     * @return SharingIdentityConfigCollection
      */
     public function createIdentityConfigurations(): SharingIdentityConfigCollection;
 }

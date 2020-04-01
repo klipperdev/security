@@ -24,8 +24,6 @@ abstract class SubjectUtils
      * Get the subject identity.
      *
      * @param object|string|SubjectIdentityInterface $subject The subject instance or classname
-     *
-     * @return SubjectIdentityInterface
      */
     public static function getSubjectIdentity($subject): SubjectIdentityInterface
     {

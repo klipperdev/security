@@ -40,8 +40,6 @@ interface OrganizationGroupsInterface extends OrganizationInterface
      * Check the presence of group in organization.
      *
      * @param string $group The group name
-     *
-     * @return bool
      */
     public function hasOrganizationGroup(string $group): bool;
 

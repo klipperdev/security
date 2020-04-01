@@ -64,8 +64,6 @@ class AnnotationLoader extends AbstractAnnotationLoader
      *
      * @param \ReflectionClass           $refClass The reflection class
      * @param PermissionConfigCollection $configs  The permission config collection
-     *
-     * @return PermissionConfigCollection
      */
     private function getConfigurations(\ReflectionClass $refClass, PermissionConfigCollection $configs): PermissionConfigCollection
     {
@@ -150,8 +148,6 @@ class AnnotationLoader extends AbstractAnnotationLoader
      *
      * @param string          $field      The field name
      * @param PermissionField $annotation The permission field annotation
-     *
-     * @return PermissionFieldConfigInterface
      */
     private function convertPermissionField(string $field, PermissionField $annotation): PermissionFieldConfigInterface
     {

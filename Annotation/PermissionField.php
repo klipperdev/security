@@ -68,17 +68,11 @@ class PermissionField extends AbstractAnnotation
         $this->mappingPermissions = $mappingPermissions;
     }
 
-    /**
-     * @return null|bool
-     */
     public function getEditable(): ?bool
     {
         return $this->editable;
     }
 
-    /**
-     * @param null|bool $editable
-     */
     public function setEditable(?bool $editable): void
     {
         $this->editable = $editable;

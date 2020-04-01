@@ -26,8 +26,6 @@ abstract class OrganizationalUtil
      *
      * @param object|OrganizationalInterface $object The organizational object
      * @param string                         $name   The name
-     *
-     * @return string
      */
     public static function formatName($object, string $name): string
     {
@@ -41,8 +39,6 @@ abstract class OrganizationalUtil
      *
      * @param string                     $name         The name
      * @param null|OrganizationInterface $organization The organization
-     *
-     * @return string
      */
     public static function formatNameWithOrg(string $name, ?OrganizationInterface $organization = null): string
     {
@@ -58,8 +54,6 @@ abstract class OrganizationalUtil
      * Format the organizational name without suffix.
      *
      * @param string $name The name
-     *
-     * @return string
      */
     public static function format(string $name): string
     {
@@ -74,8 +68,6 @@ abstract class OrganizationalUtil
      * Get the organization suffix.
      *
      * @param string $name The name
-     *
-     * @return string
      */
     public static function getSuffix(string $name): string
     {

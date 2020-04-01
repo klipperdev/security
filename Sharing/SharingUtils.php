@@ -43,8 +43,6 @@ abstract class SharingUtils
      * Get the cache id of subject.
      *
      * @param SubjectIdentityInterface $subject The subject
-     *
-     * @return string
      */
     public static function getCacheId(SubjectIdentityInterface $subject): string
     {
@@ -55,8 +53,6 @@ abstract class SharingUtils
      * Get the cache id of sharing subject.
      *
      * @param SharingInterface $sharing The sharing entry
-     *
-     * @return string
      */
     public static function getSharingCacheId(SharingInterface $sharing): string
     {

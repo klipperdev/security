@@ -61,8 +61,6 @@ class CacheSecurityIdentityManager extends SecurityIdentityManager implements Ca
      * Build the unique identifier for execution cache.
      *
      * @param TokenInterface $token The token
-     *
-     * @return string
      */
     protected function buildId(TokenInterface $token): string
     {

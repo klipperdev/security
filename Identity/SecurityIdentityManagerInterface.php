@@ -24,8 +24,6 @@ interface SecurityIdentityManagerInterface
      * Add the special role.
      *
      * @param string $role The special role
-     *
-     * @return SecurityIdentityManagerInterface
      */
     public function addSpecialRole(string $role): SecurityIdentityManagerInterface;
 

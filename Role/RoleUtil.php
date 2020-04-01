@@ -38,8 +38,6 @@ abstract class RoleUtil
      * Format the role name.
      *
      * @param RoleInterface|string $role The role
-     *
-     * @return string
      */
     public static function formatName($role): string
     {

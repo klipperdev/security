@@ -32,8 +32,6 @@ interface PermissionManagerInterface
      *
      * If the permission manager is enabled, all asked authorizations will be accepted
      * depending on the permissions.
-     *
-     * @return bool
      */
     public function isEnabled(): bool;
 
@@ -57,8 +55,6 @@ interface PermissionManagerInterface
      * Check if the configuration of permission is present.
      *
      * @param string $class The class name
-     *
-     * @return bool
      */
     public function hasConfig(string $class): bool;
 
@@ -68,8 +64,6 @@ interface PermissionManagerInterface
      * @param string $class The class name
      *
      * @throws PermissionConfigNotFoundException When the configuration of permission is not found
-     *
-     * @return PermissionConfigInterface
      */
     public function getConfig(string $class): PermissionConfigInterface;
 
@@ -84,8 +78,6 @@ interface PermissionManagerInterface
      * Check if the subject is managed.
      *
      * @param FieldVote|object|string|SubjectIdentityInterface $subject The object or class name
-     *
-     * @return bool
      */
     public function isManaged($subject): bool;
 
@@ -94,8 +86,6 @@ interface PermissionManagerInterface
      *
      * @param object|string|SubjectIdentityInterface $subject The object or class name
      * @param string                                 $field   The field
-     *
-     * @return bool
      */
     public function isFieldManaged($subject, string $field): bool;
 
@@ -105,8 +95,6 @@ interface PermissionManagerInterface
      * @param SecurityIdentityInterface[]                           $sids        The security identities
      * @param string|string[]                                       $permissions The permissions
      * @param null|FieldVote|object|string|SubjectIdentityInterface $subject     The object or class name or field vote
-     *
-     * @return bool
      */
     public function isGranted(array $sids, $permissions, $subject = null): bool;
 
@@ -117,8 +105,6 @@ interface PermissionManagerInterface
      * @param string|string[]                        $permissions The permissions
      * @param object|string|SubjectIdentityInterface $subject     The object or class name
      * @param string                                 $field       The field
-     *
-     * @return bool
      */
     public function isFieldGranted(array $sids, $permissions, $subject, string $field): bool;
 

@@ -296,8 +296,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
      * Get the master subject.
      *
      * @param null|object|string|SubjectIdentityInterface $subject The subject instance or classname
-     *
-     * @return null|SubjectIdentityInterface
      */
     abstract protected function getMaster($subject): ?SubjectIdentityInterface;
 
@@ -306,8 +304,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
      *
      * @param SubjectIdentityInterface $subject The subject identity
      * @param null|string              $field   The field name
-     *
-     * @return bool
      */
     abstract protected function doIsManaged(SubjectIdentityInterface $subject, ?string $field = null): bool;
 
@@ -318,8 +314,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
      * @param string[]                      $permissions The required permissions
      * @param null|SubjectIdentityInterface $subject     The subject
      * @param null|string                   $field       The field of subject
-     *
-     * @return bool
      */
     abstract protected function doIsGranted(array $sids, array $permissions, ?SubjectIdentityInterface $subject = null, ?string $field = null): bool;
 
@@ -365,8 +359,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
      * @param string[]                      $permissions The permissions
      * @param null|SubjectIdentityInterface $subject     The subject identity
      * @param null|string                   $field       The field name
-     *
-     * @return array
      */
     private function getMasterPermissions(array $permissions, ?SubjectIdentityInterface $subject, ?string $field): array
     {

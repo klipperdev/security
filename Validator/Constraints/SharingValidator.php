@@ -163,8 +163,6 @@ class SharingValidator extends ConstraintValidator
      * @param Sharing $constraint   The sharing constraint
      * @param string  $class        The class
      * @param string  $propertyPath The property path
-     *
-     * @return bool
      */
     private function validateClass(Sharing $constraint, ?string $class, string $propertyPath): bool
     {

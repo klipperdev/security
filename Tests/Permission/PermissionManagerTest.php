@@ -450,8 +450,6 @@ final class PermissionManagerTest extends TestCase
 
     /**
      * @dataProvider getRoles
-     *
-     * @param MockRole $role
      */
     public function testGetRolePermissions(MockRole $role): void
     {
@@ -484,8 +482,6 @@ final class PermissionManagerTest extends TestCase
 
     /**
      * @dataProvider getRoles
-     *
-     * @param MockRole $role
      */
     public function testGetRolePermissionsWithConfigPermissions(MockRole $role): void
     {
@@ -527,8 +523,6 @@ final class PermissionManagerTest extends TestCase
 
     /**
      * @dataProvider getRoles
-     *
-     * @param MockRole $role
      */
     public function testGetRolePermissionsWithClassConfigPermission(MockRole $role): void
     {
@@ -567,8 +561,6 @@ final class PermissionManagerTest extends TestCase
 
     /**
      * @dataProvider getRoles
-     *
-     * @param MockRole $role
      */
     public function testGetRolePermissionsWithFieldConfigPermission(MockRole $role): void
     {
@@ -612,8 +604,6 @@ final class PermissionManagerTest extends TestCase
 
     /**
      * @dataProvider getRoles
-     *
-     * @param MockRole $role
      */
     public function testGetRolePermissionsWithFieldConfigPermissionAndMaster(MockRole $role): void
     {
@@ -659,8 +649,6 @@ final class PermissionManagerTest extends TestCase
 
     /**
      * @dataProvider getRoles
-     *
-     * @param MockRole $role
      */
     public function testGetRolePermissionsWithRequiredConfigPermission(MockRole $role): void
     {

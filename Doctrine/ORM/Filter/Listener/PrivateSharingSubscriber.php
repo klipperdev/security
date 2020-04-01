@@ -53,8 +53,6 @@ class PrivateSharingSubscriber implements EventSubscriberInterface
      * Build the query filter with sharing entries.
      *
      * @param GetPrivateFilterEvent $event The event
-     *
-     * @return string
      */
     private function buildSharingFilter(GetPrivateFilterEvent $event): string
     {
@@ -66,19 +64,19 @@ class PrivateSharingSubscriber implements EventSubscriberInterface
         $identifier = DoctrineUtils::castIdentifier($targetEntity, $connection);
 
         return <<<SELECTCLAUSE
-{$targetTableAlias}.{$meta->getColumnName('id')} IN (SELECT
-    s.{$meta->getColumnName('subjectId')}{$identifier}
-FROM
-    {$meta->getTableName()} s
-WHERE
-    s.{$meta->getColumnName('subjectClass')} = {$classname}
-    AND s.{$meta->getColumnName('enabled')} IS TRUE
-    AND (s.{$meta->getColumnName('startedAt')} IS NULL OR s.{$meta->getColumnName('startedAt')} <= CURRENT_TIMESTAMP)
-    AND (s.{$meta->getColumnName('endedAt')} IS NULL OR s.{$meta->getColumnName('endedAt')} >= CURRENT_TIMESTAMP)
-    AND ({$this->addWhereSecurityIdentitiesForSharing($event, $meta)})
-GROUP BY
-    s.{$meta->getColumnName('subjectId')})
-SELECTCLAUSE;
+            {$targetTableAlias}.{$meta->getColumnName('id')} IN (SELECT
+                s.{$meta->getColumnName('subjectId')}{$identifier}
+            FROM
+                {$meta->getTableName()} s
+            WHERE
+                s.{$meta->getColumnName('subjectClass')} = {$classname}
+                AND s.{$meta->getColumnName('enabled')} IS TRUE
+                AND (s.{$meta->getColumnName('startedAt')} IS NULL OR s.{$meta->getColumnName('startedAt')} <= CURRENT_TIMESTAMP)
+                AND (s.{$meta->getColumnName('endedAt')} IS NULL OR s.{$meta->getColumnName('endedAt')} >= CURRENT_TIMESTAMP)
+                AND ({$this->addWhereSecurityIdentitiesForSharing($event, $meta)})
+            GROUP BY
+                s.{$meta->getColumnName('subjectId')})
+            SELECTCLAUSE;
     }
 
     /**
@@ -88,8 +86,6 @@ SELECTCLAUSE;
      * @param ClassMetadata         $meta  The class metadata of sharing entity
      *
      * @throws
-     *
-     * @return string
      */
     private function addWhereSecurityIdentitiesForSharing(GetPrivateFilterEvent $event, ClassMetadata $meta): string
     {
@@ -117,8 +113,6 @@ SELECTCLAUSE;
      *
      * @param GetPrivateFilterEvent $event  The event
      * @param string                $filter The previous filter
-     *
-     * @return string
      */
     private function buildOwnerFilter(GetPrivateFilterEvent $event, string $filter): string
     {
@@ -141,8 +135,6 @@ SELECTCLAUSE;
      * @param string                $filter The previous filter
      *
      * @throws
-     *
-     * @return string
      */
     private function buildRequiredOwnerFilter(GetPrivateFilterEvent $event, string $filter): string
     {
@@ -159,10 +151,10 @@ SELECTCLAUSE;
             : (string) $platform->getIsNullExpression($targetTableAlias.'.'.$ownerColumn);
 
         return <<<SELECTCLAUSE
-{$ownerFilter}
-    OR
-({$filter})
-SELECTCLAUSE;
+            {$ownerFilter}
+                OR
+            ({$filter})
+            SELECTCLAUSE;
     }
 
     /**
@@ -172,8 +164,6 @@ SELECTCLAUSE;
      * @param string                $filter The previous filter
      *
      * @throws
-     *
-     * @return string
      */
     private function buildOptionalOwnerFilter(GetPrivateFilterEvent $event, string $filter): string
     {
@@ -189,10 +179,10 @@ SELECTCLAUSE;
             : '';
 
         return <<<SELECTCLAUSE
-{$ownerFilter}{$platform->getIsNullExpression($targetTableAlias.'.'.$ownerColumn)}
-    OR
-({$filter})
-SELECTCLAUSE;
+            {$ownerFilter}{$platform->getIsNullExpression($targetTableAlias.'.'.$ownerColumn)}
+                OR
+            ({$filter})
+            SELECTCLAUSE;
     }
 
     /**
@@ -202,8 +192,6 @@ SELECTCLAUSE;
      * @param string        $fieldName The field name
      *
      * @throws
-     *
-     * @return string
      */
     private function getAssociationColumnName(ClassMetadata $meta, string $fieldName): string
     {

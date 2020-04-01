@@ -18,9 +18,6 @@ namespace Klipper\Component\Security\Model;
  */
 interface OrganizationUserInterface
 {
-    /**
-     * @return string
-     */
     public function __toString(): string;
 
     /**

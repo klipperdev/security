@@ -31,8 +31,6 @@ interface OwnerableOptionalInterface
 
     /**
      * Get the owner.
-     *
-     * @return null|UserInterface
      */
     public function getOwner(): ?UserInterface;
 

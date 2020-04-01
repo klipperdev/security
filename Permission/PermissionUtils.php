@@ -27,8 +27,6 @@ abstract class PermissionUtils
      *
      * @param null|string $action  The action
      * @param string      $default The default value
-     *
-     * @return string
      */
     public static function getMapAction(?string $action, string $default = '_global'): string
     {
@@ -40,8 +38,6 @@ abstract class PermissionUtils
      *
      * @param null|FieldVote|object|string|SubjectIdentityInterface $subject  The subject instance or classname
      * @param bool                                                  $optional Check if the subject id optional
-     *
-     * @return array
      */
     public static function getSubjectAndField($subject, bool $optional = false): array
     {
@@ -67,8 +63,6 @@ abstract class PermissionUtils
      *
      * @param null|FieldVote|object|string|SubjectIdentityInterface $subject  The subject instance or classname
      * @param bool                                                  $optional Check if the subject id optional
-     *
-     * @return array
      */
     public static function getClassAndField($subject, bool $optional = false): array
     {

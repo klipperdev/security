@@ -70,8 +70,6 @@ class PermissionVoter extends Voter
      * Check if the attribute is supported.
      *
      * @param string $attribute The attribute
-     *
-     * @return bool
      */
     protected function isAttributeSupported($attribute): bool
     {
@@ -82,8 +80,6 @@ class PermissionVoter extends Voter
      * Check if the subject is supported.
      *
      * @param null|FieldVote|mixed $subject The subject
-     *
-     * @return bool
      */
     protected function isSubjectSupported($subject): bool
     {
@@ -101,8 +97,6 @@ class PermissionVoter extends Voter
      * Check if the subject is managed.
      *
      * @param null|FieldVote|mixed $subject The subject
-     *
-     * @return bool
      */
     protected function isSubjectManaged($subject): bool
     {

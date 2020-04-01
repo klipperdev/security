@@ -57,8 +57,6 @@ interface PermissionProviderInterface
      * Get the class name of association field.
      *
      * @param PermissionConfigInterface $config The permission config
-     *
-     * @return null|string
      */
     public function getMasterClass(PermissionConfigInterface $config): ?string;
 }

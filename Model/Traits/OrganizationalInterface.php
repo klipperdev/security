@@ -22,8 +22,6 @@ interface OrganizationalInterface
 {
     /**
      * Get the organization.
-     *
-     * @return null|OrganizationInterface
      */
     public function getOrganization(): ?OrganizationInterface;
 

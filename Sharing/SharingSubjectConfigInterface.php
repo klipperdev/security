@@ -20,15 +20,11 @@ interface SharingSubjectConfigInterface
 {
     /**
      * Get the type. Typically, this is the PHP class name.
-     *
-     * @return string
      */
     public function getType(): string;
 
     /**
      * Get the sharing visibility.
-     *
-     * @return string
      */
     public function getVisibility(): string;
 

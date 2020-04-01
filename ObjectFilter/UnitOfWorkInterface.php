@@ -43,8 +43,6 @@ interface UnitOfWorkInterface
      * Gets the changeset for an object.
      *
      * @param object $object
-     *
-     * @return array
      */
     public function getObjectChangeSet($object): array;
 

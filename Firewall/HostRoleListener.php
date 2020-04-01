@@ -40,8 +40,6 @@ class HostRoleListener extends AbstractRoleListener
      * Get the host role.
      *
      * @param RequestEvent $event A RequestEvent instance
-     *
-     * @return null|string
      */
     protected function getHostRole(RequestEvent $event): ?string
     {
@@ -64,8 +62,6 @@ class HostRoleListener extends AbstractRoleListener
      *
      * @param string $pattern  The shell pattern or regex pattern starting and ending with a slash
      * @param string $hostname The host name
-     *
-     * @return bool
      */
     private function isValid(string $pattern, string $hostname): bool
     {

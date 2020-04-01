@@ -24,8 +24,6 @@ interface SharingManagerInterface
      * Check if sharing manager is enabled.
      *
      * If the sharing manager is disabled, all sharing visibilities are the value NONE.
-     *
-     * @return bool
      */
     public function isEnabled(): bool;
 
@@ -51,8 +49,6 @@ interface SharingManagerInterface
      * Check if the sharing subject config is present.
      *
      * @param string $class The class name of sharing subject
-     *
-     * @return bool
      */
     public function hasSubjectConfig(string $class): bool;
 
@@ -60,8 +56,6 @@ interface SharingManagerInterface
      * Get the sharing subject config.
      *
      * @param string $class The class name of sharing subject
-     *
-     * @return SharingSubjectConfigInterface
      */
     public function getSubjectConfig(string $class): SharingSubjectConfigInterface;
 
@@ -76,8 +70,6 @@ interface SharingManagerInterface
      * Check if the subject has sharing visibility of subject identity.
      *
      * @param SubjectIdentityInterface $subject The subject
-     *
-     * @return bool
      */
     public function hasSharingVisibility(SubjectIdentityInterface $subject): bool;
 
@@ -85,8 +77,6 @@ interface SharingManagerInterface
      * Get the sharing visibility of subject identity.
      *
      * @param SubjectIdentityInterface $subject The subject
-     *
-     * @return string
      */
     public function getSharingVisibility(SubjectIdentityInterface $subject): string;
 
@@ -103,8 +93,6 @@ interface SharingManagerInterface
      * Check if the sharing identity config is present.
      *
      * @param string $class The class name of sharing identity
-     *
-     * @return bool
      */
     public function hasIdentityConfig(string $class): bool;
 
@@ -112,8 +100,6 @@ interface SharingManagerInterface
      * Get the sharing identity config.
      *
      * @param string $class The class name of sharing identity
-     *
-     * @return SharingIdentityConfigInterface
      */
     public function getIdentityConfig(string $class): SharingIdentityConfigInterface;
 
@@ -126,15 +112,11 @@ interface SharingManagerInterface
 
     /**
      * Check if there is an identity config with the roleable option.
-     *
-     * @return bool
      */
     public function hasIdentityRoleable(): bool;
 
     /**
      * Check if there is an identity config with the permissible option.
-     *
-     * @return bool
      */
     public function hasIdentityPermissible(): bool;
 
@@ -144,8 +126,6 @@ interface SharingManagerInterface
      * @param string                        $operation The operation
      * @param null|SubjectIdentityInterface $subject   The subject
      * @param null|string                   $field     The field of subject
-     *
-     * @return bool
      */
     public function isGranted(string $operation, ?SubjectIdentityInterface $subject = null, ?string $field = null): bool;
 

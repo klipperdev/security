@@ -30,8 +30,6 @@ interface OrganizationalContextInterface
 
     /**
      * Get the current used organization.
-     *
-     * @return null|OrganizationInterface
      */
     public function getCurrentOrganization(): ?OrganizationInterface;
 
@@ -44,15 +42,11 @@ interface OrganizationalContextInterface
 
     /**
      * Get the current used organization user.
-     *
-     * @return null|OrganizationUserInterface
      */
     public function getCurrentOrganizationUser(): ?OrganizationUserInterface;
 
     /**
      * Check if the current organization is not a user organization.
-     *
-     * @return bool
      */
     public function isOrganization(): bool;
 
@@ -65,8 +59,6 @@ interface OrganizationalContextInterface
 
     /**
      * Get the organizational optional filter type defined in OrganizationalTypes::OPTIONAL_FILTER_*.
-     *
-     * @return string
      */
     public function getOptionalFilterType(): string;
 
@@ -74,8 +66,6 @@ interface OrganizationalContextInterface
      * Check if the current filter type defined in OrganizationalTypes::OPTIONAL_FILTER_* is the same.
      *
      * @param string $type The organizational filter type
-     *
-     * @return bool
      */
     public function isOptionalFilterType(string $type): bool;
 }

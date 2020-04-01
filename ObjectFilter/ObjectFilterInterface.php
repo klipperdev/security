@@ -20,8 +20,6 @@ interface ObjectFilterInterface
 {
     /**
      * Get object filter unit of work.
-     *
-     * @return UnitOfWorkInterface
      */
     public function getUnitOfWork(): UnitOfWorkInterface;
 

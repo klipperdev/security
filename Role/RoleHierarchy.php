@@ -79,8 +79,6 @@ class RoleHierarchy extends BaseRoleHierarchy
 
     /**
      * Set event dispatcher.
-     *
-     * @param EventDispatcherInterface $dispatcher
      */
     public function setEventDispatcher(EventDispatcherInterface $dispatcher): void
     {
@@ -136,8 +134,6 @@ class RoleHierarchy extends BaseRoleHierarchy
      * Get the unique id.
      *
      * @param array $roleNames The role names
-     *
-     * @return string
      */
     protected function getUniqueId(array $roleNames): string
     {
@@ -160,8 +156,6 @@ class RoleHierarchy extends BaseRoleHierarchy
      * Build the suffix of role.
      *
      * @param null|string $role The role
-     *
-     * @return string
      */
     protected function buildRoleSuffix(?string $role): string
     {
@@ -184,8 +178,6 @@ class RoleHierarchy extends BaseRoleHierarchy
      * Format the cleaned role name.
      *
      * @param string $name The role name
-     *
-     * @return string
      */
     protected function formatCleanedRoleName(string $name): string
     {

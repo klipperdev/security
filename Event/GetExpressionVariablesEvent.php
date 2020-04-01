@@ -45,8 +45,6 @@ class GetExpressionVariablesEvent extends Event
 
     /**
      * Get the token.
-     *
-     * @return TokenInterface
      */
     public function getToken(): TokenInterface
     {
@@ -78,8 +76,6 @@ class GetExpressionVariablesEvent extends Event
 
     /**
      * Get the variables.
-     *
-     * @return array
      */
     public function getVariables(): array
     {

@@ -39,8 +39,6 @@ interface UserOrganizationUsersInterface
      * Check if the organization is associated with this user.
      *
      * @param string $name The name of organization
-     *
-     * @return bool
      */
     public function hasUserOrganization(string $name): bool;
 
@@ -48,8 +46,6 @@ interface UserOrganizationUsersInterface
      * Get the associated organization with this user.
      *
      * @param string $name The name of organization
-     *
-     * @return null|OrganizationUserInterface
      */
     public function getUserOrganization(string $name): ?OrganizationUserInterface;
 

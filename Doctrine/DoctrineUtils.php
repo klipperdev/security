@@ -62,8 +62,6 @@ abstract class DoctrineUtils
      * Get the identifier of entity.
      *
      * @param ClassMetadata $targetEntity The target entity
-     *
-     * @return string
      */
     public static function getIdentifier(ClassMetadata $targetEntity): string
     {
@@ -103,8 +101,6 @@ abstract class DoctrineUtils
      * @param Connection    $connection   The doctrine connection
      *
      * @throws
-     *
-     * @return string
      */
     public static function castIdentifier(ClassMetadata $targetEntity, Connection $connection): string
     {
@@ -132,8 +128,6 @@ abstract class DoctrineUtils
      *
      * @throws RuntimeException When the doctrine dbal type is not found
      * @throws DBALException
-     *
-     * @return Type
      */
     public static function getIdentifierType(ClassMetadata $targetEntity): Type
     {
@@ -179,8 +173,6 @@ abstract class DoctrineUtils
      * Check if the type is a number type.
      *
      * @param Type $type The dbal identifier type
-     *
-     * @return bool
      */
     private static function isNumberType(Type $type): bool
     {
@@ -191,8 +183,6 @@ abstract class DoctrineUtils
      * Check if the type is a string type.
      *
      * @param Type $type The dbal identifier type
-     *
-     * @return bool
      */
     private static function isStringType(Type $type): bool
     {

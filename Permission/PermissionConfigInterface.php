@@ -22,8 +22,6 @@ interface PermissionConfigInterface
 {
     /**
      * Get the type. Typically, this is the PHP class name.
-     *
-     * @return string
      */
     public function getType(): string;
 
@@ -31,8 +29,6 @@ interface PermissionConfigInterface
      * Check if the operation is defined.
      *
      * @param string $operation The operation name
-     *
-     * @return bool
      */
     public function hasOperation(string $operation): bool;
 
@@ -47,8 +43,6 @@ interface PermissionConfigInterface
      * Check if the field configuration exists.
      *
      * @param string $field The field name
-     *
-     * @return bool
      */
     public function hasField(string $field): bool;
 
@@ -56,8 +50,6 @@ interface PermissionConfigInterface
      * Get the field configuration.
      *
      * @param string $field The field name
-     *
-     * @return null|PermissionFieldConfigInterface
      */
     public function getField(string $field): ?PermissionFieldConfigInterface;
 
@@ -83,8 +75,6 @@ interface PermissionConfigInterface
      *     'create' => 'edit',
      *     'update' => 'edit',
      * ]
-     *
-     * @return array
      */
     public function getMasterFieldMappingPermissions(): array;
 
@@ -97,8 +87,6 @@ interface PermissionConfigInterface
      * ]
      *
      * @param string $aliasPermission The operation or alias of operation
-     *
-     * @return string
      */
     public function getMappingPermission(string $aliasPermission): string;
 
@@ -111,29 +99,21 @@ interface PermissionConfigInterface
 
     /**
      * Check if the fields must be built even if no field config is added.
-     *
-     * @return bool
      */
     public function buildFields(): bool;
 
     /**
      * Get the value of build fields.
-     *
-     * @return null|bool
      */
     public function getBuildFields(): ?bool;
 
     /**
      * Check if the default fields must be built.
-     *
-     * @return bool
      */
     public function buildDefaultFields(): bool;
 
     /**
      * Get the value of build default fields.
-     *
-     * @return null|bool
      */
     public function getBuildDefaultFields(): ?bool;
 
