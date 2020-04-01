@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="Klipper\Component\Security\Model\Sharing">
+        <property name="subjectClass">
+            <constraint name="NotBlank" />
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="max">255</option>
+            </constraint>
+        </property>
+
+        <property name="subjectId">
+            <constraint name="NotBlank" />
+        </property>
+
+        <property name="identityClass">
+            <constraint name="NotBlank" />
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="max">255</option>
+            </constraint>
+        </property>
+
+        <property name="identityName">
+            <constraint name="NotBlank" />
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="max">255</option>
+            </constraint>
+        </property>
+
+        <property name="enabled">
+            <constraint name="Type">
+                <option name="type">bool</option>
+            </constraint>
+        </property>
+
+        <property name="startedAt">
+            <constraint name="DateTime" />
+        </property>
+
+        <property name="endedAt">
+            <constraint name="DateTime" />
+        </property>
+
+        <constraint name="Klipper\Component\Security\Validator\Constraints\Sharing"/>
+    </class>
+
+</constraint-mapping>

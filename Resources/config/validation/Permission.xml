@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="Klipper\Component\Security\Model\Permission">
+        <property name="operation">
+            <constraint name="NotBlank" />
+            <constraint name="Regex">
+                <option name="pattern">/^[A-Za-z0-9\_\-]+$/</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="max">255</option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="pattern">/__/</option>
+                <option name="match">false</option>
+                <option name="message">permission.operation.not_use_double_underscore</option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="pattern">/_$/</option>
+                <option name="match">false</option>
+                <option name="message">permission.operation.not_use_special_character_at_end</option>
+            </constraint>
+        </property>
+
+        <constraint name="Klipper\Component\Security\Validator\Constraints\Permission"/>
+    </class>
+
+</constraint-mapping>
