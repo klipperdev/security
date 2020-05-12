@@ -102,7 +102,7 @@ abstract class AbstractListener implements EventSubscriber
 
             foreach ($this->getInitProperties() as $property => $setterMethod) {
                 if (null === $this->{$property}) {
-                    throw new SecurityException(sprintf($msg, $setterMethod, \get_class($this)));
+                    throw new SecurityException(sprintf($msg, $setterMethod, static::class));
                 }
             }
 

@@ -154,7 +154,7 @@ class SharingDeleteListener implements EventSubscriber
             $msg = 'The "%s()" method must be called before the init of the "%s" class';
 
             if (null === $this->sharingManager) {
-                throw new SecurityException(sprintf($msg, 'setSharingManager', \get_class($this)));
+                throw new SecurityException(sprintf($msg, 'setSharingManager', static::class));
             }
 
             $this->initialized = true;
