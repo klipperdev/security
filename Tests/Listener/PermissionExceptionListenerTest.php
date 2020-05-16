@@ -52,7 +52,7 @@ final class PermissionExceptionListenerTest extends TestCase
 
         $listener->onKernelException($event);
 
-        static::assertSame($e, $event->getException());
+        static::assertSame($e, $event->getThrowable());
     }
 
     public function testKernelExceptionWithAccessDeniedException(): void
@@ -68,9 +68,9 @@ final class PermissionExceptionListenerTest extends TestCase
 
         $listener->onKernelException($event);
 
-        static::assertNotSame($e, $event->getException());
-        static::assertInstanceOf(AccessDeniedHttpException::class, $event->getException());
-        static::assertInstanceOf(AccessDeniedException::class, $event->getException()->getPrevious());
-        static::assertSame($e, $event->getException()->getPrevious());
+        static::assertNotSame($e, $event->getThrowable());
+        static::assertInstanceOf(AccessDeniedHttpException::class, $event->getThrowable());
+        static::assertInstanceOf(AccessDeniedException::class, $event->getThrowable()->getPrevious());
+        static::assertSame($e, $event->getThrowable()->getPrevious());
     }
 }

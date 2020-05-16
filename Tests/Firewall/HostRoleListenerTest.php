@@ -134,7 +134,7 @@ final class HostRoleListenerTest extends TestCase
 
         ($this->listener)($this->event);
 
-        static::assertCount(1, $token->getRoles());
+        static::assertCount(1, $token->getRoleNames());
     }
 
     public function getHosts(): array
@@ -176,6 +176,6 @@ final class HostRoleListenerTest extends TestCase
 
         ($this->listener)($this->event);
 
-        static::assertCount(1, $token->getRoles());
+        static::assertCount(1, $token->getRoleNames());
     }
 }

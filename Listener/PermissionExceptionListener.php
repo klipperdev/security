@@ -31,12 +31,12 @@ class PermissionExceptionListener
      */
     public function onKernelException(ExceptionEvent $event): void
     {
-        $exception = $event->getException();
+        $exception = $event->getThrowable();
 
         if (!$exception instanceof AccessDeniedException) {
             return;
         }
 
-        $event->setException(new AccessDeniedHttpException($exception->getMessage(), $exception));
+        $event->setThrowable(new AccessDeniedHttpException($exception->getMessage(), $exception));
     }
 }
