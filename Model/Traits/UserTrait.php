@@ -24,12 +24,12 @@ trait UserTrait
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      */
-    protected ?string $username;
+    protected ?string $username = null;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected ?string $password;
+    protected ?string $password = null;
 
     /**
      * A visual identifier that represents this user.
