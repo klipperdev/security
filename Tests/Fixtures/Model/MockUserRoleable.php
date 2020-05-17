@@ -12,6 +12,7 @@
 namespace Klipper\Component\Security\Tests\Fixtures\Model;
 
 use Klipper\Component\Security\Model\Traits\RoleableTrait;
+use Klipper\Component\Security\Model\Traits\UserTrait;
 use Klipper\Component\Security\Model\UserInterface;
 
 /**
@@ -19,6 +20,7 @@ use Klipper\Component\Security\Model\UserInterface;
  */
 class MockUserRoleable implements UserInterface
 {
+    use UserTrait;
     use RoleableTrait;
 
     /**

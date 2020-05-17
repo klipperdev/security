@@ -27,4 +27,21 @@ interface UserInterface extends BaseUserInterface, RoleableInterface
      * @return null|int|string
      */
     public function getId();
+
+    /**
+     * Sets the password used to authenticate the user.
+     *
+     * This should be the encoded password. On authentication, a plain-text
+     * password will be salted, encoded, and then compared to this value.
+     *
+     * @return static
+     */
+    public function setPassword(?string $password);
+
+    /**
+     * Sets the username used to authenticate the user.
+     *
+     * @return static
+     */
+    public function setUsername(string $username);
 }

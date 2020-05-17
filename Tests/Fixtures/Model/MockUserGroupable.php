@@ -14,6 +14,7 @@ namespace Klipper\Component\Security\Tests\Fixtures\Model;
 use Klipper\Component\Security\Model\Traits\EditGroupableInterface;
 use Klipper\Component\Security\Model\Traits\EditGroupableTrait;
 use Klipper\Component\Security\Model\Traits\RoleableTrait;
+use Klipper\Component\Security\Model\Traits\UserTrait;
 use Klipper\Component\Security\Model\UserInterface;
 
 /**
@@ -21,6 +22,7 @@ use Klipper\Component\Security\Model\UserInterface;
  */
 class MockUserGroupable implements UserInterface, EditGroupableInterface
 {
+    use UserTrait;
     use RoleableTrait;
     use EditGroupableTrait;
 
