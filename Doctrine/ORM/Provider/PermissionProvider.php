@@ -11,10 +11,10 @@
 
 namespace Klipper\Component\Security\Doctrine\ORM\Provider;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Klipper\Component\DoctrineExtra\Util\ManagerUtils;
 use Klipper\Component\DoctrineExtra\Util\RepositoryUtils;
 use Klipper\Component\Security\Exception\InvalidArgumentException;

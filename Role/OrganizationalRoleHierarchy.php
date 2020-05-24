@@ -11,7 +11,7 @@
 
 namespace Klipper\Component\Security\Role;
 
-use Doctrine\Common\Persistence\ManagerRegistry as ManagerRegistryInterface;
+use Doctrine\Persistence\ManagerRegistry as ManagerRegistryInterface;
 use Klipper\Component\Security\Model\RoleInterface;
 use Klipper\Component\Security\Organizational\OrganizationalContextInterface;
 use Klipper\Component\Security\Organizational\OrganizationalUtil;

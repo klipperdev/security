@@ -11,12 +11,12 @@
 
 namespace Klipper\Component\Security\Tests\Doctrine\ORM\Provider;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Klipper\Component\Security\Doctrine\ORM\Provider\SharingProvider;
 use Klipper\Component\Security\Identity\RoleSecurityIdentity;
 use Klipper\Component\Security\Identity\SecurityIdentityManagerInterface;

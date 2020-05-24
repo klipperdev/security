@@ -11,7 +11,7 @@
 
 namespace Klipper\Component\Security\Role;
 
-use Doctrine\Common\Persistence\ManagerRegistry as ManagerRegistryInterface;
+use Doctrine\Persistence\ManagerRegistry as ManagerRegistryInterface;
 use Klipper\Component\DoctrineExtensions\Util\SqlFilterUtil;
 use Klipper\Component\DoctrineExtra\Util\ManagerUtils;
 use Klipper\Component\Security\Event\PostReachableRoleEvent;

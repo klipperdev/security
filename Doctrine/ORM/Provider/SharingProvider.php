@@ -11,9 +11,9 @@
 
 namespace Klipper\Component\Security\Doctrine\ORM\Provider;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Klipper\Component\DoctrineExtra\Util\ManagerUtils;
 use Klipper\Component\Security\Exception\InvalidArgumentException;
 use Klipper\Component\Security\Identity\IdentityUtils;
