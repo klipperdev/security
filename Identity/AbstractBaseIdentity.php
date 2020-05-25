@@ -43,7 +43,7 @@ abstract class AbstractBaseIdentity
             throw new InvalidArgumentException('The type cannot be empty');
         }
 
-        if ('' === $identifier) {
+        if (empty($identifier)) {
             throw new InvalidArgumentException('The identifier cannot be empty');
         }
 
