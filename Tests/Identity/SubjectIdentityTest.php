@@ -153,12 +153,12 @@ final class SubjectIdentityTest extends TestCase
 
     public function testFromObjectWithEmptyIdentifier(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\InvalidSubjectIdentityException::class);
-        $this->expectExceptionMessage('The identifier cannot be empty');
-
         $object = new MockObject('foo', null);
 
-        SubjectIdentity::fromObject($object);
+        $si = SubjectIdentity::fromObject($object);
+        static::assertSame(MockObject::class, $si->getType());
+        static::assertSame('class', $si->getIdentifier());
+        static::assertSame($object, $si->getObject());
     }
 
     public function testFromObjectWithInvalidObject(): void

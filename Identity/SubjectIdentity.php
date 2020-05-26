@@ -81,7 +81,7 @@ final class SubjectIdentity extends AbstractBaseIdentity implements SubjectIdent
                 return new self(ClassUtils::getClass($object), $object->getSubjectIdentifier(), $object);
             }
             if (method_exists($object, 'getId')) {
-                return new self(ClassUtils::getClass($object), (string) $object->getId(), $object);
+                return new self(ClassUtils::getClass($object), (string) ($object->getId() ?: 'class'), $object);
             }
         } catch (InvalidArgumentException $e) {
             throw new InvalidSubjectIdentityException($e->getMessage(), 0, $e);

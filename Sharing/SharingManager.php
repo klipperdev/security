@@ -202,19 +202,16 @@ class SharingManager extends AbstractSharingManager
         $subjects = [];
 
         foreach ($objects as $object) {
-            try {
-                $subject = SubjectIdentity::fromObject($object);
-                $id = SharingUtils::getCacheId($subject);
+            $subject = SubjectIdentity::fromObject($object);
+            $id = SharingUtils::getCacheId($subject);
 
-                if (!\array_key_exists($id, $this->cacheSubjectSharing)
-                    && $this->hasIdentityPermissible()
-                    && $this->hasSharingVisibility($subject)
-                    && $this->hasSubjectConfig($subject->getType())) {
-                    $subjects[$id] = $subject;
-                    $this->cacheSubjectSharing[$id] = false;
-                }
-            } catch (InvalidSubjectIdentityException $e) {
-                // skip subject without identifier
+            if (!\array_key_exists($id, $this->cacheSubjectSharing)
+                && 'class' !== $subject->getIdentifier()
+                && $this->hasIdentityPermissible()
+                && $this->hasSharingVisibility($subject)
+                && $this->hasSubjectConfig($subject->getType())) {
+                $subjects[$id] = $subject;
+                $this->cacheSubjectSharing[$id] = false;
             }
         }
 
