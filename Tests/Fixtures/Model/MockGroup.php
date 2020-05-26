@@ -21,14 +21,8 @@ class MockGroup implements GroupInterface
 {
     use GroupTrait;
 
-    /**
-     * @var null|int
-     */
     protected ?int $id = null;
 
-    /**
-     * @var array
-     */
     protected array $roles = [];
 
     /**
