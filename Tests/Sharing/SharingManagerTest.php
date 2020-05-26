@@ -294,6 +294,8 @@ final class SharingManagerTest extends TestCase
         $object = new MockObject('foo', 42);
         $subject = SubjectIdentity::fromObject($object);
 
+        $newObject = new MockObject('foo', null);
+
         $perm = new MockPermission();
         $perm->setOperation('view');
         $sharing = new MockSharing();
@@ -335,7 +337,7 @@ final class SharingManagerTest extends TestCase
         $iConfig2 = new SharingIdentityConfig(MockUserRoleable::class, 'user', true);
         $this->sm->addIdentityConfig($iConfig2);
 
-        $this->sm->preloadPermissions([$object]);
+        $this->sm->preloadPermissions([$object, $newObject]);
         $this->sm->preloadRolePermissions([$subject]);
 
         static::assertTrue($this->sm->isGranted($operation, $subject, $field));
