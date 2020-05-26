@@ -21,10 +21,7 @@ class MockPermission implements PermissionInterface
 {
     use PermissionTrait;
 
-    /**
-     * @var null|int
-     */
-    protected $id;
+    protected ?int $id = null;
 
     /**
      * {@inheritdoc}

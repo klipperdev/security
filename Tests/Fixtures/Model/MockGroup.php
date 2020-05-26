@@ -24,12 +24,12 @@ class MockGroup implements GroupInterface
     /**
      * @var null|int
      */
-    protected $id;
+    protected ?int $id = null;
 
     /**
      * @var array
      */
-    protected $roles = [];
+    protected array $roles = [];
 
     /**
      * Constructor.

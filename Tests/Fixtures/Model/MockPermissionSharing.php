@@ -24,10 +24,7 @@ class MockPermissionSharing implements PermissionInterface, PermissionSharingEnt
     use PermissionTrait;
     use PermissionSharingEntryTrait;
 
-    /**
-     * @var null|int
-     */
-    protected $id;
+    protected ?int $id = null;
 
     /**
      * {@inheritdoc}

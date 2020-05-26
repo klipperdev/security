@@ -23,10 +23,7 @@ class MockRole implements RoleHierarchicalInterface
     use RoleTrait;
     use RoleHierarchicalTrait;
 
-    /**
-     * @var null|int
-     */
-    protected $id;
+    protected ?int $id = null;
 
     /**
      * Constructor.

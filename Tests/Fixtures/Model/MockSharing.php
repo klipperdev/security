@@ -21,10 +21,7 @@ class MockSharing implements SharingInterface
 {
     use SharingTrait;
 
-    /**
-     * @var null|int
-     */
-    protected $id;
+    protected ?int $id = null;
 
     /**
      * {@inheritdoc}
