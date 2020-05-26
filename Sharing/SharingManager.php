@@ -79,7 +79,7 @@ class SharingManager extends AbstractSharingManager
             }
         }
 
-        $this->preloadPermissionsOfSharingRoles($objects);
+        $this->preloadPermissionsOfSharingRoles($subjects);
 
         return $this;
     }
@@ -243,15 +243,13 @@ class SharingManager extends AbstractSharingManager
     /**
      * Preload permissions of sharing roles.
      *
-     * @param object[] $objects The objects
+     * @param SubjectIdentityInterface[] $subjects The subjects
      */
-    private function preloadPermissionsOfSharingRoles(array $objects): void
+    private function preloadPermissionsOfSharingRoles(array $subjects): void
     {
         if (!$this->hasIdentityRoleable()) {
             return;
         }
-
-        $subjects = $this->buildMapSubject($objects);
 
         foreach ($subjects as $id => $subject) {
             if (!isset($this->cacheRoleSharing[$id])
@@ -259,26 +257,6 @@ class SharingManager extends AbstractSharingManager
                 $this->buildCacheRoleSharing($this->cacheSubjectSharing[$id]['sharings'], $id);
             }
         }
-    }
-
-    /**
-     * Build the map of subjects with cache ids.
-     *
-     * @param object[] $objects The objects
-     *
-     * @return array The map of cache id and subject
-     */
-    private function buildMapSubject(array $objects): array
-    {
-        $subjects = [];
-
-        foreach ($objects as $object) {
-            $subject = SubjectIdentity::fromObject($object);
-            $id = SharingUtils::getCacheId($subject);
-            $subjects[$id] = $subject;
-        }
-
-        return $subjects;
     }
 
     /**
