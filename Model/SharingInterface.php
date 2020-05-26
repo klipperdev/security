@@ -101,28 +101,28 @@ interface SharingInterface extends PermissionsInterface, RoleableInterface
     /**
      * Set the date when the sharing entry must start.
      *
-     * @param null|\DateTime $date The date
+     * @param null|\DateTimeInterface $date The date
      *
      * @return static
      */
-    public function setStartedAt(?\DateTime $date);
+    public function setStartedAt(?\DateTimeInterface $date);
 
     /**
      * Get the date when the sharing entry must start.
      */
-    public function getStartedAt(): ?\DateTime;
+    public function getStartedAt(): ?\DateTimeInterface;
 
     /**
      * Set the date when the sharing entry must end.
      *
-     * @param null|\DateTime $date The date
+     * @param null|\DateTimeInterface $date The date
      *
      * @return static
      */
-    public function setEndedAt(?\DateTime $date);
+    public function setEndedAt(?\DateTimeInterface $date);
 
     /**
      * Get the date when the sharing entry must end.
      */
-    public function getEndedAt(): ?\DateTime;
+    public function getEndedAt(): ?\DateTimeInterface;
 }

@@ -32,7 +32,7 @@ trait RoleHierarchicalTrait
      *     mappedBy="children"
      * )
      */
-    protected $parents;
+    protected ?Collection $parents = null;
 
     /**
      * @var null|Collection|RoleInterface[]
@@ -51,7 +51,7 @@ trait RoleHierarchicalTrait
      *     }
      * )
      */
-    protected $children;
+    protected ?Collection $children = null;
 
     /**
      * {@inheritdoc}

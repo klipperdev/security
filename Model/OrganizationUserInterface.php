@@ -34,7 +34,7 @@ interface OrganizationUserInterface
      *
      * @return static
      */
-    public function setOrganization(OrganizationInterface $organization);
+    public function setOrganization(?OrganizationInterface $organization);
 
     /**
      * Get the organization.
@@ -50,7 +50,7 @@ interface OrganizationUserInterface
      *
      * @return static
      */
-    public function setUser(UserInterface $user);
+    public function setUser(?UserInterface $user);
 
     /**
      * Get the user of organization.

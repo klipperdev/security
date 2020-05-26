@@ -25,15 +25,11 @@ use Klipper\Component\Security\Model\UserInterface;
 trait OrganizationTrait
 {
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    protected $name;
+    protected ?string $name = null;
 
     /**
-     * @var null|UserInterface
-     *
      * @ORM\OneToOne(
      *     targetEntity="Klipper\Component\Security\Model\UserInterface",
      *     inversedBy="organization",
@@ -41,7 +37,7 @@ trait OrganizationTrait
      * )
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    protected $user;
+    protected ?UserInterface $user = null;
 
     /**
      * @var null|Collection|OrganizationUserInterface[]
@@ -53,7 +49,7 @@ trait OrganizationTrait
      *     cascade={"persist", "remove"}
      * )
      */
-    protected $organizationUsers;
+    protected ?Collection $organizationUsers = null;
 
     /**
      * {@inheritdoc}

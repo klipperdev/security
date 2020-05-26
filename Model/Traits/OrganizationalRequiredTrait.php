@@ -11,8 +11,6 @@
 
 namespace Klipper\Component\Security\Model\Traits;
 
-use Klipper\Component\Security\Model\OrganizationInterface;
-
 /**
  * Trait to indicate that the model is linked with a required organization.
  *
@@ -21,14 +19,4 @@ use Klipper\Component\Security\Model\OrganizationInterface;
 trait OrganizationalRequiredTrait
 {
     use OrganizationalTrait;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOrganization(OrganizationInterface $organization): self
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
 }

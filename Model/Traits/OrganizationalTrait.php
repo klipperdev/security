@@ -20,10 +20,17 @@ use Klipper\Component\Security\Model\OrganizationInterface;
  */
 trait OrganizationalTrait
 {
+    protected ?OrganizationInterface $organization = null;
+
     /**
-     * @var null|OrganizationInterface
+     * {@inheritdoc}
      */
-    protected $organization;
+    public function setOrganization(?OrganizationInterface $organization): self
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
 
     /**
      * {@inheritdoc}

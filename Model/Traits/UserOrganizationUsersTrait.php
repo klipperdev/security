@@ -35,7 +35,7 @@ trait UserOrganizationUsersTrait
      * )
      * @ORM\OrderBy({"organization": "ASC"})
      */
-    protected $userOrganizations;
+    protected ?Collection $userOrganizations = null;
 
     /**
      * {@inheritdoc}

@@ -26,9 +26,12 @@ trait PermissionSharingEntryTrait
     /**
      * @var Collection|SharingInterface[]
      *
-     * @ORM\ManyToMany(targetEntity="Klipper\Component\Security\Model\SharingInterface", mappedBy="permissions")
+     * @ORM\ManyToMany(
+     *     targetEntity="Klipper\Component\Security\Model\SharingInterface",
+     *     mappedBy="permissions"
+     * )
      */
-    protected $sharingEntries;
+    protected ?Collection $sharingEntries = null;
 
     /**
      * {@inheritdoc}

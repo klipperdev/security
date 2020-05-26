@@ -21,6 +21,15 @@ use Klipper\Component\Security\Model\OrganizationInterface;
 interface OrganizationalInterface
 {
     /**
+     * Set the organization.
+     *
+     * @param null|OrganizationInterface $organization The organization
+     *
+     * @return static
+     */
+    public function setOrganization(?OrganizationInterface $organization);
+
+    /**
      * Get the organization.
      */
     public function getOrganization(): ?OrganizationInterface;

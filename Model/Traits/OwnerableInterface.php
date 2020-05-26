@@ -23,11 +23,11 @@ interface OwnerableInterface
     /**
      * Set the owner.
      *
-     * @param UserInterface $user The user
+     * @param null|UserInterface $user The user
      *
      * @return static
      */
-    public function setOwner(UserInterface $user);
+    public function setOwner(?UserInterface $user);
 
     /**
      * Get the owner.

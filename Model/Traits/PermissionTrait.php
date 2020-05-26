@@ -28,35 +28,32 @@ trait PermissionTrait
      *
      * @ORM\Column(type="json", nullable=true)
      */
-    protected $contexts = [];
+    protected array $contexts = [];
 
     /**
-     * @var null|string
-     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $class;
+    protected ?string $class = null;
 
     /**
-     * @var null|string
-     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $field;
+    protected ?string $field = null;
 
     /**
-     * @var null|string
-     *
      * @ORM\Column(type="string", length=255)
      */
-    protected $operation;
+    protected ?string $operation = null;
 
     /**
      * @var null|Collection|RoleInterface[]
      *
-     * @ORM\ManyToMany(targetEntity="Klipper\Component\Security\Model\RoleInterface", mappedBy="permissions")
+     * @ORM\ManyToMany(
+     *     targetEntity="Klipper\Component\Security\Model\RoleInterface",
+     *     mappedBy="permissions"
+     * )
      */
-    protected $roles;
+    protected ?Collection $roles = null;
 
     /**
      * {@inheritdoc}

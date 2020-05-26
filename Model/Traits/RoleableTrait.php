@@ -27,7 +27,7 @@ trait RoleableTrait
      *
      * @ORM\Column(type="json")
      */
-    protected $roles = [];
+    protected array $roles = [];
 
     /**
      * {@inheritdoc}

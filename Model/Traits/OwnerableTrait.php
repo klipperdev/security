@@ -20,15 +20,12 @@ use Klipper\Component\Security\Model\UserInterface;
  */
 trait OwnerableTrait
 {
-    /**
-     * @var null|UserInterface
-     */
-    protected $owner;
+    protected ?UserInterface $owner = null;
 
     /**
      * {@inheritdoc}
      */
-    public function setOwner(UserInterface $user): self
+    public function setOwner(?UserInterface $user): self
     {
         $this->owner = $user;
 

@@ -39,7 +39,7 @@ trait GroupableTrait
      *     }
      * )
      */
-    protected $groups;
+    protected ?Collection $groups = null;
 
     /**
      * {@inheritdoc}

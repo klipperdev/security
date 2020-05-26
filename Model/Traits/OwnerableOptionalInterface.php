@@ -23,7 +23,7 @@ interface OwnerableOptionalInterface
     /**
      * Set the owner.
      *
-     * @param null|UserInterface $user The organization
+     * @param null|UserInterface $user The user
      *
      * @return static
      */

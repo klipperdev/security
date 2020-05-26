@@ -43,5 +43,5 @@ interface UserInterface extends BaseUserInterface, RoleableInterface
      *
      * @return static
      */
-    public function setUsername(string $username);
+    public function setUsername(?string $username);
 }

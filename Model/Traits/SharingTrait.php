@@ -26,53 +26,39 @@ trait SharingTrait
     use RoleableTrait;
 
     /**
-     * @var null|string
-     *
      * @ORM\Column(type="string", length=244)
      */
-    protected $subjectClass;
+    protected ?string $subjectClass = null;
 
     /**
-     * @var null|string
-     *
      * @ORM\Column(type="string", length=36)
      */
-    protected $subjectId;
+    protected ?string $subjectId = null;
 
     /**
-     * @var null|string
-     *
      * @ORM\Column(type="string", length=244)
      */
-    protected $identityClass;
+    protected ?string $identityClass = null;
 
     /**
-     * @var null|string
-     *
      * @ORM\Column(type="string", length=244)
      */
-    protected $identityName;
+    protected ?string $identityName = null;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(type="boolean")
      */
-    protected $enabled = true;
+    protected bool $enabled = true;
 
     /**
-     * @var null|\DateTime
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $startedAt;
+    protected ?\DateTimeInterface $startedAt = null;
 
     /**
-     * @var null|\DateTime
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $endedAt;
+    protected ?\DateTimeInterface $endedAt = null;
 
     /**
      * @var null|Collection|PermissionInterface[]
@@ -82,7 +68,7 @@ trait SharingTrait
      *     inversedBy="sharingEntries"
      * )
      */
-    protected $permissions;
+    protected ?Collection $permissions = null;
 
     /**
      * {@inheritdoc}
@@ -177,7 +163,7 @@ trait SharingTrait
     /**
      * {@inheritdoc}
      */
-    public function setStartedAt(?\DateTime $date): self
+    public function setStartedAt(?\DateTimeInterface $date): self
     {
         $this->startedAt = $date;
 
@@ -187,7 +173,7 @@ trait SharingTrait
     /**
      * {@inheritdoc}
      */
-    public function getStartedAt(): ?\DateTime
+    public function getStartedAt(): ?\DateTimeInterface
     {
         return $this->startedAt;
     }
@@ -195,7 +181,7 @@ trait SharingTrait
     /**
      * {@inheritdoc}
      */
-    public function setEndedAt(?\DateTime $date): self
+    public function setEndedAt(?\DateTimeInterface $date): self
     {
         $this->endedAt = $date;
 
@@ -205,7 +191,7 @@ trait SharingTrait
     /**
      * {@inheritdoc}
      */
-    public function getEndedAt(): ?\DateTime
+    public function getEndedAt(): ?\DateTimeInterface
     {
         return $this->endedAt;
     }

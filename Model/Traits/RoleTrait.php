@@ -23,11 +23,9 @@ trait RoleTrait
     use PermissionsTrait;
 
     /**
-     * @var null|string
-     *
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    protected $name;
+    protected ?string $name = null;
 
     /**
      * {@inheritdoc}

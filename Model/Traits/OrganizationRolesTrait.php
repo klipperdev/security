@@ -33,7 +33,7 @@ trait OrganizationRolesTrait
      *     cascade={"persist", "remove"}
      * )
      */
-    protected $organizationRoles;
+    protected ?Collection $organizationRoles = null;
 
     /**
      * {@inheritdoc}

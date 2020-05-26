@@ -40,7 +40,7 @@ trait PermissionsTrait
      *     }
      * )
      */
-    protected $permissions;
+    protected ?Collection $permissions = null;
 
     /**
      * {@inheritdoc}

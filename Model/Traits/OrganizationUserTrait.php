@@ -23,8 +23,6 @@ use Klipper\Component\Security\Model\UserInterface;
 trait OrganizationUserTrait
 {
     /**
-     * @var null|OrganizationInterface
-     *
      * @ORM\ManyToOne(
      *     targetEntity="Klipper\Component\Security\Model\OrganizationInterface",
      *     fetch="EXTRA_LAZY",
@@ -32,11 +30,9 @@ trait OrganizationUserTrait
      * )
      * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
      */
-    protected $organization;
+    protected ?OrganizationInterface $organization = null;
 
     /**
-     * @var null|UserInterface
-     *
      * @ORM\ManyToOne(
      *     targetEntity="Klipper\Component\Security\Model\UserInterface",
      *     fetch="EXTRA_LAZY",
@@ -45,7 +41,7 @@ trait OrganizationUserTrait
      * )
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    protected $user;
+    protected ?UserInterface $user = null;
 
     /**
      * {@inheritdoc}
@@ -58,7 +54,7 @@ trait OrganizationUserTrait
     /**
      * {@inheritdoc}
      */
-    public function setOrganization(OrganizationInterface $organization): self
+    public function setOrganization(?OrganizationInterface $organization): self
     {
         $this->organization = $organization;
 
@@ -76,7 +72,7 @@ trait OrganizationUserTrait
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserInterface $user): self
+    public function setUser(?UserInterface $user): self
     {
         $this->user = $user;
 

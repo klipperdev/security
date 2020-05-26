@@ -11,8 +11,6 @@
 
 namespace Klipper\Component\Security\Model\Traits;
 
-use Klipper\Component\Security\Model\OrganizationInterface;
-
 /**
  * Interface to indicate that the model is linked with an optional organization.
  *
@@ -20,12 +18,4 @@ use Klipper\Component\Security\Model\OrganizationInterface;
  */
 interface OrganizationalOptionalInterface extends OrganizationalInterface
 {
-    /**
-     * Set the organization.
-     *
-     * @param null|OrganizationInterface $organization The organization
-     *
-     * @return static
-     */
-    public function setOrganization(?OrganizationInterface $organization);
 }
