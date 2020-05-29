@@ -169,8 +169,9 @@ class SharingFilterSubscriber extends AbstractFilterSubscriber
         $mapSids = [];
 
         foreach ($sids as $sid) {
-            $type = $this->sharingManager->getIdentityConfig($sid->getType())->getType();
-            $mapSids[$type][] = $connection->quote($sid->getIdentifier());
+            $sidType = $sid->getType();
+            $sidType = $this->sharingManager->hasIdentityConfig($sidType) ? $this->sharingManager->getIdentityConfig($sidType)->getType() : $sidType;
+            $mapSids[$sidType][] = $connection->quote($sid->getIdentifier());
         }
 
         foreach ($mapSids as $type => $ids) {

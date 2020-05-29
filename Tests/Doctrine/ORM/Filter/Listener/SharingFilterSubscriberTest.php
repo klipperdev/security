@@ -212,6 +212,12 @@ final class SharingFilterSubscriberTest extends TestCase
         ;
 
         $this->sharingManager->expects(static::atLeastOnce())
+            ->method('hasIdentityConfig')
+            ->with(...['role'])
+            ->willReturn(true)
+        ;
+
+        $this->sharingManager->expects(static::atLeastOnce())
             ->method('getIdentityConfig')
             ->willReturnCallback(function ($v) {
                 $config = $this->getMockBuilder(SharingIdentityConfigInterface::class)->getMock();
