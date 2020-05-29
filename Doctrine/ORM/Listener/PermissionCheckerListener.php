@@ -107,7 +107,7 @@ class PermissionCheckerListener extends AbstractPermissionListener
     protected function checkAllScheduledByAction(array $objects, string $action): void
     {
         foreach ($objects as $object) {
-            if (!$this->getAuthorizationChecker()->isGranted('perm_'.$action, $object)) {
+            if (!$this->getAuthorizationChecker()->isGranted('perm:'.$action, $object)) {
                 throw new AccessDeniedException('Insufficient privilege to '.$action.' the entity');
             }
         }

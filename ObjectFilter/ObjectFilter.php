@@ -279,8 +279,8 @@ class ObjectFilter implements ObjectFilterInterface
             return !$event->isGranted();
         }
 
-        return !$this->ac->isGranted('perm_read', $fieldVote)
-            || !$this->ac->isGranted('perm_edit', $fieldVote);
+        return !$this->ac->isGranted('perm:read', $fieldVote)
+            || !$this->ac->isGranted('perm:edit', $fieldVote);
     }
 
     /**
@@ -292,10 +292,10 @@ class ObjectFilter implements ObjectFilterInterface
     {
         if ($object instanceof FieldVote) {
             $event = new ObjectFieldViewGrantedEvent($object);
-            $permission = 'perm_read';
+            $permission = 'perm:read';
         } else {
             $event = new ObjectViewGrantedEvent($object);
-            $permission = 'perm_view';
+            $permission = 'perm:view';
         }
 
         $this->dispatcher->dispatch($event);

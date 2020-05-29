@@ -30,7 +30,7 @@ final class IsGrantedProviderTest extends TestCase
 
         $authChecker->expects(static::once())
             ->method('isGranted')
-            ->with('perm_view', $object)
+            ->with('perm:view', $object)
             ->willReturn(true)
         ;
 
@@ -40,9 +40,9 @@ final class IsGrantedProviderTest extends TestCase
             'auth_checker' => $authChecker,
         ];
 
-        static::assertTrue($expressionLanguage->evaluate('is_granted("perm_view", object)', $variables));
+        static::assertTrue($expressionLanguage->evaluate('is_granted("perm:view", object)', $variables));
 
-        $compiled = '$auth_checker && $auth_checker->isGranted("perm_view", $object)';
-        static::assertEquals($compiled, $expressionLanguage->compile('is_granted("perm_view", object)', ['object']));
+        $compiled = '$auth_checker && $auth_checker->isGranted("perm:view", $object)';
+        static::assertEquals($compiled, $expressionLanguage->compile('is_granted("perm:view", object)', ['object']));
     }
 }

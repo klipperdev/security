@@ -73,7 +73,7 @@ class PermissionVoter extends Voter
      */
     protected function isAttributeSupported($attribute): bool
     {
-        return \is_string($attribute) && 0 === stripos(strtolower($attribute), 'perm_');
+        return \is_string($attribute) && 0 === stripos(strtolower($attribute), 'perm:');
     }
 
     /**

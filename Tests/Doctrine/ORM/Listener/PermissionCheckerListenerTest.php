@@ -226,7 +226,7 @@ final class PermissionCheckerListenerTest extends TestCase
 
         $this->authChecker->expects(static::once())
             ->method('isGranted')
-            ->with('perm_create', $object)
+            ->with('perm:create', $object)
             ->willReturn(false)
         ;
 
@@ -280,7 +280,7 @@ final class PermissionCheckerListenerTest extends TestCase
 
         $this->authChecker->expects(static::once())
             ->method('isGranted')
-            ->with('perm_update', $object)
+            ->with('perm:update', $object)
             ->willReturn(false)
         ;
 
@@ -334,7 +334,7 @@ final class PermissionCheckerListenerTest extends TestCase
 
         $this->authChecker->expects(static::once())
             ->method('isGranted')
-            ->with('perm_delete', $object)
+            ->with('perm:delete', $object)
             ->willReturn(false)
         ;
 

@@ -105,38 +105,38 @@ final class PermissionVoterTest extends TestCase
             [['view'], $arrayInvalid, VoterInterface::ACCESS_ABSTAIN, null, true, false],
             [['view'], $arrayInvalid, VoterInterface::ACCESS_ABSTAIN, null, true, true],
 
-            [['perm_view'], $class, VoterInterface::ACCESS_GRANTED, true, true, false],
-            [['perm_view'], $class, VoterInterface::ACCESS_GRANTED, true, false, true],
+            [['perm:view'], $class, VoterInterface::ACCESS_GRANTED, true, true, false],
+            [['perm:view'], $class, VoterInterface::ACCESS_GRANTED, true, false, true],
 
-            [['perm_view'], $object, VoterInterface::ACCESS_GRANTED, true, true, false],
-            [['perm_view'], $object, VoterInterface::ACCESS_GRANTED, true, false, true],
+            [['perm:view'], $object, VoterInterface::ACCESS_GRANTED, true, true, false],
+            [['perm:view'], $object, VoterInterface::ACCESS_GRANTED, true, false, true],
 
-            [['perm_view'], $object, VoterInterface::ACCESS_DENIED, false, true, false],
-            [['perm_view'], $object, VoterInterface::ACCESS_DENIED, false, false, true],
+            [['perm:view'], $object, VoterInterface::ACCESS_DENIED, false, true, false],
+            [['perm:view'], $object, VoterInterface::ACCESS_DENIED, false, false, true],
 
-            [['perm_view'], $fieldVote, VoterInterface::ACCESS_GRANTED, true, true, false],
-            [['perm_view'], $fieldVote, VoterInterface::ACCESS_GRANTED, true, false, true],
+            [['perm:view'], $fieldVote, VoterInterface::ACCESS_GRANTED, true, true, false],
+            [['perm:view'], $fieldVote, VoterInterface::ACCESS_GRANTED, true, false, true],
 
-            [['perm_view'], $fieldVote, VoterInterface::ACCESS_DENIED, false, true, false],
-            [['perm_view'], $fieldVote, VoterInterface::ACCESS_DENIED, false, false, true],
+            [['perm:view'], $fieldVote, VoterInterface::ACCESS_DENIED, false, true, false],
+            [['perm:view'], $fieldVote, VoterInterface::ACCESS_DENIED, false, false, true],
 
-            [['perm_view'], $arrayValid, VoterInterface::ACCESS_GRANTED, true, true, false],
-            [['perm_view'], $arrayValid, VoterInterface::ACCESS_GRANTED, true, false, true],
+            [['perm:view'], $arrayValid, VoterInterface::ACCESS_GRANTED, true, true, false],
+            [['perm:view'], $arrayValid, VoterInterface::ACCESS_GRANTED, true, false, true],
 
-            [['perm_view'], $arrayValid, VoterInterface::ACCESS_DENIED, false, true, false],
-            [['perm_view'], $arrayValid, VoterInterface::ACCESS_DENIED, false, false, true],
+            [['perm:view'], $arrayValid, VoterInterface::ACCESS_DENIED, false, true, false],
+            [['perm:view'], $arrayValid, VoterInterface::ACCESS_DENIED, false, false, true],
 
-            [['perm_view'], $arrayInvalid, VoterInterface::ACCESS_ABSTAIN, null, true, false],
-            [['perm_view'], $arrayInvalid, VoterInterface::ACCESS_ABSTAIN, null, true, true],
+            [['perm:view'], $arrayInvalid, VoterInterface::ACCESS_ABSTAIN, null, true, false],
+            [['perm:view'], $arrayInvalid, VoterInterface::ACCESS_ABSTAIN, null, true, true],
 
             [['foo'], null, VoterInterface::ACCESS_ABSTAIN, null, true, false],
             [['foo'], null, VoterInterface::ACCESS_ABSTAIN, null, true, true],
 
-            [['perm_foo'], null, VoterInterface::ACCESS_GRANTED, true, true, false],
-            [['perm_foo'], null, VoterInterface::ACCESS_GRANTED, true, true, true],
+            [['perm:foo'], null, VoterInterface::ACCESS_GRANTED, true, true, false],
+            [['perm:foo'], null, VoterInterface::ACCESS_GRANTED, true, true, true],
 
-            [['perm_foo'], null, VoterInterface::ACCESS_DENIED, false, true, false],
-            [['perm_foo'], null, VoterInterface::ACCESS_DENIED, false, true, true],
+            [['perm:foo'], null, VoterInterface::ACCESS_DENIED, false, true, false],
+            [['perm:foo'], null, VoterInterface::ACCESS_DENIED, false, true, true],
         ];
     }
 

@@ -294,14 +294,14 @@ final class ObjectFilterTest extends TestCase
 
         $this->ac->expects(static::at(0))
             ->method('isGranted')
-            ->with('perm_read', $fv)
+            ->with('perm:read', $fv)
             ->willReturn($allowView)
         ;
 
         if ($allowView) {
             $this->ac->expects(static::at(1))
                 ->method('isGranted')
-                ->with('perm_edit', $fv)
+                ->with('perm:edit', $fv)
                 ->willReturn($allowEdit)
             ;
         }
