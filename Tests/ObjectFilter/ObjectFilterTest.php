@@ -21,6 +21,7 @@ use Klipper\Component\Security\ObjectFilter\ObjectFilterExtensionInterface;
 use Klipper\Component\Security\ObjectFilter\UnitOfWorkInterface;
 use Klipper\Component\Security\Permission\FieldVote;
 use Klipper\Component\Security\Permission\PermissionManagerInterface;
+use Klipper\Component\Security\Permission\PermVote;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -294,14 +295,14 @@ final class ObjectFilterTest extends TestCase
 
         $this->ac->expects(static::at(0))
             ->method('isGranted')
-            ->with('perm:read', $fv)
+            ->with(new PermVote('read'), $fv)
             ->willReturn($allowView)
         ;
 
         if ($allowView) {
             $this->ac->expects(static::at(1))
                 ->method('isGranted')
-                ->with('perm:edit', $fv)
+                ->with(new PermVote('edit'), $fv)
                 ->willReturn($allowEdit)
             ;
         }

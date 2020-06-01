@@ -16,6 +16,7 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\UnitOfWork;
 use Klipper\Component\Security\Doctrine\ORM\Listener\PermissionCheckerListener;
 use Klipper\Component\Security\Permission\PermissionManagerInterface;
+use Klipper\Component\Security\Permission\PermVote;
 use Klipper\Component\Security\Token\ConsoleToken;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -226,7 +227,7 @@ final class PermissionCheckerListenerTest extends TestCase
 
         $this->authChecker->expects(static::once())
             ->method('isGranted')
-            ->with('perm:create', $object)
+            ->with(new PermVote('create'), $object)
             ->willReturn(false)
         ;
 
@@ -280,7 +281,7 @@ final class PermissionCheckerListenerTest extends TestCase
 
         $this->authChecker->expects(static::once())
             ->method('isGranted')
-            ->with('perm:update', $object)
+            ->with(new PermVote('update'), $object)
             ->willReturn(false)
         ;
 
@@ -334,7 +335,7 @@ final class PermissionCheckerListenerTest extends TestCase
 
         $this->authChecker->expects(static::once())
             ->method('isGranted')
-            ->with('perm:delete', $object)
+            ->with(new PermVote('delete'), $object)
             ->willReturn(false)
         ;
 

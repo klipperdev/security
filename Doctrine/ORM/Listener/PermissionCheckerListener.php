@@ -14,6 +14,7 @@ namespace Klipper\Component\Security\Doctrine\ORM\Listener;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use Klipper\Component\Security\Exception\AccessDeniedException;
+use Klipper\Component\Security\Permission\PermVote;
 use Klipper\Component\Security\Token\ConsoleToken;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -107,7 +108,7 @@ class PermissionCheckerListener extends AbstractPermissionListener
     protected function checkAllScheduledByAction(array $objects, string $action): void
     {
         foreach ($objects as $object) {
-            if (!$this->getAuthorizationChecker()->isGranted('perm:'.$action, $object)) {
+            if (!$this->getAuthorizationChecker()->isGranted(new PermVote($action), $object)) {
                 throw new AccessDeniedException('Insufficient privilege to '.$action.' the entity');
             }
         }

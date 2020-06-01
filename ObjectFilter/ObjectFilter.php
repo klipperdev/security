@@ -19,6 +19,7 @@ use Klipper\Component\Security\Event\RestoreViewGrantedEvent;
 use Klipper\Component\Security\Exception\UnexpectedTypeException;
 use Klipper\Component\Security\Permission\FieldVote;
 use Klipper\Component\Security\Permission\PermissionManagerInterface;
+use Klipper\Component\Security\Permission\PermVote;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -279,8 +280,8 @@ class ObjectFilter implements ObjectFilterInterface
             return !$event->isGranted();
         }
 
-        return !$this->ac->isGranted('perm:read', $fieldVote)
-            || !$this->ac->isGranted('perm:edit', $fieldVote);
+        return !$this->ac->isGranted(new PermVote('read'), $fieldVote)
+            || !$this->ac->isGranted(new PermVote('edit'), $fieldVote);
     }
 
     /**
@@ -292,10 +293,10 @@ class ObjectFilter implements ObjectFilterInterface
     {
         if ($object instanceof FieldVote) {
             $event = new ObjectFieldViewGrantedEvent($object);
-            $permission = 'perm:read';
+            $permission = new PermVote('read');
         } else {
             $event = new ObjectViewGrantedEvent($object);
-            $permission = 'perm:view';
+            $permission = new PermVote('view');
         }
 
         $this->dispatcher->dispatch($event);
