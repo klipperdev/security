@@ -105,7 +105,7 @@ final class CacheSecurityIdentityManagerTest extends TestCase
     public function testGetSecurityIdentitiesWithoutToken(): void
     {
         $this->roleHierarchy->expects(static::never())
-            ->method('getReachableRoles')
+            ->method('getReachableRoleNames')
         ;
 
         $sids = $this->sidManager->getSecurityIdentities();
