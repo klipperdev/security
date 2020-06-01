@@ -14,6 +14,7 @@ namespace Klipper\Component\Security\Authorization\Voter;
 use Klipper\Component\Security\Identity\SecurityIdentityManagerInterface;
 use Klipper\Component\Security\Permission\FieldVote;
 use Klipper\Component\Security\Permission\PermissionManagerInterface;
+use Klipper\Component\Security\Permission\PermVote;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -73,7 +74,8 @@ class PermissionVoter extends Voter
      */
     protected function isAttributeSupported($attribute): bool
     {
-        return \is_string($attribute) && 0 === stripos(strtolower($attribute), 'perm:');
+        return $attribute instanceof PermVote
+            || (\is_string($attribute) && 0 === stripos(strtolower($attribute), 'perm:'));
     }
 
     /**
@@ -111,7 +113,7 @@ class PermissionVoter extends Voter
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
         $sids = $this->sim->getSecurityIdentities($token);
-        $attribute = substr($attribute, 5);
+        $attribute = $attribute instanceof PermVote ? $attribute->getPermission() : substr($attribute, 5);
         $subject = $this->convertSubject($subject);
 
         return !$this->permissionManager->isEnabled()

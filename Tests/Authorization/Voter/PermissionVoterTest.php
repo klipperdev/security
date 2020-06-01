@@ -16,6 +16,7 @@ use Klipper\Component\Security\Identity\RoleSecurityIdentity;
 use Klipper\Component\Security\Identity\SecurityIdentityManagerInterface;
 use Klipper\Component\Security\Permission\FieldVote;
 use Klipper\Component\Security\Permission\PermissionManagerInterface;
+use Klipper\Component\Security\Permission\PermVote;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockObject;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockRole;
 use PHPUnit\Framework\TestCase;
@@ -70,6 +71,7 @@ final class PermissionVoterTest extends TestCase
     {
         $class = MockObject::class;
         $object = new MockObject('foo');
+        $permVote = new PermVote('view');
         $fieldVote = new FieldVote($object, 'name');
         $arrayValid = [$object, 'name'];
         $arrayInvalid = [$object];
@@ -107,27 +109,43 @@ final class PermissionVoterTest extends TestCase
 
             [['perm:view'], $class, VoterInterface::ACCESS_GRANTED, true, true, false],
             [['perm:view'], $class, VoterInterface::ACCESS_GRANTED, true, false, true],
+            [[$permVote], $class, VoterInterface::ACCESS_GRANTED, true, true, false],
+            [[$permVote], $class, VoterInterface::ACCESS_GRANTED, true, false, true],
 
             [['perm:view'], $object, VoterInterface::ACCESS_GRANTED, true, true, false],
             [['perm:view'], $object, VoterInterface::ACCESS_GRANTED, true, false, true],
+            [[$permVote], $object, VoterInterface::ACCESS_GRANTED, true, true, false],
+            [[$permVote], $object, VoterInterface::ACCESS_GRANTED, true, false, true],
 
             [['perm:view'], $object, VoterInterface::ACCESS_DENIED, false, true, false],
             [['perm:view'], $object, VoterInterface::ACCESS_DENIED, false, false, true],
+            [[$permVote], $object, VoterInterface::ACCESS_DENIED, false, true, false],
+            [[$permVote], $object, VoterInterface::ACCESS_DENIED, false, false, true],
 
             [['perm:view'], $fieldVote, VoterInterface::ACCESS_GRANTED, true, true, false],
             [['perm:view'], $fieldVote, VoterInterface::ACCESS_GRANTED, true, false, true],
+            [[$permVote], $fieldVote, VoterInterface::ACCESS_GRANTED, true, true, false],
+            [[$permVote], $fieldVote, VoterInterface::ACCESS_GRANTED, true, false, true],
 
             [['perm:view'], $fieldVote, VoterInterface::ACCESS_DENIED, false, true, false],
             [['perm:view'], $fieldVote, VoterInterface::ACCESS_DENIED, false, false, true],
+            [[$permVote], $fieldVote, VoterInterface::ACCESS_DENIED, false, true, false],
+            [[$permVote], $fieldVote, VoterInterface::ACCESS_DENIED, false, false, true],
 
             [['perm:view'], $arrayValid, VoterInterface::ACCESS_GRANTED, true, true, false],
             [['perm:view'], $arrayValid, VoterInterface::ACCESS_GRANTED, true, false, true],
+            [[$permVote], $arrayValid, VoterInterface::ACCESS_GRANTED, true, true, false],
+            [[$permVote], $arrayValid, VoterInterface::ACCESS_GRANTED, true, false, true],
 
             [['perm:view'], $arrayValid, VoterInterface::ACCESS_DENIED, false, true, false],
             [['perm:view'], $arrayValid, VoterInterface::ACCESS_DENIED, false, false, true],
+            [[$permVote], $arrayValid, VoterInterface::ACCESS_DENIED, false, true, false],
+            [[$permVote], $arrayValid, VoterInterface::ACCESS_DENIED, false, false, true],
 
             [['perm:view'], $arrayInvalid, VoterInterface::ACCESS_ABSTAIN, null, true, false],
             [['perm:view'], $arrayInvalid, VoterInterface::ACCESS_ABSTAIN, null, true, true],
+            [[$permVote], $arrayInvalid, VoterInterface::ACCESS_ABSTAIN, null, true, false],
+            [[$permVote], $arrayInvalid, VoterInterface::ACCESS_ABSTAIN, null, true, true],
 
             [['foo'], null, VoterInterface::ACCESS_ABSTAIN, null, true, false],
             [['foo'], null, VoterInterface::ACCESS_ABSTAIN, null, true, true],
@@ -180,7 +198,7 @@ final class PermissionVoterTest extends TestCase
 
                 $this->permManager->expects(static::once())
                     ->method('isGranted')
-                    ->with($sids, substr($attributes[0], 5), $expectedSubject)
+                    ->with($sids, $attributes[0] instanceof PermVote ? $attributes[0]->getPermission() : substr($attributes[0], 5), $expectedSubject)
                     ->willReturn($permManagerResult)
                 ;
             } else {
@@ -196,7 +214,7 @@ final class PermissionVoterTest extends TestCase
 
                 $this->permManager->expects(static::once())
                     ->method('isGranted')
-                    ->with($sids, substr($attributes[0], 5), $subject)
+                    ->with($sids, $attributes[0] instanceof PermVote ? $attributes[0]->getPermission() : substr($attributes[0], 5), $subject)
                     ->willReturn($permManagerResult)
                 ;
             }
