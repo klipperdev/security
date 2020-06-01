@@ -170,7 +170,7 @@ class SharingValidator extends ConstraintValidator
             $this->context->buildViolation($constraint->invalidClassMessage)
                 ->atPath($propertyPath)
                 ->setParameter('%class_property%', $propertyPath)
-                ->setParameter('%class%', $class)
+                ->setParameter('%class%', (string) $class)
                 ->addViolation()
             ;
 
