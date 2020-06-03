@@ -11,14 +11,14 @@
 
 namespace Klipper\Component\Security\Tests\Doctrine\ORM\Provider;
 
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\Mapping\ClassMetadata;
+use Doctrine\Persistence\ObjectManager;
 use Klipper\Component\Security\Doctrine\ORM\Provider\PermissionProvider;
 use Klipper\Component\Security\Model\PermissionInterface;
 use Klipper\Component\Security\Permission\FieldVote;

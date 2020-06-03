@@ -12,11 +12,11 @@
 namespace Klipper\Component\Security\Tests\Role;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Filter\SQLFilter;
 use Doctrine\ORM\Query\FilterCollection;
 use Doctrine\Persistence\ManagerRegistry as ManagerRegistryInterface;
+use Doctrine\Persistence\ObjectRepository;
 use Klipper\Component\Security\Model\RoleHierarchicalInterface;
 use Klipper\Component\Security\Role\RoleHierarchy;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockRole;

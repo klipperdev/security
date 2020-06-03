@@ -11,12 +11,12 @@
 
 namespace Klipper\Component\Security\Tests\Doctrine;
 
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDOPgSql\Driver;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\Persistence\Mapping\ClassMetadata;
 use Klipper\Component\Security\Doctrine\DoctrineUtils;
 use Klipper\Component\Security\Exception\RuntimeException;
 use PHPUnit\Framework\MockObject\MockObject;
