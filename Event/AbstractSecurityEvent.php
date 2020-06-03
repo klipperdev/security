@@ -20,10 +20,7 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 abstract class AbstractSecurityEvent extends Event
 {
-    /**
-     * @var bool
-     */
-    protected $permissionEnabled = true;
+    protected bool $permissionEnabled = true;
 
     /**
      * Check if the permission manager is enabled.

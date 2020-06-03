@@ -23,7 +23,7 @@ use Klipper\Component\Security\ObjectFilter\ObjectFilterVoterInterface;
 class DoctrineOrmCollectionValue implements ObjectFilterVoterInterface
 {
     /**
-     * {@inheritdoc}
+     * @param mixed $value
      */
     public function supports($value): bool
     {
@@ -31,7 +31,7 @@ class DoctrineOrmCollectionValue implements ObjectFilterVoterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $value
      */
     public function getValue($value)
     {

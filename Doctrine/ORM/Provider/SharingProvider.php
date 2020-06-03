@@ -33,39 +33,19 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class SharingProvider implements SharingProviderInterface
 {
-    /**
-     * @var ManagerRegistry
-     */
-    protected $doctrine;
+    protected ManagerRegistry $doctrine;
+
+    protected ?EntityRepository $roleRepo = null;
+
+    protected ?EntityRepository $sharingRepo = null;
+
+    protected ?SharingManagerInterface $sharingManager = null;
+
+    protected SecurityIdentityManagerInterface $sidManager;
+
+    protected TokenStorageInterface $tokenStorage;
 
     /**
-     * @var null|EntityRepository
-     */
-    protected $roleRepo;
-
-    /**
-     * @var null|EntityRepository
-     */
-    protected $sharingRepo;
-
-    /**
-     * @var SharingManagerInterface
-     */
-    protected $sharingManager;
-
-    /**
-     * @var SecurityIdentityManagerInterface
-     */
-    protected $sidManager;
-
-    /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
-
-    /**
-     * Constructor.
-     *
      * @param ManagerRegistry                  $doctrine     The doctrine
      * @param SecurityIdentityManagerInterface $sidManager   The security identity manager
      * @param TokenStorageInterface            $tokenStorage The token storage
@@ -80,9 +60,6 @@ class SharingProvider implements SharingProviderInterface
         $this->tokenStorage = $tokenStorage;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSharingManager(SharingManagerInterface $sharingManager): self
     {
         $this->sharingManager = $sharingManager;
@@ -90,9 +67,6 @@ class SharingProvider implements SharingProviderInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPermissionRoles(array $roles): array
     {
         if (empty($roles)) {
@@ -115,9 +89,6 @@ class SharingProvider implements SharingProviderInterface
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSharingEntries(array $subjects, $sids = null): array
     {
         if (empty($subjects) || null === $this->getSharingRepository()) {
@@ -140,9 +111,6 @@ class SharingProvider implements SharingProviderInterface
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function renameIdentity(string $type, string $oldName, string $newName): self
     {
         $this->getSharingRepository()->createQueryBuilder('s')
@@ -160,9 +128,6 @@ class SharingProvider implements SharingProviderInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function deleteIdentity(string $type, string $name): self
     {
         $this->getSharingRepository()->createQueryBuilder('s')
@@ -178,9 +143,6 @@ class SharingProvider implements SharingProviderInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function deletes(array $ids): self
     {
         if (!empty($ids)) {
@@ -327,8 +289,9 @@ class SharingProvider implements SharingProviderInterface
      *
      * @param string $classname The class name
      */
-    private function getRepository($classname): EntityRepository
+    private function getRepository(string $classname): EntityRepository
     {
+        /** @var EntityRepository $repo */
         return ManagerUtils::getRequiredManager($this->doctrine, $classname)->getRepository($classname);
     }
 }

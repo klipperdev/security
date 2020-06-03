@@ -21,55 +21,41 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
  */
 class PermissionConfig implements PermissionConfigInterface
 {
-    /**
-     * @var string
-     */
-    protected $type;
+    protected string $type;
 
     /**
      * @var string[]
      */
-    protected $operations;
+    protected array $operations;
 
     /**
      * @var string[]
      */
-    protected $mappingPermissions;
+    protected array $mappingPermissions;
 
     /**
      * @var PermissionFieldConfigInterface[]
      */
-    protected $fields = [];
+    protected array $fields = [];
 
     /**
      * @var null|PropertyPathInterface|string
      */
     protected $master;
 
-    /**
-     * @var array
-     */
-    protected $masterFieldMappingPermissions;
+    protected array $masterFieldMappingPermissions;
+
+    protected ?bool $buildFields;
+
+    protected ?bool$buildDefaultFields;
 
     /**
-     * @var null|bool
-     */
-    protected $buildFields;
-
-    /**
-     * @var null|bool
-     */
-    protected $buildDefaultFields;
-
-    /**
-     * Constructor.
-     *
      * @param string                            $type                          The type, typically, this is the PHP class name
      * @param string[]                          $operations                    The permission operations of this type
      * @param string[]                          $mappingPermissions            The map of alias permission and real permission
      * @param PermissionFieldConfigInterface[]  $fields                        The field configurations
      * @param null|PropertyPathInterface|string $master                        The property path of master
-     * @param array[]                           $masterFieldMappingPermissions The map of field permission of this type with the permission of master type
+     * @param array                             $masterFieldMappingPermissions The map of field permission of this type with the permission of master type
      * @param null|bool                         $buildFields                   Check if the fields must be built even if no field config is added
      * @param null|bool                         $buildDefaultFields            check if the default fields must be built
      */
@@ -96,121 +82,76 @@ class PermissionConfig implements PermissionConfigInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasOperation(string $operation): bool
     {
         return \in_array($this->getMappingPermission($operation), $this->operations, true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOperations(): array
     {
         return $this->operations;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasField(string $field): bool
     {
         return isset($this->fields[$field]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getField(string $field): ?PermissionFieldConfigInterface
     {
         return $this->fields[$field] ?? null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFields(): array
     {
         return $this->fields;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMaster()
     {
         return $this->master;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMasterFieldMappingPermissions(): array
     {
         return $this->masterFieldMappingPermissions;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMappingPermission(string $aliasPermission): string
     {
         return $this->mappingPermissions[$aliasPermission] ?? $aliasPermission;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMappingPermissions(): array
     {
         return $this->mappingPermissions;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildFields(): bool
     {
         return $this->buildFields ?? true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBuildFields(): ?bool
     {
         return $this->buildFields;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildDefaultFields(): bool
     {
         return $this->buildDefaultFields ?? true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBuildDefaultFields(): ?bool
     {
         return $this->buildDefaultFields;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function merge(PermissionConfigInterface $newConfig): void
     {
         if ($this->getType() !== $newConfig->getType()) {

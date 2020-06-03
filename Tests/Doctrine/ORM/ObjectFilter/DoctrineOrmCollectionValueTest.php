@@ -39,7 +39,7 @@ final class DoctrineOrmCollectionValueTest extends TestCase
      * @param mixed $value  The value
      * @param bool  $result The expected result
      */
-    public function testSupports($value, $result): void
+    public function testSupports($value, bool $result): void
     {
         $collectionValue = new DoctrineOrmCollectionValue();
 

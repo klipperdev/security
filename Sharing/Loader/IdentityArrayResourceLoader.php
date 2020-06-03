@@ -23,18 +23,15 @@ use Klipper\Component\Security\Sharing\SharingIdentityConfigCollection;
 class IdentityArrayResourceLoader extends AbstractArrayResourceLoader
 {
     /**
-     * {@inheritdoc}
+     * @param mixed $resource
      *
      * @return ConfigCollectionInterface|SharingIdentityConfigCollection
      */
-    public function load($resource, $type = null): SharingIdentityConfigCollection
+    public function load($resource, string $type = null): SharingIdentityConfigCollection
     {
         return parent::load($resource, $type);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function createConfigCollection(): ConfigCollectionInterface
     {
         return new SharingIdentityConfigCollection();

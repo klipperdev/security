@@ -27,24 +27,13 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class DisablePermissionSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var PermissionManagerInterface
-     */
-    protected $permManager;
+    protected PermissionManagerInterface $permManager;
 
-    /**
-     * Constructor.
-     *
-     * @param PermissionManagerInterface $permManager The permission manager
-     */
     public function __construct(PermissionManagerInterface $permManager)
     {
         $this->permManager = $permManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

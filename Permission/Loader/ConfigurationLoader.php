@@ -22,14 +22,9 @@ use Symfony\Component\Config\Loader\Loader;
  */
 class ConfigurationLoader extends Loader
 {
-    /**
-     * @var PermissionConfigCollection
-     */
-    protected $configs;
+    protected PermissionConfigCollection $configs;
 
     /**
-     * Constructor.
-     *
      * @param PermissionConfigInterface[] $configs The permission configs
      */
     public function __construct(array $configs = [])
@@ -41,18 +36,12 @@ class ConfigurationLoader extends Loader
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function load($resource, $type = null): PermissionConfigCollection
+    public function load($resource, string $type = null): PermissionConfigCollection
     {
         return $this->configs;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function supports($resource, $type = null): bool
+    public function supports($resource, string $type = null): bool
     {
         return 'config' === $type;
     }

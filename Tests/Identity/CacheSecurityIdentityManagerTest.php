@@ -28,10 +28,7 @@ use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
  */
 final class CacheSecurityIdentityManagerTest extends TestCase
 {
-    /**
-     * @var EventDispatcher
-     */
-    protected $dispatcher;
+    protected ?EventDispatcher $dispatcher = null;
 
     /**
      * @var MockObject|RoleHierarchyInterface
@@ -43,10 +40,7 @@ final class CacheSecurityIdentityManagerTest extends TestCase
      */
     protected $authenticationTrustResolver;
 
-    /**
-     * @var CacheSecurityIdentityManager
-     */
-    protected $sidManager;
+    protected ?CacheSecurityIdentityManager $sidManager = null;
 
     protected function setUp(): void
     {

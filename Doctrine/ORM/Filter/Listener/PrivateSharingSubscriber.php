@@ -26,9 +26,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class PrivateSharingSubscriber implements EventSubscriberInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [

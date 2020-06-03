@@ -11,6 +11,7 @@
 
 namespace Klipper\Component\Security\Model\Traits;
 
+use Doctrine\Common\Collections\Collection;
 use Klipper\Component\Security\Model\GroupInterface;
 
 /**
@@ -30,9 +31,9 @@ interface GroupableInterface
     /**
      * Gets the groups granted to the user.
      *
-     * @return GroupInterface[]|\Traversable
+     * @return Collection|GroupInterface[]
      */
-    public function getGroups();
+    public function getGroups(): Collection;
 
     /**
      * Gets the name of the groups which includes the user.

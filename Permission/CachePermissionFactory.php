@@ -22,14 +22,9 @@ use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
  */
 class CachePermissionFactory extends AbstractCache implements PermissionFactoryInterface, WarmableInterface
 {
-    /**
-     * @var PermissionFactoryInterface
-     */
-    protected $factory;
+    protected PermissionFactoryInterface $factory;
 
     /**
-     * Constructor.
-     *
      * @param PermissionFactoryInterface $factory The permission factory
      * @param array                      $options An array of options
      */
@@ -41,8 +36,6 @@ class CachePermissionFactory extends AbstractCache implements PermissionFactoryI
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return ConfigCollectionInterface|PermissionConfigCollection
      */
     public function createConfigurations(): PermissionConfigCollection
@@ -57,7 +50,7 @@ class CachePermissionFactory extends AbstractCache implements PermissionFactoryI
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $cacheDir
      */
     public function warmUp($cacheDir): void
     {

@@ -56,5 +56,5 @@ class MockObjectWithAnnotation extends MockObject
      *
      * @KlipperSecurity\PermissionField(operations={"edit"})
      */
-    protected $name;
+    protected ?string $name;
 }

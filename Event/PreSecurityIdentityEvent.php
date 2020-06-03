@@ -25,8 +25,6 @@ class PreSecurityIdentityEvent extends AbstractEditableSecurityEvent
     use SecurityIdentityEventTrait;
 
     /**
-     * Constructor.
-     *
      * @param TokenInterface              $token              The token
      * @param SecurityIdentityInterface[] $securityIdentities The security identities
      */

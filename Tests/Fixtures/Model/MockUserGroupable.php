@@ -33,49 +33,31 @@ class MockUserGroupable implements UserInterface, EditGroupableInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPassword(): string
     {
         return 'password';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSalt(): string
     {
         return 'salt';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUsername(): string
     {
         return 'user.test';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function eraseCredentials(): void
     {
         // do nothing
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRoles(): array
     {
         return ['ROLE_TEST'];

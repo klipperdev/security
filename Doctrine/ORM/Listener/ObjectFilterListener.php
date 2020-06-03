@@ -25,10 +25,7 @@ use Klipper\Component\Security\Token\ConsoleToken;
  */
 class ObjectFilterListener extends AbstractPermissionListener
 {
-    /**
-     * @var ObjectFilterInterface
-     */
-    protected $objectFilter;
+    protected ?ObjectFilterInterface $objectFilter = null;
 
     /**
      * Specifies the list of listened events.
@@ -127,9 +124,6 @@ class ObjectFilterListener extends AbstractPermissionListener
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getInitProperties(): array
     {
         return [

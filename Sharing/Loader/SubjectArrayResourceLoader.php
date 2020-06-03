@@ -23,18 +23,15 @@ use Klipper\Component\Security\Sharing\SharingSubjectConfigCollection;
 class SubjectArrayResourceLoader extends AbstractArrayResourceLoader
 {
     /**
-     * {@inheritdoc}
+     * @param mixed $resource
      *
      * @return ConfigCollectionInterface|SharingSubjectConfigCollection
      */
-    public function load($resource, $type = null): SharingSubjectConfigCollection
+    public function load($resource, string $type = null): SharingSubjectConfigCollection
     {
         return parent::load($resource, $type);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function createConfigCollection(): ConfigCollectionInterface
     {
         return new SharingSubjectConfigCollection();

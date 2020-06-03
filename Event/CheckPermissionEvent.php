@@ -25,36 +25,19 @@ class CheckPermissionEvent extends Event
     /**
      * @var SecurityIdentityInterface[]
      */
-    protected $sids;
+    protected array $sids;
+
+    protected array $permissionMap;
+
+    protected string $operation;
+
+    protected ?SubjectIdentityInterface $subject;
+
+    protected ?string $field;
+
+    protected ?bool $granted = null;
 
     /**
-     * @var array
-     */
-    protected $permissionMap;
-
-    /**
-     * @var string
-     */
-    protected $operation;
-
-    /**
-     * @var null|SubjectIdentityInterface
-     */
-    protected $subject;
-
-    /**
-     * @var null|string
-     */
-    protected $field;
-
-    /**
-     * @var null|bool
-     */
-    protected $granted;
-
-    /**
-     * Constructor.
-     *
      * @param SecurityIdentityInterface[]   $sids          The security identities
      * @param array                         $permissionMap The map of permissions
      * @param string                        $operation     The operation

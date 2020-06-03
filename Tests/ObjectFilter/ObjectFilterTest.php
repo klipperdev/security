@@ -36,33 +36,30 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 final class ObjectFilterTest extends TestCase
 {
     /**
-     * @var ObjectFilter
+     * @var MockObject|UnitOfWorkInterface
      */
     protected $of;
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|UnitOfWorkInterface
+     * @var MockObject|UnitOfWorkInterface
      */
     private $uow;
 
     /**
-     * @var ObjectFilterExtensionInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject|ObjectFilterExtensionInterface
      */
     private $ofe;
 
     /**
-     * @var PermissionManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject|PermissionManagerInterface
      */
     private $pm;
 
     /**
-     * @var AuthorizationCheckerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var AuthorizationCheckerInterface|MockObject
      */
     private $ac;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $dispatcher;
+    private ?EventDispatcherInterface $dispatcher = null;
 
     protected function setUp(): void
     {
@@ -171,8 +168,8 @@ final class ObjectFilterTest extends TestCase
 
     public function testFilterWithInvalidType(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\UnexpectedTypeException::class);
-        $this->expectExceptionMessage('Expected argument of type "object", "integer" given');
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('must be an object, int given');
 
         /** @var object $object */
         $object = 42;
@@ -281,7 +278,7 @@ final class ObjectFilterTest extends TestCase
      * @param mixed $newValue   The object new value
      * @param mixed $validValue The valid object value
      */
-    public function testRestoreByAction($allowView, $allowEdit, $oldValue, $newValue, $validValue): void
+    public function testRestoreByAction(bool $allowView, bool $allowEdit, $oldValue, $newValue, $validValue): void
     {
         $object = new MockObject($newValue);
         $fv = new FieldVote($object, 'name');
@@ -343,8 +340,8 @@ final class ObjectFilterTest extends TestCase
 
     public function testRestoreWithInvalidType(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\UnexpectedTypeException::class);
-        $this->expectExceptionMessage('Expected argument of type "object", "integer" given');
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('must be an object, int given');
 
         /** @var object $object */
         $object = 42;
@@ -357,7 +354,7 @@ final class ObjectFilterTest extends TestCase
      *
      * @param object $object The mock object
      */
-    protected function prepareFilterTest($object): void
+    protected function prepareFilterTest(object $object): void
     {
         $this->uow->expects(static::once())
             ->method('attach')
@@ -381,7 +378,7 @@ final class ObjectFilterTest extends TestCase
      * @param object     $object    The mock object
      * @param null|array $changeSet The field change set
      */
-    protected function prepareRestoreTest($object, $changeSet = null): void
+    protected function prepareRestoreTest(object $object, ?array $changeSet = null): void
     {
         if (null === $changeSet) {
             $changeSet = [

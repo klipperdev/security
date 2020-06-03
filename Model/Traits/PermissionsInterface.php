@@ -26,7 +26,7 @@ interface PermissionsInterface
      *
      * @return Collection|PermissionInterface[]
      */
-    public function getPermissions();
+    public function getPermissions(): Collection;
 
     /**
      * Check if the role has the permission.

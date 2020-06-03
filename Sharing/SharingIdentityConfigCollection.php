@@ -36,8 +36,6 @@ class SharingIdentityConfigCollection extends AbstractConfigCollection
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return SharingIdentityConfigInterface[]
      */
     public function all(): array
@@ -70,8 +68,6 @@ class SharingIdentityConfigCollection extends AbstractConfigCollection
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param ConfigCollectionInterface|SharingIdentityConfigCollection $collection The collection
      */
     public function addCollection(ConfigCollectionInterface $collection): void

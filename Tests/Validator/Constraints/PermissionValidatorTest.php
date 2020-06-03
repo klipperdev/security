@@ -28,19 +28,16 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 final class PermissionValidatorTest extends TestCase
 {
     /**
-     * @var PermissionManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject|PermissionManagerInterface
      */
     protected $permissionManager;
 
     /**
-     * @var ExecutionContextInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var ExecutionContextInterface|MockObject
      */
     protected $context;
 
-    /**
-     * @var PermissionValidator
-     */
-    protected $validator;
+    protected ?PermissionValidator $validator = null;
 
     protected function setUp(): void
     {

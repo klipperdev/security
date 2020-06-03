@@ -20,17 +20,11 @@ use Klipper\Component\Security\Model\OrganizationInterface;
  */
 class OrganizationVoter extends AbstractIdentityVoter
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function getValidType(): string
     {
         return OrganizationInterface::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefaultPrefix(): string
     {
         return 'ORG_';

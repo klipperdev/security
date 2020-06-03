@@ -71,7 +71,7 @@ interface OrganizationInterface
      *
      * @return Collection|OrganizationUserInterface[]
      */
-    public function getOrganizationUsers();
+    public function getOrganizationUsers(): Collection;
 
     /**
      * Get the usernames of organization.

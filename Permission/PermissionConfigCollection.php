@@ -36,8 +36,6 @@ class PermissionConfigCollection extends AbstractConfigCollection
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return PermissionConfigInterface[]
      */
     public function all(): array
@@ -70,8 +68,6 @@ class PermissionConfigCollection extends AbstractConfigCollection
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param ConfigCollectionInterface|PermissionConfigCollection $collection The permission collection
      */
     public function addCollection(ConfigCollectionInterface $collection): void

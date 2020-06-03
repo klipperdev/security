@@ -20,10 +20,7 @@ use Klipper\Component\Security\Permission\FieldVote;
  */
 class RestoreViewGrantedEvent extends AbstractViewGrantedEvent
 {
-    /**
-     * @var FieldVote
-     */
-    protected $fieldVote;
+    protected FieldVote $fieldVote;
 
     /**
      * @var mixed
@@ -36,8 +33,6 @@ class RestoreViewGrantedEvent extends AbstractViewGrantedEvent
     protected $newValue;
 
     /**
-     * Constructor.
-     *
      * @param FieldVote $fieldVote The permission field vote
      * @param mixed     $oldValue  The old value of field
      * @param mixed     $newValue  The new value of field

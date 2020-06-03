@@ -21,11 +21,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class ConsoleToken extends AbstractToken
 {
-    private $key;
+    private string $key;
 
     /**
-     * Constructor.
-     *
      * @param string               $key   The key shared with the authentication provider
      * @param string|UserInterface $user  The user
      * @param string[]             $roles An array of roles
@@ -39,26 +37,17 @@ class ConsoleToken extends AbstractToken
         $this->setAuthenticated(true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __serialize(): array
     {
         return [$this->key, parent::__serialize()];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function __unserialize(array $data): void
     {
         [$this->key, $parentData] = $data;
         parent::__unserialize($parentData);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCredentials(): string
     {
         return '';
@@ -66,8 +55,6 @@ class ConsoleToken extends AbstractToken
 
     /**
      * Returns the key.
-     *
-     * @return string The Key
      */
     public function getKey(): string
     {

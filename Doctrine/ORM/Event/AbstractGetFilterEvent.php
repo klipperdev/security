@@ -24,44 +24,21 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 abstract class AbstractGetFilterEvent extends Event
 {
-    /**
-     * @var SQLFilter
-     */
-    protected $filter;
+    protected SQLFilter $filter;
+
+    protected EntityManagerInterface $entityManager;
+
+    protected ClassMetadata $targetEntity;
+
+    protected string $targetTableAlias;
+
+    protected string $sharingClass;
+
+    protected string $filterConstraint = '';
+
+    private ?\ReflectionProperty $refParameters = null;
 
     /**
-     * @var EntityManagerInterface
-     */
-    protected $entityManager;
-
-    /**
-     * @var ClassMetadata
-     */
-    protected $targetEntity;
-
-    /**
-     * @var string
-     */
-    protected $targetTableAlias;
-
-    /**
-     * @var string
-     */
-    protected $sharingClass;
-
-    /**
-     * @var string
-     */
-    protected $filterConstraint = '';
-
-    /**
-     * @var null|\ReflectionProperty
-     */
-    private $refParameters;
-
-    /**
-     * Constructor.
-     *
      * @param SQLFilter              $filter           The sql filter
      * @param EntityManagerInterface $entityManager    The entity manager
      * @param ClassMetaData          $targetEntity     The target entity
@@ -103,7 +80,7 @@ abstract class AbstractGetFilterEvent extends Event
      *
      * @param string $classname The class name
      */
-    public function getClassMetadata($classname): ClassMetadata
+    public function getClassMetadata(string $classname): ClassMetadata
     {
         return $this->entityManager->getClassMetadata($classname);
     }

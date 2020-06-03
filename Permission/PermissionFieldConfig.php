@@ -20,29 +20,21 @@ use Klipper\Component\Security\Exception\InvalidArgumentException;
  */
 class PermissionFieldConfig implements PermissionFieldConfigInterface
 {
-    /**
-     * @var string
-     */
-    protected $field;
+    protected string $field;
 
     /**
      * @var string[]
      */
-    protected $operations;
+    protected array $operations;
 
     /**
      * @var string[]
      */
-    protected $mappingPermissions;
+    protected array $mappingPermissions;
+
+    protected ?bool $editable;
 
     /**
-     * @var null|bool
-     */
-    protected $editable;
-
-    /**
-     * Constructor.
-     *
      * @param string    $field              The field name
      * @param string[]  $operations         The permission operations of this field
      * @param string[]  $mappingPermissions The map of alias permission and real permission
@@ -60,57 +52,36 @@ class PermissionFieldConfig implements PermissionFieldConfigInterface
         $this->editable = $editable;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getField(): string
     {
         return $this->field;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasOperation(string $operation): bool
     {
         return \in_array($this->getMappingPermission($operation), $this->operations, true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOperations(): array
     {
         return $this->operations;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEditable(): bool
     {
         return null !== $this->editable ? (bool) $this->editable : empty($this->getOperations());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEditable(): ?bool
     {
         return $this->editable;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMappingPermission(string $aliasPermission): string
     {
         return $this->mappingPermissions[$aliasPermission] ?? $aliasPermission;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMappingPermissions(): array
     {
         return $this->mappingPermissions;

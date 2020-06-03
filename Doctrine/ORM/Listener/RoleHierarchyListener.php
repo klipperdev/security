@@ -36,24 +36,13 @@ use Psr\Cache\CacheItemPoolInterface;
  */
 class RoleHierarchyListener implements EventSubscriber
 {
-    /**
-     * @var SecurityIdentityManagerInterface
-     */
-    protected $sim;
+    protected SecurityIdentityManagerInterface $sim;
+
+    protected ?CacheItemPoolInterface $cache;
+
+    protected ?OrganizationalContextInterface $context;
 
     /**
-     * @var null|CacheItemPoolInterface
-     */
-    protected $cache;
-
-    /**
-     * @var null|OrganizationalContextInterface
-     */
-    protected $context;
-
-    /**
-     * Constructor.
-     *
      * @param SecurityIdentityManagerInterface    $sim     The security identity manager
      * @param null|CacheItemPoolInterface         $cache   The cache
      * @param null|OrganizationalContextInterface $context The organizational context
@@ -68,9 +57,6 @@ class RoleHierarchyListener implements EventSubscriber
         $this->context = $context;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubscribedEvents(): array
     {
         return [Events::onFlush];
@@ -141,7 +127,7 @@ class RoleHierarchyListener implements EventSubscriber
      *
      * @return false|string
      */
-    protected function invalidateCache(UnitOfWork $uow, $object)
+    protected function invalidateCache(UnitOfWork $uow, object $object)
     {
         if ($this->isCacheableObject($object)) {
             return $this->invalidateCacheableObject($uow, $object);
@@ -159,7 +145,7 @@ class RoleHierarchyListener implements EventSubscriber
      *
      * @param object $object The object
      */
-    protected function isCacheableObject($object): bool
+    protected function isCacheableObject(object $object): bool
     {
         return $object instanceof UserInterface || $object instanceof RoleHierarchicalInterface || $object instanceof GroupInterface || $object instanceof OrganizationUserInterface;
     }
@@ -190,10 +176,8 @@ class RoleHierarchyListener implements EventSubscriber
 
     /**
      * Get the cache prefix key.
-     *
-     * @param object $object
      */
-    protected function getPrefix($object): string
+    protected function getPrefix(object $object): string
     {
         $id = 'user';
 
@@ -216,7 +200,7 @@ class RoleHierarchyListener implements EventSubscriber
      *
      * @return bool|string
      */
-    private function invalidateCacheableObject(UnitOfWork $uow, $object)
+    private function invalidateCacheableObject(UnitOfWork $uow, object $object)
     {
         $fields = array_keys($uow->getEntityChangeSet($object));
         $checkFields = ['roles'];

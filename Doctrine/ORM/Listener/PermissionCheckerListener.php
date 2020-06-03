@@ -25,10 +25,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class PermissionCheckerListener extends AbstractPermissionListener
 {
-    /**
-     * @var AuthorizationCheckerInterface
-     */
-    protected $authChecker;
+    protected ?AuthorizationCheckerInterface $authChecker = null;
 
     /**
      * Specifies the list of listened events.
@@ -114,9 +111,6 @@ class PermissionCheckerListener extends AbstractPermissionListener
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getInitProperties(): array
     {
         return [

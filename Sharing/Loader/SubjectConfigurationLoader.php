@@ -22,14 +22,9 @@ use Symfony\Component\Config\Loader\Loader;
  */
 class SubjectConfigurationLoader extends Loader
 {
-    /**
-     * @var SharingSubjectConfigCollection
-     */
-    protected $configs;
+    protected SharingSubjectConfigCollection $configs;
 
     /**
-     * Constructor.
-     *
      * @param SharingSubjectConfigInterface[] $configs The sharing subject configs
      */
     public function __construct(array $configs = [])
@@ -41,18 +36,12 @@ class SubjectConfigurationLoader extends Loader
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function load($resource, $type = null): SharingSubjectConfigCollection
+    public function load($resource, string $type = null): SharingSubjectConfigCollection
     {
         return $this->configs;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function supports($resource, $type = null): bool
+    public function supports($resource, string $type = null): bool
     {
         return 'config' === $type;
     }

@@ -34,34 +34,17 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class SharingFilterSubscriber extends AbstractFilterSubscriber
 {
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $dispatcher;
+    protected EventDispatcherInterface $dispatcher;
+
+    protected TokenStorageInterface $tokenStorage;
+
+    protected SecurityIdentityManagerInterface $sidManager;
+
+    protected SharingManagerInterface $sharingManager;
+
+    protected string $sharingClass;
 
     /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
-
-    /**
-     * @var SecurityIdentityManagerInterface
-     */
-    protected $sidManager;
-
-    /**
-     * @var SharingManagerInterface
-     */
-    protected $sharingManager;
-
-    /**
-     * @var string
-     */
-    protected $sharingClass;
-
-    /**
-     * Constructor.
-     *
      * @param EntityManagerInterface           $entityManager  The entity manager
      * @param EventDispatcherInterface         $dispatcher     The event dispatcher
      * @param TokenStorageInterface            $tokenStorage   The token storage
@@ -86,9 +69,6 @@ class SharingFilterSubscriber extends AbstractFilterSubscriber
         $this->sharingClass = $sharingClass;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return array_merge(parent::getSubscribedEvents(), [
@@ -114,17 +94,11 @@ class SharingFilterSubscriber extends AbstractFilterSubscriber
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function supports(): string
     {
         return SharingFilter::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function injectParameters(SQLFilter $filter): void
     {
         /* @var SharingFilter $filter */

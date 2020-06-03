@@ -23,19 +23,11 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class PermissionValidator extends ConstraintValidator
 {
-    /**
-     * @var PermissionManagerInterface
-     */
-    protected $permissionManager;
+    protected PermissionManagerInterface $permissionManager;
+
+    protected PropertyAccessorInterface $propertyAccessor;
 
     /**
-     * @var PropertyAccessorInterface
-     */
-    protected $propertyAccessor;
-
-    /**
-     * Constructor.
-     *
      * @param PermissionManagerInterface     $permissionManager The permission manager
      * @param null|PropertyAccessorInterface $propertyAccessor  The property access
      */
@@ -44,12 +36,9 @@ class PermissionValidator extends ConstraintValidator
         ?PropertyAccessorInterface $propertyAccessor = null
     ) {
         $this->permissionManager = $permissionManager;
-        $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
+        $this->propertyAccessor = $propertyAccessor ?? PropertyAccess::createPropertyAccessor();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
         /** @var Permission $constraint */

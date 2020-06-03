@@ -27,20 +27,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class SharingFilter extends AbstractFilter
 {
-    /**
-     * @var null|SharingManagerInterface
-     */
-    protected $sm;
+    protected ?SharingManagerInterface $sm = null;
 
-    /**
-     * @var null|EventDispatcherInterface
-     */
-    protected $dispatcher;
+    protected ?EventDispatcherInterface $dispatcher = null;
 
-    /**
-     * @var null|string
-     */
-    protected $sharingClass;
+    protected ?string $sharingClass = null;
 
     /**
      * Set the sharing manager.
@@ -77,16 +68,13 @@ class SharingFilter extends AbstractFilter
      *
      * @return static
      */
-    public function setSharingClass($class): self
+    public function setSharingClass(string $class): self
     {
         $this->sharingClass = $class;
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function doAddFilterConstraint(ClassMetadata $targetEntity, string $targetTableAlias): string
     {
         $visibility = $this->sm->getSharingVisibility(SubjectUtils::getSubjectIdentity($targetEntity->getName()));
@@ -99,8 +87,6 @@ class SharingFilter extends AbstractFilter
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws
      */
     protected function supports(ClassMetadata $targetEntity): bool

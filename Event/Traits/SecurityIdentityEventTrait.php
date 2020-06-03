@@ -21,15 +21,12 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 trait SecurityIdentityEventTrait
 {
-    /**
-     * @var TokenInterface
-     */
-    protected $token;
+    protected TokenInterface $token;
 
     /**
      * @var SecurityIdentityInterface[]
      */
-    protected $securityIdentities = [];
+    protected array $securityIdentities = [];
 
     /**
      * Get the token.

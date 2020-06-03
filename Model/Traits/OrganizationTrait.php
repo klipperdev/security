@@ -51,17 +51,11 @@ trait OrganizationTrait
      */
     protected ?Collection $organizationUsers = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString(): string
     {
         return (string) $this->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): self
     {
         $this->name = $name;
@@ -69,17 +63,11 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUser(?UserInterface $user): self
     {
         $this->user = $user;
@@ -87,33 +75,21 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUser(): ?UserInterface
     {
         return $this->user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isUserOrganization(): bool
     {
         return null !== $this->getUser();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrganizationUsers(): Collection
     {
         return $this->organizationUsers ?: $this->organizationUsers = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrganizationUserNames(): array
     {
         $names = [];
@@ -124,17 +100,11 @@ trait OrganizationTrait
         return $names;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasOrganizationUser(string $username): bool
     {
         return \in_array($username, $this->getOrganizationUserNames(), true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addOrganizationUser(OrganizationUserInterface $organizationUser): self
     {
         if (!$this->isUserOrganization()
@@ -145,9 +115,6 @@ trait OrganizationTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeOrganizationUser(OrganizationUserInterface $organizationUser): self
     {
         if ($this->getOrganizationUsers()->contains($organizationUser)) {

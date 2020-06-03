@@ -42,15 +42,9 @@ final class ExpressionVariableStorageTest extends TestCase
      */
     protected $sidManager;
 
-    /**
-     * @var OrganizationalContextInterface
-     */
-    protected $context;
+    protected ?OrganizationalContextInterface $context = null;
 
-    /**
-     * @var RoleInterface
-     */
-    protected $orgRole;
+    protected ?RoleInterface $orgRole = null;
 
     /**
      * @var MockObject|TokenInterface

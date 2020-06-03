@@ -38,10 +38,7 @@ final class RoleHierarchyTest extends TestCase
      */
     protected $registry;
 
-    /**
-     * @var string
-     */
-    protected $roleClassname;
+    protected ?string $roleClassname = null;
 
     /**
      * @var CacheItemPoolInterface|MockObject
@@ -68,10 +65,7 @@ final class RoleHierarchyTest extends TestCase
      */
     protected $filters;
 
-    /**
-     * @var RoleHierarchy
-     */
-    protected $roleHierarchy;
+    protected ?RoleHierarchy $roleHierarchy = null;
 
     protected function setUp(): void
     {

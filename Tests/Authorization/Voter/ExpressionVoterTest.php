@@ -38,10 +38,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
  */
 final class ExpressionVoterTest extends TestCase
 {
-    /**
-     * @var EventDispatcher
-     */
-    protected $dispatcher;
+    protected ?EventDispatcher $dispatcher = null;
 
     /**
      * @var ExpressionLanguage|MockObject
@@ -59,12 +56,12 @@ final class ExpressionVoterTest extends TestCase
     protected $sidManager;
 
     /**
-     * @var OrganizationalContextInterface
+     * @var MockObject|OrganizationalContextInterface
      */
     protected $context;
 
     /**
-     * @var RoleInterface
+     * @var MockObject|RoleInterface
      */
     protected $orgRole;
 
@@ -73,15 +70,12 @@ final class ExpressionVoterTest extends TestCase
      */
     protected $token;
 
-    /**
-     * @var ExpressionVariableStorage
-     */
-    protected $variableStorage;
+    protected ?ExpressionVariableStorage $variableStorage = null;
 
     /**
-     * @var ExpressionVoter
+     * @var
      */
-    protected $voter;
+    protected ?ExpressionVoter $voter = null;
 
     protected function setUp(): void
     {
@@ -144,7 +138,7 @@ final class ExpressionVoterTest extends TestCase
      * @param int  $resultVoter      The result of voter
      * @param bool $resultExpression The result of expression
      */
-    public function testWithExpression($resultVoter, $resultExpression): void
+    public function testWithExpression(int $resultVoter, bool $resultExpression): void
     {
         $sids = [
             new RoleSecurityIdentity(MockRole::class, 'ROLE_USER'),

@@ -21,14 +21,9 @@ class MockObject
      */
     protected $id;
 
-    /**
-     * @var string
-     */
-    protected $name;
+    protected ?string $name;
 
     /**
-     * Constructor.
-     *
      * @param string          $name The name
      * @param null|int|string $id   The id
      */

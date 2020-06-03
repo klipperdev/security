@@ -28,14 +28,11 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 final class RoleVoterTest extends TestCase
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|SecurityIdentityManagerInterface
+     * @var MockObject|SecurityIdentityManagerInterface
      */
     protected $sidManager;
 
-    /**
-     * @var RoleVoter
-     */
-    protected $voter;
+    protected ?RoleVoter $voter = null;
 
     protected function setUp(): void
     {
@@ -58,7 +55,7 @@ final class RoleVoterTest extends TestCase
      * @param string[] $attributes The voter attributes
      * @param int      $access     The access status of voter
      */
-    public function testExtractRolesWithAccessGranted(array $attributes, $access): void
+    public function testExtractRolesWithAccessGranted(array $attributes, int $access): void
     {
         /** @var MockObject|TokenInterface $token */
         $token = $this->getMockBuilder(TokenInterface::class)->getMock();

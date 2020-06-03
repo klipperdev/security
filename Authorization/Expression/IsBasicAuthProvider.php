@@ -22,9 +22,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 class IsBasicAuthProvider implements ExpressionFunctionProviderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions(): array
     {
         return [

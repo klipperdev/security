@@ -14,6 +14,7 @@ namespace Klipper\Component\Security\Tests\Organizational;
 use Klipper\Component\Security\Event\SetCurrentOrganizationEvent;
 use Klipper\Component\Security\Event\SetCurrentOrganizationUserEvent;
 use Klipper\Component\Security\Event\SetOrganizationalOptionalFilterTypeEvent;
+use Klipper\Component\Security\Exception\RuntimeException;
 use Klipper\Component\Security\Model\OrganizationInterface;
 use Klipper\Component\Security\Model\OrganizationUserInterface;
 use Klipper\Component\Security\Model\UserInterface;
@@ -48,10 +49,7 @@ final class OrganizationalContextTest extends TestCase
      */
     protected $dispatcher;
 
-    /**
-     * @var OrganizationalContext
-     */
-    protected $context;
+    protected ?OrganizationalContext $context = null;
 
     protected function setUp(): void
     {
@@ -331,7 +329,7 @@ final class OrganizationalContextTest extends TestCase
 
     public function testInvalidTokenForOrganizationUser(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('The current organization user cannot be added in security token because the security token is empty');
 
         /** @var OrganizationUserInterface $orgUser */

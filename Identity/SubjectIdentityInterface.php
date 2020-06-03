@@ -30,10 +30,8 @@ interface SubjectIdentityInterface
 
     /**
      * Get the instance of subject.
-     *
-     * @return null|object
      */
-    public function getObject();
+    public function getObject(): ?object;
 
     /**
      * We specifically require this method so we can check for object equality

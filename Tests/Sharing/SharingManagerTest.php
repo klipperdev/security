@@ -13,6 +13,8 @@ namespace Klipper\Component\Security\Tests\Sharing;
 
 use Klipper\Component\Security\Event\SharingDisabledEvent;
 use Klipper\Component\Security\Event\SharingEnabledEvent;
+use Klipper\Component\Security\Exception\SharingIdentityConfigNotFoundException;
+use Klipper\Component\Security\Exception\SharingSubjectConfigNotFoundException;
 use Klipper\Component\Security\Identity\SubjectIdentity;
 use Klipper\Component\Security\Identity\SubjectIdentityInterface;
 use Klipper\Component\Security\Sharing\Loader\IdentityConfigurationLoader;
@@ -40,19 +42,16 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 final class SharingManagerTest extends TestCase
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|SharingProviderInterface
+     * @var MockObject|SharingProviderInterface
      */
     protected $provider;
 
     /**
-     * @var EventDispatcherInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var EventDispatcherInterface|MockObject
      */
     protected $dispatcher;
 
-    /**
-     * @var SharingManager
-     */
-    protected $sm;
+    protected ?SharingManager $sm = null;
 
     protected function setUp(): void
     {
@@ -173,7 +172,7 @@ final class SharingManagerTest extends TestCase
 
     public function testGetSubjectConfigWithNotManagedClass(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\SharingSubjectConfigNotFoundException::class);
+        $this->expectException(SharingSubjectConfigNotFoundException::class);
         $this->expectExceptionMessage('The sharing subject configuration for the class "Klipper\\Component\\Security\\Tests\\Fixtures\\Model\\MockRole" is not found');
 
         $this->sm->getSubjectConfig(MockRole::class);
@@ -181,7 +180,7 @@ final class SharingManagerTest extends TestCase
 
     public function testGetIdentityConfigWithNotManagedClass(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\SharingIdentityConfigNotFoundException::class);
+        $this->expectException(SharingIdentityConfigNotFoundException::class);
         $this->expectExceptionMessage('The sharing identity configuration for the class "Klipper\\Component\\Security\\Tests\\Fixtures\\Model\\MockRole" is not found');
 
         $this->sm->getIdentityConfig(MockRole::class);
@@ -225,7 +224,7 @@ final class SharingManagerTest extends TestCase
 
     public function testHasSharingVisibilityWithoutConfig(): void
     {
-        /** @var \PHPUnit\Framework\MockObject\MockObject|SubjectIdentityInterface $subject */
+        /** @var MockObject|SubjectIdentityInterface $subject */
         $subject = $this->getMockBuilder(SubjectIdentityInterface::class)->getMock();
         $subject->expects(static::once())
             ->method('getType')
@@ -250,9 +249,9 @@ final class SharingManagerTest extends TestCase
      * @param string $visibility The sharing visibility
      * @param bool   $result     The result
      */
-    public function testHasSharingVisibility($visibility, $result): void
+    public function testHasSharingVisibility(string $visibility, bool $result): void
     {
-        /** @var \PHPUnit\Framework\MockObject\MockObject|SubjectIdentityInterface $subject */
+        /** @var MockObject|SubjectIdentityInterface $subject */
         $subject = $this->getMockBuilder(SubjectIdentityInterface::class)->getMock();
         $subject->expects(static::once())
             ->method('getType')

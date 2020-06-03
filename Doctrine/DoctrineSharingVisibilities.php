@@ -23,7 +23,7 @@ use Klipper\Component\Security\SharingVisibilities;
  */
 abstract class DoctrineSharingVisibilities
 {
-    public static $classMap = [
+    public static array $classMap = [
         SharingVisibilities::TYPE_NONE => GetNoneFilterEvent::class,
         SharingVisibilities::TYPE_PUBLIC => GetPublicFilterEvent::class,
         SharingVisibilities::TYPE_PRIVATE => GetPrivateFilterEvent::class,

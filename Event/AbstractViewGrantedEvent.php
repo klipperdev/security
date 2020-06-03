@@ -22,37 +22,21 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 abstract class AbstractViewGrantedEvent extends Event
 {
-    /**
-     * @var object
-     */
-    protected $object;
+    protected object $object;
 
-    /**
-     * @var bool
-     */
-    protected $isGranted = true;
+    protected bool $isGranted = true;
 
-    /**
-     * @var bool
-     */
-    protected $skip = false;
+    protected bool $skip = false;
 
-    /**
-     * Constructor.
-     *
-     * @param object $object The object
-     */
-    public function __construct($object)
+    public function __construct(object $object)
     {
         $this->object = $object;
     }
 
     /**
      * Get the object.
-     *
-     * @return object
      */
-    public function getObject()
+    public function getObject(): object
     {
         return $this->object;
     }
@@ -104,12 +88,8 @@ abstract class AbstractViewGrantedEvent extends Event
 
     /**
      * Validate and return the domain object instance in field vote.
-     *
-     * @param FieldVote $fieldVote The field vote
-     *
-     * @return object
      */
-    protected function validateFieldVoteSubject(FieldVote $fieldVote)
+    protected function validateFieldVoteSubject(FieldVote $fieldVote): object
     {
         $object = $fieldVote->getSubject()->getObject();
 

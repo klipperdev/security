@@ -25,24 +25,12 @@ use Klipper\Component\Security\Permission\PermissionUtils;
  */
 class SharingManager extends AbstractSharingManager
 {
-    /**
-     * @var array
-     */
-    protected $cacheSharing = [];
+    protected array $cacheSharing = [];
 
-    /**
-     * @var array
-     */
-    protected $cacheRoleSharing = [];
+    protected array $cacheRoleSharing = [];
 
-    /**
-     * @var array
-     */
-    protected $cacheSubjectSharing = [];
+    protected array $cacheSubjectSharing = [];
 
-    /**
-     * {@inheritdoc}
-     */
     public function isGranted(string $operation, ?SubjectIdentityInterface $subject = null, ?string $field = null): bool
     {
         $this->preloadPermissions([$subject]);
@@ -56,9 +44,6 @@ class SharingManager extends AbstractSharingManager
             || $this->isSharingGranted($operation, $subject, $field);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preloadPermissions(array $objects): self
     {
         $this->init();
@@ -84,9 +69,6 @@ class SharingManager extends AbstractSharingManager
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preloadRolePermissions(array $subjects): void
     {
         $this->init();
@@ -111,9 +93,6 @@ class SharingManager extends AbstractSharingManager
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function resetPreloadPermissions(array $objects): self
     {
         foreach ($objects as $object) {
@@ -123,15 +102,14 @@ class SharingManager extends AbstractSharingManager
                 unset($this->cacheSharing[$id], $this->cacheRoleSharing[$id], $this->cacheSubjectSharing[$id]);
             } catch (InvalidSubjectIdentityException $e) {
                 // do nothing
+            } catch (\TypeError $e) {
+                // do nothing
             }
         }
 
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function clear(): self
     {
         $this->cacheSharing = [];
@@ -141,9 +119,6 @@ class SharingManager extends AbstractSharingManager
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function renameIdentity(string $type, string $oldName, string $newName): self
     {
         $this->provider->renameIdentity($type, $oldName, $newName);
@@ -151,9 +126,6 @@ class SharingManager extends AbstractSharingManager
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function deleteIdentity(string $type, string $name): self
     {
         $this->provider->deleteIdentity($type, $name);
@@ -161,9 +133,6 @@ class SharingManager extends AbstractSharingManager
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function deletes(array $ids): self
     {
         $this->provider->deletes($ids);

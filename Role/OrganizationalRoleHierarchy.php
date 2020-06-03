@@ -24,14 +24,9 @@ use Psr\Cache\CacheItemPoolInterface;
  */
 class OrganizationalRoleHierarchy extends RoleHierarchy
 {
-    /**
-     * @var null|OrganizationalContextInterface
-     */
-    protected $context;
+    protected ?OrganizationalContextInterface $context;
 
     /**
-     * Constructor.
-     *
      * @param array                               $hierarchy     An array defining the hierarchy
      * @param ManagerRegistryInterface            $registry      The doctrine registry
      * @param null|CacheItemPoolInterface         $cache         The cache
@@ -49,9 +44,6 @@ class OrganizationalRoleHierarchy extends RoleHierarchy
         $this->context = $context;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getUniqueId(array $roleNames): string
     {
         $id = parent::getUniqueId($roleNames);
@@ -63,9 +55,6 @@ class OrganizationalRoleHierarchy extends RoleHierarchy
         return $id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function formatRoles(array $roles): array
     {
         return array_map(static function ($role) {
@@ -73,17 +62,11 @@ class OrganizationalRoleHierarchy extends RoleHierarchy
         }, $roles);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function buildRoleSuffix(?string $role): string
     {
         return null !== $role ? OrganizationalUtil::getSuffix($role) : '';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function cleanRoleNames(array $roles): array
     {
         return array_map(static function ($role) {
@@ -91,9 +74,6 @@ class OrganizationalRoleHierarchy extends RoleHierarchy
         }, $roles);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function formatCleanedRoleName(string $name): string
     {
         return OrganizationalUtil::format($name);

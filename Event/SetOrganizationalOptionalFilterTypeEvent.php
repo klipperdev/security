@@ -20,14 +20,9 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class SetOrganizationalOptionalFilterTypeEvent extends Event
 {
-    /**
-     * @var string
-     */
-    protected $filterType;
+    protected string $filterType;
 
     /**
-     * Constructor.
-     *
      * @param string $filterType The optional filter type
      */
     public function __construct(string $filterType)

@@ -20,14 +20,9 @@ use Klipper\Component\Security\Permission\FieldVote;
  */
 class ObjectFieldViewGrantedEvent extends AbstractViewGrantedEvent
 {
-    /**
-     * @var FieldVote
-     */
-    protected $fieldVote;
+    protected FieldVote $fieldVote;
 
     /**
-     * Constructor.
-     *
      * @param FieldVote $fieldVote The permission field vote
      */
     public function __construct(FieldVote $fieldVote)

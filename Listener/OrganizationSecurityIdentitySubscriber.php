@@ -26,19 +26,11 @@ use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
  */
 class OrganizationSecurityIdentitySubscriber implements EventSubscriberInterface, CacheSecurityIdentityListenerInterface
 {
-    /**
-     * @var RoleHierarchyInterface
-     */
-    private $roleHierarchy;
+    private RoleHierarchyInterface $roleHierarchy;
+
+    private OrganizationalContextInterface $context;
 
     /**
-     * @var OrganizationalContextInterface
-     */
-    private $context;
-
-    /**
-     * Constructor.
-     *
      * @param RoleHierarchyInterface         $roleHierarchy The role hierarchy
      * @param OrganizationalContextInterface $context       The organizational context
      */
@@ -50,9 +42,6 @@ class OrganizationSecurityIdentitySubscriber implements EventSubscriberInterface
         $this->context = $context;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -60,9 +49,6 @@ class OrganizationSecurityIdentitySubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCacheId(): string
     {
         $org = $this->context->getCurrentOrganization();

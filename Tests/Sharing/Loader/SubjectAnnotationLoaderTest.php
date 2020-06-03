@@ -12,7 +12,6 @@
 namespace Klipper\Component\Security\Tests\Sharing\Loader;
 
 use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use Klipper\Component\Config\Loader\ClassFinder;
 use Klipper\Component\Security\Sharing\Loader\SubjectAnnotationLoader;
 use Klipper\Component\Security\SharingVisibilities;
@@ -27,11 +26,6 @@ use PHPUnit\Framework\TestCase;
  */
 final class SubjectAnnotationLoaderTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        AnnotationRegistry::registerLoader('class_exists');
-    }
-
     public function testSupports(): void
     {
         $reader = new AnnotationReader();

@@ -11,6 +11,7 @@
 
 namespace Klipper\Component\Security\Tests\Identity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Klipper\Component\Security\Identity\GroupSecurityIdentity;
 use Klipper\Component\Security\Identity\SecurityIdentityInterface;
 use Klipper\Component\Security\Model\GroupInterface;
@@ -62,7 +63,7 @@ final class GroupSecurityIdentityTest extends TestCase
      * @param mixed $value  The value
      * @param bool  $result The expected result
      */
-    public function testEquals($value, $result): void
+    public function testEquals($value, bool $result): void
     {
         $identity = new GroupSecurityIdentity(MockGroup::class, 'identifier');
 
@@ -98,7 +99,7 @@ final class GroupSecurityIdentityTest extends TestCase
         $user = $this->getMockBuilder(GroupableInterface::class)->getMock();
         $user->expects(static::once())
             ->method('getGroups')
-            ->willReturn([$group])
+            ->willReturn(new ArrayCollection([$group]))
         ;
 
         /** @var MockObject|TokenInterface $token */

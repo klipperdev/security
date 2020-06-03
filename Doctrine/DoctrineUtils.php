@@ -11,7 +11,6 @@
 
 namespace Klipper\Component\Security\Doctrine;
 
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\PDOPgSql\Driver as PgSqlDriver;
@@ -24,6 +23,7 @@ use Doctrine\DBAL\Types\SmallIntType;
 use Doctrine\DBAL\Types\StringType;
 use Doctrine\DBAL\Types\TextType;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\Persistence\Mapping\ClassMetadata;
 use Klipper\Component\Security\Exception\RuntimeException;
 
 /**
@@ -33,20 +33,11 @@ use Klipper\Component\Security\Exception\RuntimeException;
  */
 abstract class DoctrineUtils
 {
-    /**
-     * @var array
-     */
-    private static $cacheIdentifiers = [];
+    private static array $cacheIdentifiers = [];
 
-    /**
-     * @var array
-     */
-    private static $cacheZeroIds = [];
+    private static array $cacheZeroIds = [];
 
-    /**
-     * @var array
-     */
-    private static $cacheCastIdentifiers = [];
+    private static array $cacheCastIdentifiers = [];
 
     /**
      * Clear the caches.

@@ -27,8 +27,6 @@ class SetCurrentOrganizationEvent extends Event
     protected $organization;
 
     /**
-     * Constructor.
-     *
      * @param null|false|OrganizationInterface $organization The current organization
      */
     public function __construct($organization)

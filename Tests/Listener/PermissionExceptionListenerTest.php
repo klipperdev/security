@@ -12,6 +12,7 @@
 namespace Klipper\Component\Security\Tests\Listener;
 
 use Klipper\Component\Security\Listener\PermissionExceptionListener;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -27,10 +28,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 final class PermissionExceptionListenerTest extends TestCase
 {
     /**
-     * @var HttpKernelInterface
+     * @var HttpKernelInterface|MockObject
      */
     protected $kernel;
 
+    /**
+     * @var MockObject|Request
+     */
     protected $request;
 
     protected function setUp(): void

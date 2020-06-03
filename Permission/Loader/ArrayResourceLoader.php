@@ -23,18 +23,15 @@ use Klipper\Component\Security\Permission\PermissionConfigCollection;
 class ArrayResourceLoader extends AbstractArrayResourceLoader
 {
     /**
-     * {@inheritdoc}
+     * @param mixed $resource
      *
      * @return ConfigCollectionInterface|PermissionConfigCollection
      */
-    public function load($resource, $type = null): PermissionConfigCollection
+    public function load($resource, string $type = null): PermissionConfigCollection
     {
         return parent::load($resource, $type);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function createConfigCollection(): ConfigCollectionInterface
     {
         return new PermissionConfigCollection();

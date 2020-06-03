@@ -11,6 +11,7 @@
 
 namespace Klipper\Component\Security\Tests\Identity;
 
+use Klipper\Component\Security\Exception\InvalidArgumentException;
 use Klipper\Component\Security\Identity\SecurityIdentityInterface;
 use Klipper\Component\Security\Identity\UserSecurityIdentity;
 use Klipper\Component\Security\Model\UserInterface;
@@ -60,7 +61,7 @@ final class UserSecurityIdentityTest extends TestCase
      * @param mixed $value  The value
      * @param bool  $result The expected result
      */
-    public function testEquals($value, $result): void
+    public function testEquals($value, bool $result): void
     {
         $identity = new UserSecurityIdentity(MockUserRoleable::class, 'identifier');
 
@@ -106,7 +107,7 @@ final class UserSecurityIdentityTest extends TestCase
 
     public function testFormTokenWithInvalidInterface(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The user class must implement "Klipper\\Component\\Security\\Model\\UserInterface"');
 
         /** @var MockObject|\Symfony\Component\Security\Core\User\UserInterface $user */

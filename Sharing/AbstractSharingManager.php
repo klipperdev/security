@@ -28,64 +28,29 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 abstract class AbstractSharingManager implements SharingManagerInterface
 {
-    /**
-     * @var SharingProviderInterface
-     */
-    protected $provider;
+    protected SharingProviderInterface $provider;
+
+    protected ?SharingFactoryInterface $factory;
+
+    protected ?EventDispatcherInterface $dispatcher;
+
+    protected array $subjectConfigs = [];
+
+    protected array $identityConfigs = [];
+
+    protected array $identityAliases = [];
+
+    protected bool $identityRoleable = false;
+
+    protected bool $identityPermissible = false;
+
+    protected bool $enabled = true;
+
+    protected array $cacheSubjectVisibilities = [];
+
+    protected bool $initialized = false;
 
     /**
-     * @var null|SharingFactoryInterface
-     */
-    protected $factory;
-
-    /**
-     * @var null|EventDispatcherInterface
-     */
-    protected $dispatcher;
-
-    /**
-     * @var array
-     */
-    protected $subjectConfigs = [];
-
-    /**
-     * @var array
-     */
-    protected $identityConfigs = [];
-
-    /**
-     * @var array
-     */
-    protected $identityAliases = [];
-
-    /**
-     * @var bool
-     */
-    protected $identityRoleable = false;
-
-    /**
-     * @var bool
-     */
-    protected $identityPermissible = false;
-
-    /**
-     * @var bool
-     */
-    protected $enabled = true;
-
-    /**
-     * @var array
-     */
-    protected $cacheSubjectVisibilities = [];
-
-    /**
-     * @var bool
-     */
-    protected $initialized = false;
-
-    /**
-     * Constructor.
-     *
      * @param SharingProviderInterface     $provider The sharing provider
      * @param null|SharingFactoryInterface $factory  The sharing factory
      */
@@ -107,17 +72,11 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         $this->dispatcher = $dispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
@@ -130,9 +89,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addSubjectConfig(SharingSubjectConfigInterface $config): self
     {
         $this->subjectConfigs[$config->getType()] = $config;
@@ -141,9 +97,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasSubjectConfig(string $class): bool
     {
         $this->init();
@@ -151,9 +104,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return isset($this->subjectConfigs[ClassUtils::getRealClass($class)]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubjectConfig(string $class): SharingSubjectConfigInterface
     {
         $this->init();
@@ -166,9 +116,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return $this->subjectConfigs[$class];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubjectConfigs(): array
     {
         $this->init();
@@ -176,9 +123,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return array_values($this->subjectConfigs);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasSharingVisibility(SubjectIdentityInterface $subject): bool
     {
         $this->init();
@@ -186,9 +130,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return SharingVisibilities::TYPE_NONE !== $this->getSharingVisibility($subject);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSharingVisibility(SubjectIdentityInterface $subject): string
     {
         $this->init();
@@ -208,9 +149,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return $this->cacheSubjectVisibilities[$type];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addIdentityConfig(SharingIdentityConfigInterface $config): self
     {
         if (isset($this->identityAliases[$config->getAlias()])) {
@@ -231,9 +169,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasIdentityConfig(string $class): bool
     {
         $this->init();
@@ -242,9 +177,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
             || isset($this->identityAliases[$class]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIdentityConfig(string $class): SharingIdentityConfigInterface
     {
         $this->init();
@@ -257,9 +189,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return $this->identityConfigs[$class];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIdentityConfigs(): array
     {
         $this->init();
@@ -267,9 +196,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return array_values($this->identityConfigs);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasIdentityRoleable(): bool
     {
         $this->init();
@@ -277,9 +203,6 @@ abstract class AbstractSharingManager implements SharingManagerInterface
         return $this->identityRoleable;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasIdentityPermissible(): bool
     {
         $this->init();

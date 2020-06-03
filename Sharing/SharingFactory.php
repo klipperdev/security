@@ -20,15 +20,9 @@ use Symfony\Component\Config\Loader\LoaderInterface;
  */
 class SharingFactory implements SharingFactoryInterface
 {
-    /**
-     * @var LoaderInterface
-     */
-    protected $subjectLoader;
+    protected LoaderInterface $subjectLoader;
 
-    /**
-     * @var LoaderInterface
-     */
-    protected $identityLoader;
+    protected LoaderInterface $identityLoader;
 
     /**
      * @var mixed
@@ -36,8 +30,6 @@ class SharingFactory implements SharingFactoryInterface
     protected $resource;
 
     /**
-     * Constructor.
-     *
      * @param LoaderInterface $subjectLoader  The sharing subject loader
      * @param LoaderInterface $identityLoader The sharing identity loader
      * @param mixed           $resource       The main resource to load
@@ -49,17 +41,11 @@ class SharingFactory implements SharingFactoryInterface
         $this->resource = $resource;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createSubjectConfigurations(): SharingSubjectConfigCollection
     {
         return $this->subjectLoader->load($this->resource);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function createIdentityConfigurations(): SharingIdentityConfigCollection
     {
         return $this->identityLoader->load($this->resource);

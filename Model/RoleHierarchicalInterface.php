@@ -39,7 +39,7 @@ interface RoleHierarchicalInterface extends RoleInterface
      *
      * @return Collection|RoleHierarchicalInterface[]
      */
-    public function getParents();
+    public function getParents(): Collection;
 
     /**
      * Gets all parent names.
@@ -70,7 +70,7 @@ interface RoleHierarchicalInterface extends RoleInterface
      *
      * @return Collection|RoleHierarchicalInterface[]
      */
-    public function getChildren();
+    public function getChildren(): Collection;
 
     /**
      * Gets all children names.

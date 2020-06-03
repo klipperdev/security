@@ -46,25 +46,16 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
  */
 final class PermissionManagerTest extends TestCase
 {
-    /**
-     * @var EventDispatcher
-     */
-    protected $dispatcher;
+    protected ?EventDispatcher $dispatcher = null;
 
     /**
-     * @var PermissionProviderInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject|PermissionProviderInterface
      */
     protected $provider;
 
-    /**
-     * @var PropertyAccessor
-     */
-    protected $propertyAccessor;
+    protected ?PropertyAccessor $propertyAccessor = null;
 
-    /**
-     * @var PermissionManager
-     */
-    protected $pm;
+    protected ?PermissionManager $pm = null;
 
     protected function setUp(): void
     {
@@ -91,7 +82,7 @@ final class PermissionManagerTest extends TestCase
 
     public function testSetEnabledWithSharingManager(): void
     {
-        /** @var \PHPUnit\Framework\MockObject\MockObject|SharingManagerInterface $sm */
+        /** @var MockObject|SharingManagerInterface $sm */
         $sm = $this->getMockBuilder(SharingManagerInterface::class)->getMock();
 
         $this->pm = new PermissionManager(
@@ -362,7 +353,7 @@ final class PermissionManagerTest extends TestCase
             ->willReturn([])
         ;
 
-        /** @var \PHPUnit\Framework\MockObject\MockObject|SharingManagerInterface $sharingManager */
+        /** @var MockObject|SharingManagerInterface $sharingManager */
         $sharingManager = $this->getMockBuilder(SharingManagerInterface::class)->getMock();
         $sharingManager->expects(static::once())
             ->method('preloadRolePermissions')
@@ -718,7 +709,7 @@ final class PermissionManagerTest extends TestCase
     {
         $objects = [new MockObject('foo')];
 
-        /** @var \PHPUnit\Framework\MockObject\MockObject|SharingManagerInterface $sharingManager */
+        /** @var MockObject|SharingManagerInterface $sharingManager */
         $sharingManager = $this->getMockBuilder(SharingManagerInterface::class)->getMock();
         $sharingManager->expects(static::once())
             ->method('preloadPermissions')
@@ -753,7 +744,7 @@ final class PermissionManagerTest extends TestCase
     {
         $objects = [new MockObject('foo')];
 
-        /** @var \PHPUnit\Framework\MockObject\MockObject|SharingManagerInterface $sharingManager */
+        /** @var MockObject|SharingManagerInterface $sharingManager */
         $sharingManager = $this->getMockBuilder(SharingManagerInterface::class)->getMock();
         $sharingManager->expects(static::once())
             ->method('resetPreloadPermissions')

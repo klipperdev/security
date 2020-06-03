@@ -21,17 +21,11 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 abstract class AbstractRoleProvider implements AuthenticationProviderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function authenticate(TokenInterface $token): TokenInterface
     {
         return $token;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(TokenInterface $token): bool
     {
         return false;

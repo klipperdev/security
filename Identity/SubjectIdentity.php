@@ -23,14 +23,9 @@ use Klipper\Component\Security\Exception\UnexpectedTypeException;
  */
 final class SubjectIdentity extends AbstractBaseIdentity implements SubjectIdentityInterface
 {
-    /**
-     * @var null|object
-     */
-    private $subject;
+    private ?object $subject;
 
     /**
-     * Constructor.
-     *
      * @param string      $identifier The identifier
      * @param string      $type       The type
      * @param null|object $subject    The instance of subject
@@ -39,16 +34,10 @@ final class SubjectIdentity extends AbstractBaseIdentity implements SubjectIdent
      * @throws InvalidArgumentException When the type is empty
      * @throws UnexpectedTypeException  When the subject instance is not an object
      */
-    public function __construct(?string $type, ?string $identifier, $subject = null)
+    public function __construct(?string $type, ?string $identifier, ?object $subject = null)
     {
         parent::__construct($type, $identifier);
 
-        if (null !== $subject && !\is_object($subject)) {
-            throw new UnexpectedTypeException($subject, 'object|null');
-        }
-
-        $this->type = $type;
-        $this->identifier = $identifier;
         $this->subject = $subject;
     }
 
@@ -67,19 +56,17 @@ final class SubjectIdentity extends AbstractBaseIdentity implements SubjectIdent
      *
      * @throws InvalidSubjectIdentityException
      */
-    public static function fromObject($object): SubjectIdentityInterface
+    public static function fromObject(object $object): SubjectIdentityInterface
     {
         try {
-            if (!\is_object($object)) {
-                throw new UnexpectedTypeException($object, 'object');
-            }
-
             if ($object instanceof SubjectIdentityInterface) {
                 return $object;
             }
+
             if ($object instanceof SubjectInterface) {
                 return new self(ClassUtils::getClass($object), $object->getSubjectIdentifier(), $object);
             }
+
             if (method_exists($object, 'getId')) {
                 return new self(ClassUtils::getClass($object), (string) ($object->getId() ?: 'class'), $object);
             }
@@ -110,17 +97,11 @@ final class SubjectIdentity extends AbstractBaseIdentity implements SubjectIdent
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getObject()
+    public function getObject(): ?object
     {
         return $this->subject;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function equals(SubjectIdentityInterface $identity): bool
     {
         return $this->identifier === $identity->getIdentifier()

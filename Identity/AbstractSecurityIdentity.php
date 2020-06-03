@@ -30,9 +30,6 @@ abstract class AbstractSecurityIdentity extends AbstractBaseIdentity implements 
         return sprintf('%s(%s)', $name, $this->getIdentifier());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function equals(SecurityIdentityInterface $identity): bool
     {
         if (!$identity instanceof self || $this->getType() !== $identity->getType()) {

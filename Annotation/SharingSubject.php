@@ -22,11 +22,9 @@ use Klipper\Component\Config\Annotation\AbstractAnnotation;
 class SharingSubject extends AbstractAnnotation
 {
     /**
-     * @var null|string
-     *
      * @see \Klipper\Component\Security\SharingVisibilities
      */
-    protected $visibility;
+    protected ?string $visibility = null;
 
     public function getVisibility(): ?string
     {

@@ -62,10 +62,7 @@ final class RoleHierarchyListenerTest extends TestCase
      */
     protected $uow;
 
-    /**
-     * @var RoleHierarchyListener
-     */
-    protected $listener;
+    protected ?RoleHierarchyListener $listener = null;
 
     protected function setUp(): void
     {
@@ -292,7 +289,7 @@ final class RoleHierarchyListenerTest extends TestCase
      * @param string $interface The interface name
      * @param string $fieldName The field name
      */
-    public function testOnFLushWithPersistentCollection($interface, $fieldName): void
+    public function testOnFLushWithPersistentCollection(string $interface, string $fieldName): void
     {
         /** @var MockObject|OnFlushEventArgs $args */
         $args = $this->getMockBuilder(OnFlushEventArgs::class)->disableOriginalConstructor()->getMock();

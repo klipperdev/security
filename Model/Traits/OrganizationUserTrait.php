@@ -43,17 +43,11 @@ trait OrganizationUserTrait
      */
     protected ?UserInterface $user = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString(): string
     {
         return $this->organization->getName().':'.$this->user->getUsername();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOrganization(?OrganizationInterface $organization): self
     {
         $this->organization = $organization;
@@ -61,17 +55,11 @@ trait OrganizationUserTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrganization(): ?OrganizationInterface
     {
         return $this->organization;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setUser(?UserInterface $user): self
     {
         $this->user = $user;
@@ -79,9 +67,6 @@ trait OrganizationUserTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUser(): ?UserInterface
     {
         return $this->user;

@@ -23,8 +23,6 @@ class PreReachableRoleEvent extends AbstractEditableSecurityEvent
     use ReachableRoleEventTrait;
 
     /**
-     * Constructor.
-     *
      * @param string[] $reachableRoles The reachable roles
      */
     public function __construct(array $reachableRoles)

@@ -35,39 +35,33 @@ use PHPUnit\Framework\TestCase;
 final class PrivateSharingSubscriberTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityManagerInterface|MockObject
      */
     protected $entityManager;
 
     /**
-     * @var Connection|\PHPUnit\Framework\MockObject\MockObject
+     * @var Connection|MockObject
      */
     protected $connection;
 
     /**
-     * @var ClassMetadata|\PHPUnit\Framework\MockObject\MockObject
+     * @var ClassMetadata|MockObject
      */
     protected $targetEntity;
 
     /**
-     * @var ClassMetadata|\PHPUnit\Framework\MockObject\MockObject
+     * @var ClassMetadata|MockObject
      */
     protected $sharingMeta;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|SQLFilter
+     * @var MockObject|SQLFilter
      */
     protected $filter;
 
-    /**
-     * @var GetPrivateFilterEvent
-     */
-    protected $event;
+    protected ?GetPrivateFilterEvent $event = null;
 
-    /**
-     * @var PrivateSharingSubscriber
-     */
-    protected $listener;
+    protected ?PrivateSharingSubscriber $listener = null;
 
     /**
      * @throws
@@ -189,11 +183,8 @@ final class PrivateSharingSubscriberTest extends TestCase
 
     /**
      * @dataProvider getCurrentUserValues
-     *
-     * @param string $objectClass
-     * @param bool   $withCurrentUser
      */
-    public function testGetFilterWithOwnerableObject($objectClass, $withCurrentUser): void
+    public function testGetFilterWithOwnerableObject(string $objectClass, bool $withCurrentUser): void
     {
         $this->injectParameters(
             true,
@@ -277,7 +268,8 @@ final class PrivateSharingSubscriberTest extends TestCase
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $sharingEnabled
+     * @param mixed $userId
      */
     protected function injectParameters($sharingEnabled = true, $userId = 42, array $mapSids = []): void
     {

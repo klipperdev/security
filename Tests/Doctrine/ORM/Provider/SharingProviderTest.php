@@ -18,6 +18,7 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Klipper\Component\Security\Doctrine\ORM\Provider\SharingProvider;
+use Klipper\Component\Security\Exception\InvalidArgumentException;
 use Klipper\Component\Security\Identity\RoleSecurityIdentity;
 use Klipper\Component\Security\Identity\SecurityIdentityManagerInterface;
 use Klipper\Component\Security\Identity\SubjectIdentity;
@@ -41,37 +42,37 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 final class SharingProviderTest extends TestCase
 {
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository|MockObject
      */
     protected $roleRepo;
 
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository|MockObject
      */
     protected $sharingRepo;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|SecurityIdentityManagerInterface
+     * @var MockObject|SecurityIdentityManagerInterface
      */
     protected $sidManager;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|TokenStorageInterface
+     * @var MockObject|TokenStorageInterface
      */
     protected $tokenStorage;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|SharingManagerInterface
+     * @var MockObject|SharingManagerInterface
      */
     protected $sharingManager;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|QueryBuilder
+     * @var MockObject|QueryBuilder
      */
     protected $qb;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|Query
+     * @var MockObject|Query
      */
     protected $query;
 
@@ -529,7 +530,7 @@ final class SharingProviderTest extends TestCase
 
     public function testGetSharingEntriesWithoutSharingManager(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The "setSharingManager()" must be called before');
 
         $sids = [
@@ -721,9 +722,9 @@ final class SharingProviderTest extends TestCase
         $provider->deletes($ids);
     }
 
-    protected function createProvider($roleClass = MockRole::class, $sharingClass = MockSharing::class, $addManager = true): SharingProvider
+    protected function createProvider(string $roleClass = MockRole::class, string $sharingClass = MockSharing::class, bool $addManager = true): SharingProvider
     {
-        /** @var ManagerRegistry|\PHPUnit\Framework\MockObject\MockObject $registry */
+        /** @var ManagerRegistry|MockObject $registry */
         $registry = $this->getMockBuilder(ManagerRegistry::class)->getMock();
 
         $em = $this->getMockBuilder(EntityManagerInterface::class)->getMock();

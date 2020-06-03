@@ -20,17 +20,11 @@ use Klipper\Component\Security\Model\GroupInterface;
  */
 class GroupVoter extends AbstractIdentityVoter
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function getValidType(): string
     {
         return GroupInterface::class;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefaultPrefix(): string
     {
         return 'GROUP_';

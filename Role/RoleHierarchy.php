@@ -30,34 +30,17 @@ use Symfony\Component\Security\Core\Role\RoleHierarchy as BaseRoleHierarchy;
  */
 class RoleHierarchy extends BaseRoleHierarchy
 {
-    /**
-     * @var ManagerRegistryInterface
-     */
-    private $registry;
+    private ManagerRegistryInterface $registry;
+
+    private string $roleClassname;
+
+    private array $cacheExec = [];
+
+    private ?CacheItemPoolInterface $cache;
+
+    private ?EventDispatcherInterface $eventDispatcher = null;
 
     /**
-     * @var string
-     */
-    private $roleClassname;
-
-    /**
-     * @var array
-     */
-    private $cacheExec;
-
-    /**
-     * @var null|CacheItemPoolInterface
-     */
-    private $cache;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
-
-    /**
-     * Constructor.
-     *
      * @param array                       $hierarchy     An array defining the hierarchy
      * @param ManagerRegistryInterface    $registry      The doctrine registry
      * @param null|CacheItemPoolInterface $cache         The cache
@@ -73,7 +56,6 @@ class RoleHierarchy extends BaseRoleHierarchy
 
         $this->registry = $registry;
         $this->roleClassname = $roleClassname;
-        $this->cacheExec = [];
         $this->cache = $cache;
     }
 
@@ -85,9 +67,6 @@ class RoleHierarchy extends BaseRoleHierarchy
         $this->eventDispatcher = $dispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getReachableRoleNames(array $roles): array
     {
         return $this->doGetReachableRoleNames(RoleUtil::formatNames($roles));
@@ -194,7 +173,7 @@ class RoleHierarchy extends BaseRoleHierarchy
      *
      * @return null|string[]
      */
-    private function getCachedReachableRoleNames(string $id, &$item): ?array
+    private function getCachedReachableRoleNames(string $id, ?CacheItemInterface &$item): ?array
     {
         $roles = null;
 

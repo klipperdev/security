@@ -70,9 +70,6 @@ trait SharingTrait
      */
     protected ?Collection $permissions = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSubjectClass(?string $class): self
     {
         $this->subjectClass = $class;
@@ -80,17 +77,11 @@ trait SharingTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubjectClass(): ?string
     {
         return $this->subjectClass;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSubjectId(?string $id): self
     {
         $this->subjectId = $id;
@@ -98,17 +89,11 @@ trait SharingTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSubjectId(): ?string
     {
         return $this->subjectId;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setIdentityClass(?string $class): self
     {
         $this->identityClass = $class;
@@ -116,17 +101,11 @@ trait SharingTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIdentityClass(): ?string
     {
         return $this->identityClass;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setIdentityName(?string $name): self
     {
         $this->identityName = $name;
@@ -134,17 +113,11 @@ trait SharingTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIdentityName(): ?string
     {
         return $this->identityName;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
@@ -152,17 +125,11 @@ trait SharingTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setStartedAt(?\DateTimeInterface $date): self
     {
         $this->startedAt = $date;
@@ -170,17 +137,11 @@ trait SharingTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStartedAt(): ?\DateTimeInterface
     {
         return $this->startedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEndedAt(?\DateTimeInterface $date): self
     {
         $this->endedAt = $date;
@@ -188,33 +149,21 @@ trait SharingTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEndedAt(): ?\DateTimeInterface
     {
         return $this->endedAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPermissions(): Collection
     {
         return $this->permissions ?: $this->permissions = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasPermission(PermissionInterface $permission): bool
     {
         return $this->getPermissions()->contains($permission);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addPermission(PermissionInterface $permission): self
     {
         if (!$this->getPermissions()->contains($permission)) {
@@ -224,9 +173,6 @@ trait SharingTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removePermission(PermissionInterface $permission): self
     {
         if ($this->getPermissions()->contains($permission)) {

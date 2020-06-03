@@ -25,8 +25,6 @@ class PostSecurityIdentityEvent extends AbstractSecurityEvent
     use SecurityIdentityEventTrait;
 
     /**
-     * Constructor.
-     *
      * @param TokenInterface              $token              The token
      * @param SecurityIdentityInterface[] $securityIdentities The security identities
      * @param bool                        $permissionEnabled  Check if the permission manager is enabled

@@ -18,21 +18,18 @@ use Symfony\Component\Validator\Constraint;
  */
 class Permission extends Constraint
 {
-    public $propertyClass = 'class';
+    public string $propertyClass = 'class';
 
-    public $propertyField = 'field';
+    public string $propertyField = 'field';
 
-    public $invalidClassMessage = 'permission.class.invalid';
+    public string $invalidClassMessage = 'permission.class.invalid';
 
-    public $requiredClassMessage = 'permission.class.required';
+    public string $requiredClassMessage = 'permission.class.required';
 
-    public $classNotManagedMessage = 'permission.class.not_managed';
+    public string $classNotManagedMessage = 'permission.class.not_managed';
 
-    public $invalidFieldMessage = 'permission.field.invalid';
+    public string $invalidFieldMessage = 'permission.field.invalid';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

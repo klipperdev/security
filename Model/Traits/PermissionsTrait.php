@@ -42,25 +42,16 @@ trait PermissionsTrait
      */
     protected ?Collection $permissions = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPermissions(): Collection
     {
         return $this->permissions ?: $this->permissions = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasPermission(PermissionInterface $permission): bool
     {
         return $this->getPermissions()->contains($permission);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addPermission(PermissionInterface $permission): self
     {
         if (!$this->getPermissions()->contains($permission)) {
@@ -70,9 +61,6 @@ trait PermissionsTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removePermission(PermissionInterface $permission): self
     {
         if ($this->getPermissions()->contains($permission)) {

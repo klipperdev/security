@@ -21,19 +21,14 @@ use Symfony\Contracts\EventDispatcher\Event;
  */
 class GetExpressionVariablesEvent extends Event
 {
-    /**
-     * @var TokenInterface
-     */
-    protected $token;
+    protected TokenInterface $token;
 
     /**
      * @var array<string, mixed>
      */
-    protected $variables;
+    protected array $variables;
 
     /**
-     * Constructor.
-     *
      * @param TokenInterface       $token     The token
      * @param array<string, mixed> $variables The variables
      */

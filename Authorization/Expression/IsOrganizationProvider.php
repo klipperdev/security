@@ -21,9 +21,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
  */
 class IsOrganizationProvider implements ExpressionFunctionProviderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions(): array
     {
         return [

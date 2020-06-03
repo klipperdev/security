@@ -28,29 +28,18 @@ use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
  */
 class SecurityIdentityManager implements SecurityIdentityManagerInterface
 {
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $dispatcher;
+    protected EventDispatcherInterface $dispatcher;
 
-    /**
-     * @var RoleHierarchyInterface
-     */
-    protected $roleHierarchy;
+    protected RoleHierarchyInterface $roleHierarchy;
 
-    /**
-     * @var AuthenticationTrustResolverInterface
-     */
-    protected $authenticationTrustResolver;
+    protected AuthenticationTrustResolverInterface $authenticationTrustResolver;
 
     /**
      * @var string[]
      */
-    protected $roles = [];
+    protected array $roles = [];
 
     /**
-     * Constructor.
-     *
      * @param EventDispatcherInterface             $dispatcher                  The event dispatcher
      * @param RoleHierarchyInterface               $roleHierarchy               The role hierarchy
      * @param AuthenticationTrustResolverInterface $authenticationTrustResolver The authentication trust resolver
@@ -65,9 +54,6 @@ class SecurityIdentityManager implements SecurityIdentityManagerInterface
         $this->authenticationTrustResolver = $authenticationTrustResolver;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addSpecialRole(string $role): SecurityIdentityManagerInterface
     {
         if (!isset($this->roles[$role])) {
@@ -77,9 +63,6 @@ class SecurityIdentityManager implements SecurityIdentityManagerInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSecurityIdentities(?TokenInterface $token = null): array
     {
         $sids = [];

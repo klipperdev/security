@@ -18,19 +18,11 @@ use Klipper\Component\Security\Exception\InvalidArgumentException;
  */
 abstract class AbstractBaseIdentity
 {
-    /**
-     * @var string
-     */
-    protected $type;
+    protected string $type;
+
+    protected string $identifier;
 
     /**
-     * @var string
-     */
-    protected $identifier;
-
-    /**
-     * Constructor.
-     *
      * @param string $identifier The identifier
      * @param string $type       The type
      *

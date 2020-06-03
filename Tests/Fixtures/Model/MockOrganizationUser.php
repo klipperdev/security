@@ -26,8 +26,6 @@ class MockOrganizationUser implements OrganizationUserInterface
     protected ?int $id = null;
 
     /**
-     * Constructor.
-     *
      * @param OrganizationInterface $organization The organization
      * @param UserInterface         $user         The user
      * @param int                   $id           The id
@@ -39,9 +37,6 @@ class MockOrganizationUser implements OrganizationUserInterface
         $this->id = $id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId(): ?int
     {
         return $this->id;

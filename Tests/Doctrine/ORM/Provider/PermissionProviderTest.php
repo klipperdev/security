@@ -39,22 +39,22 @@ use PHPUnit\Framework\TestCase;
 final class PermissionProviderTest extends TestCase
 {
     /**
-     * @var EntityRepository|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityRepository|MockObject
      */
     protected $permissionRepo;
 
     /**
-     * @var ManagerRegistry|\PHPUnit\Framework\MockObject\MockObject
+     * @var ManagerRegistry|MockObject
      */
     protected $registry;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|QueryBuilder
+     * @var MockObject|QueryBuilder
      */
     protected $qb;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|Query
+     * @var MockObject|Query
      */
     protected $query;
 
@@ -159,7 +159,7 @@ final class PermissionProviderTest extends TestCase
     {
         $om = $this->getMockBuilder(ObjectManager::class)->getMock();
 
-        /** @var PermissionConfigInterface|\PHPUnit\Framework\MockObject\MockObject $permConfig */
+        /** @var MockObject|PermissionConfigInterface $permConfig */
         $permConfig = $this->getMockBuilder(PermissionConfigInterface::class)->getMock();
 
         $permConfig->expects(static::once())
@@ -200,7 +200,7 @@ final class PermissionProviderTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The doctrine object manager is not found for the class "Klipper\\Component\\Security\\Tests\\Fixtures\\Model\\MockObject"');
 
-        /** @var PermissionConfigInterface|\PHPUnit\Framework\MockObject\MockObject $permConfig */
+        /** @var MockObject|PermissionConfigInterface $permConfig */
         $permConfig = $this->getMockBuilder(PermissionConfigInterface::class)->getMock();
 
         $permConfig->expects(static::atLeast(2))
@@ -225,7 +225,7 @@ final class PermissionProviderTest extends TestCase
 
         $om = $this->getMockBuilder(ObjectManager::class)->getMock();
 
-        /** @var PermissionConfigInterface|\PHPUnit\Framework\MockObject\MockObject $permConfig */
+        /** @var MockObject|PermissionConfigInterface $permConfig */
         $permConfig = $this->getMockBuilder(PermissionConfigInterface::class)->getMock();
 
         $permConfig->expects(static::atLeast(2))

@@ -11,6 +11,8 @@
 
 namespace Klipper\Component\Security\Tests\Identity;
 
+use Klipper\Component\Security\Exception\InvalidArgumentException;
+use Klipper\Component\Security\Exception\InvalidSubjectIdentityException;
 use Klipper\Component\Security\Identity\SubjectIdentity;
 use Klipper\Component\Security\Identity\SubjectIdentityInterface;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockObject;
@@ -46,7 +48,7 @@ final class SubjectIdentityTest extends TestCase
 
     public function testEmptyType(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The type cannot be empty');
 
         new SubjectIdentity(null, '42');
@@ -54,7 +56,7 @@ final class SubjectIdentityTest extends TestCase
 
     public function testEmptyIdentifier(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('The identifier cannot be empty');
 
         new SubjectIdentity(MockObject::class, '');
@@ -62,8 +64,8 @@ final class SubjectIdentityTest extends TestCase
 
     public function testInvalidSubject(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\UnexpectedTypeException::class);
-        $this->expectExceptionMessage('Expected argument of type "object|null", "integer" given');
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('must be an object or null');
 
         new SubjectIdentity(MockObject::class, '42', 42);
     }
@@ -84,7 +86,7 @@ final class SubjectIdentityTest extends TestCase
      * @param mixed $value  The value
      * @param bool  $result The expected result
      */
-    public function testEquals($value, $result): void
+    public function testEquals($value, bool $result): void
     {
         $object = new MockObject('foo');
         $si = new SubjectIdentity(\get_class($object), (string) $object->getId(), $object);
@@ -103,7 +105,7 @@ final class SubjectIdentityTest extends TestCase
 
     public function testFromClassnameWithNonExistentClass(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\InvalidSubjectIdentityException::class);
+        $this->expectException(InvalidSubjectIdentityException::class);
         $this->expectExceptionMessage('The class "FooBar" does not exist');
 
         SubjectIdentity::fromClassname('FooBar');
@@ -142,8 +144,8 @@ final class SubjectIdentityTest extends TestCase
 
     public function testFromObjectWithNonObject(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\InvalidSubjectIdentityException::class);
-        $this->expectExceptionMessage('Expected argument of type "object", "integer" given');
+        $this->expectException(\TypeError::class);
+        $this->expectExceptionMessage('must be an object, int given');
 
         /** @var object $object */
         $object = 42;
@@ -163,7 +165,7 @@ final class SubjectIdentityTest extends TestCase
 
     public function testFromObjectWithInvalidObject(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\InvalidSubjectIdentityException::class);
+        $this->expectException(InvalidSubjectIdentityException::class);
         $this->expectExceptionMessage('The object must either implement the SubjectInterface, or have a method named "getId"');
 
         $object = new \stdClass();

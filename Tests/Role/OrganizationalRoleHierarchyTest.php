@@ -40,10 +40,7 @@ final class OrganizationalRoleHierarchyTest extends TestCase
      */
     protected $registry;
 
-    /**
-     * @var string
-     */
-    protected $roleClassname;
+    protected ?string $roleClassname = null;
 
     /**
      * @var CacheItemPoolInterface|MockObject
@@ -75,10 +72,7 @@ final class OrganizationalRoleHierarchyTest extends TestCase
      */
     protected $context;
 
-    /**
-     * @var OrganizationalRoleHierarchy
-     */
-    protected $roleHierarchy;
+    protected ?OrganizationalRoleHierarchy $roleHierarchy = null;
 
     protected function setUp(): void
     {
@@ -140,7 +134,7 @@ final class OrganizationalRoleHierarchyTest extends TestCase
      *
      * @throws
      */
-    public function testGetReachableRolesWithCustomRoles($orgContextType): void
+    public function testGetReachableRolesWithCustomRoles(?string $orgContextType): void
     {
         $this->initOrgContextType($orgContextType);
 

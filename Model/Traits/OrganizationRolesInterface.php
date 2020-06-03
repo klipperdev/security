@@ -27,7 +27,7 @@ interface OrganizationRolesInterface extends OrganizationInterface
      *
      * @return Collection|RoleInterface[]
      */
-    public function getOrganizationRoles();
+    public function getOrganizationRoles(): Collection;
 
     /**
      * Get the role names of organization.

@@ -23,14 +23,9 @@ class MockSubjectObject implements SubjectInterface
      */
     protected $subjectIdentifier;
 
-    /**
-     * @var string
-     */
-    protected $name;
+    protected string $name;
 
     /**
-     * Constructor.
-     *
      * @param string          $name              The name
      * @param null|int|string $subjectIdentifier The subject identifier
      */

@@ -18,25 +18,22 @@ use Symfony\Component\Validator\Constraint;
  */
 class Sharing extends Constraint
 {
-    public $subjectClass = 'subjectClass';
+    public string $subjectClass = 'subjectClass';
 
-    public $identityClass = 'identityClass';
+    public string $identityClass = 'identityClass';
 
-    public $roles = 'roles';
+    public string $roles = 'roles';
 
-    public $permissions = 'permissions';
+    public string $permissions = 'permissions';
 
-    public $invalidClassMessage = 'sharing.class.invalid';
+    public string $invalidClassMessage = 'sharing.class.invalid';
 
-    public $classNotManagedMessage = 'sharing.class.not_managed';
+    public string $classNotManagedMessage = 'sharing.class.not_managed';
 
-    public $identityNotRoleableMessage = 'sharing.class.identity_not_roleable';
+    public string $identityNotRoleableMessage = 'sharing.class.identity_not_roleable';
 
-    public $identityNotPermissibleMessage = 'sharing.class.identity_not_permissible';
+    public string $identityNotPermissibleMessage = 'sharing.class.identity_not_permissible';
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;

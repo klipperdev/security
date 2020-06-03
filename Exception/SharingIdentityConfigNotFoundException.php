@@ -19,8 +19,6 @@ namespace Klipper\Component\Security\Exception;
 class SharingIdentityConfigNotFoundException extends InvalidArgumentException
 {
     /**
-     * Constructor.
-     *
      * @param string $class The class name
      */
     public function __construct(string $class)

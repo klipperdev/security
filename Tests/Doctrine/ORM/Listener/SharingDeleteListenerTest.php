@@ -34,34 +34,31 @@ use PHPUnit\Framework\TestCase;
 final class SharingDeleteListenerTest extends TestCase
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|SharingManagerInterface
+     * @var MockObject|SharingManagerInterface
      */
     protected $sharingManager;
 
     /**
-     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityManagerInterface|MockObject
      */
     protected $em;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|UnitOfWork
+     * @var MockObject|UnitOfWork
      */
     protected $uow;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|QueryBuilder
+     * @var MockObject|QueryBuilder
      */
     protected $qb;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|Query
+     * @var MockObject|Query
      */
     protected $query;
 
-    /**
-     * @var SharingDeleteListener
-     */
-    protected $listener;
+    protected ?SharingDeleteListener $listener = null;
 
     /**
      * @throws
@@ -109,7 +106,7 @@ final class SharingDeleteListenerTest extends TestCase
      * @param string   $method  The method
      * @param string[] $setters The setters
      */
-    public function testInvalidInit($method, array $setters): void
+    public function testInvalidInit(string $method, array $setters): void
     {
         $this->expectException(\Klipper\Component\Security\Exception\SecurityException::class);
 
@@ -132,9 +129,9 @@ final class SharingDeleteListenerTest extends TestCase
 
     public function testOnFlush(): void
     {
-        /** @var OnFlushEventArgs|\PHPUnit\Framework\MockObject\MockObject $args */
+        /** @var MockObject|OnFlushEventArgs $args */
         $args = $this->getMockBuilder(OnFlushEventArgs::class)->disableOriginalConstructor()->getMock();
-        /** @var \PHPUnit\Framework\MockObject\MockObject|PostFlushEventArgs $postArgs */
+        /** @var MockObject|PostFlushEventArgs $postArgs */
         $postArgs = $this->getMockBuilder(PostFlushEventArgs::class)->disableOriginalConstructor()->getMock();
 
         $args->expects(static::atLeast(1))

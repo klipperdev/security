@@ -22,9 +22,6 @@ trait OrganizationalTrait
 {
     protected ?OrganizationInterface $organization = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOrganization(?OrganizationInterface $organization): self
     {
         $this->organization = $organization;
@@ -32,17 +29,11 @@ trait OrganizationalTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrganization(): ?OrganizationInterface
     {
         return $this->organization;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrganizationId()
     {
         return null !== $this->getOrganization()

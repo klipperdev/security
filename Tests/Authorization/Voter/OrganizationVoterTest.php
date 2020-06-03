@@ -32,10 +32,7 @@ final class OrganizationVoterTest extends TestCase
      */
     protected $sidManager;
 
-    /**
-     * @var OrganizationVoter
-     */
-    protected $voter;
+    protected ?OrganizationVoter $voter = null;
 
     protected function setUp(): void
     {
@@ -58,7 +55,7 @@ final class OrganizationVoterTest extends TestCase
      * @param string[] $attributes The voter attributes
      * @param int      $access     The access status of voter
      */
-    public function testExtractRolesWithAccessGranted(array $attributes, $access): void
+    public function testExtractRolesWithAccessGranted(array $attributes, int $access): void
     {
         /** @var MockObject|TokenInterface $token */
         $token = $this->getMockBuilder(TokenInterface::class)->getMock();

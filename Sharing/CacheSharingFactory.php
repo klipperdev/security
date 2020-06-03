@@ -22,14 +22,9 @@ use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
  */
 class CacheSharingFactory extends AbstractCache implements SharingFactoryInterface, WarmableInterface
 {
-    /**
-     * @var SharingFactoryInterface
-     */
-    protected $factory;
+    protected SharingFactoryInterface $factory;
 
     /**
-     * Constructor.
-     *
      * @param SharingFactoryInterface $factory The sharing factory
      * @param array                   $options An array of options
      */
@@ -41,8 +36,6 @@ class CacheSharingFactory extends AbstractCache implements SharingFactoryInterfa
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return ConfigCollectionInterface|SharingSubjectConfigCollection
      */
     public function createSubjectConfigurations(): SharingSubjectConfigCollection
@@ -57,8 +50,6 @@ class CacheSharingFactory extends AbstractCache implements SharingFactoryInterfa
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return ConfigCollectionInterface|SharingIdentityConfigCollection
      */
     public function createIdentityConfigurations(): SharingIdentityConfigCollection
@@ -73,7 +64,7 @@ class CacheSharingFactory extends AbstractCache implements SharingFactoryInterfa
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $cacheDir
      */
     public function warmUp($cacheDir): void
     {

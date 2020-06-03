@@ -24,17 +24,14 @@ class PermissionField extends AbstractAnnotation
     /**
      * @var null|string[]
      */
-    protected $operations = [];
+    protected array $operations = [];
 
     /**
      * @var null|string[]
      */
-    protected $mappingPermissions = [];
+    protected array $mappingPermissions = [];
 
-    /**
-     * @var null|bool
-     */
-    protected $editable;
+    protected ?bool $editable = null;
 
     /**
      * @return string[]

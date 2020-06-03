@@ -24,18 +24,12 @@ use Symfony\Component\Config\Resource\DirectoryResource;
  */
 class SubjectAnnotationLoader extends AbstractAnnotationLoader
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function supports($resource, $type = null): bool
+    public function supports($resource, string $type = null): bool
     {
         return 'annotation' === $type && \is_string($resource) && is_dir($resource);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function load($resource, $type = null): SharingSubjectConfigCollection
+    public function load($resource, string $type = null): SharingSubjectConfigCollection
     {
         $configs = new SharingSubjectConfigCollection();
         $configs->addResource(new DirectoryResource($resource));

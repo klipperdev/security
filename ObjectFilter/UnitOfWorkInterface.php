@@ -30,21 +30,19 @@ interface UnitOfWorkInterface
      *
      * @param object $object The object to attach
      */
-    public function attach($object): void;
+    public function attach(object $object): void;
 
     /**
      * Detaches an object from the object filter management.
      *
      * @param object $object The object to detach
      */
-    public function detach($object): void;
+    public function detach(object $object): void;
 
     /**
      * Gets the changeset for an object.
-     *
-     * @param object $object
      */
-    public function getObjectChangeSet($object): array;
+    public function getObjectChangeSet(object $object): array;
 
     /**
      * Clears the UnitOfWork.

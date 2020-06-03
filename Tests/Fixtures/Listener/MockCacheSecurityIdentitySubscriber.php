@@ -20,9 +20,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class MockCacheSecurityIdentitySubscriber implements EventSubscriberInterface, CacheSecurityIdentityListenerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -30,9 +27,6 @@ class MockCacheSecurityIdentitySubscriber implements EventSubscriberInterface, C
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCacheId(): string
     {
         return 'cache_id';

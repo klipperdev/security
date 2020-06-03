@@ -32,34 +32,17 @@ use Klipper\Component\Security\Sharing\SharingManagerInterface;
  */
 class SharingDeleteListener implements EventSubscriber
 {
-    /**
-     * @var string
-     */
-    protected $sharingClass;
+    protected string $sharingClass;
+
+    protected ?SharingManagerInterface $sharingManager = null;
+
+    protected array $deleteSharingSubjects = [];
+
+    protected array $deleteSharingIdentities = [];
+
+    protected bool $initialized = false;
 
     /**
-     * @var SharingManagerInterface
-     */
-    protected $sharingManager;
-
-    /**
-     * @var array
-     */
-    protected $deleteSharingSubjects = [];
-
-    /**
-     * @var array
-     */
-    protected $deleteSharingIdentities = [];
-
-    /**
-     * @var bool
-     */
-    protected $initialized = false;
-
-    /**
-     * Constructor.
-     *
      * @param string $sharingClass The classname of sharing model
      */
     public function __construct(string $sharingClass = SharingInterface::class)

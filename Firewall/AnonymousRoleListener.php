@@ -23,19 +23,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class AnonymousRoleListener extends AbstractRoleListener
 {
-    /**
-     * @var AuthenticationTrustResolverInterface
-     */
-    protected $trustResolver;
+    protected AuthenticationTrustResolverInterface $trustResolver;
+
+    protected TokenStorageInterface $tokenStorage;
 
     /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
-
-    /**
-     * Constructor.
-     *
      * @param SecurityIdentityManagerInterface     $sidManager    The security identity manager
      * @param array                                $config        The config
      * @param AuthenticationTrustResolverInterface $trustResolver The authentication trust resolver

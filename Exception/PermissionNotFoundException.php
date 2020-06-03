@@ -19,8 +19,6 @@ namespace Klipper\Component\Security\Exception;
 class PermissionNotFoundException extends InvalidArgumentException
 {
     /**
-     * Constructor.
-     *
      * @param string      $operation The permission operation
      * @param string      $class     The class name
      * @param null|string $field     The field name

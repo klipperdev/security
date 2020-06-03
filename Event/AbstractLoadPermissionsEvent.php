@@ -24,16 +24,14 @@ abstract class AbstractLoadPermissionsEvent extends Event
     /**
      * @var SecurityIdentityInterface[]
      */
-    protected $sids;
+    protected array $sids;
 
     /**
      * @var string[]
      */
-    protected $roles;
+    protected array $roles;
 
     /**
-     * Constructor.
-     *
      * @param SecurityIdentityInterface[] $sids  The security identities
      * @param string[]                    $roles The role names
      */

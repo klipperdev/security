@@ -27,7 +27,7 @@ interface OrganizationGroupsInterface extends OrganizationInterface
      *
      * @return Collection|GroupInterface[]
      */
-    public function getOrganizationGroups();
+    public function getOrganizationGroups(): Collection;
 
     /**
      * Get the group names of organization.

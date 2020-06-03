@@ -25,19 +25,11 @@ use Symfony\Component\Validator\ConstraintValidator;
  */
 class SharingValidator extends ConstraintValidator
 {
-    /**
-     * @var SharingManagerInterface
-     */
-    protected $sharingManager;
+    protected SharingManagerInterface $sharingManager;
+
+    protected PropertyAccessorInterface $propertyAccessor;
 
     /**
-     * @var PropertyAccessorInterface
-     */
-    protected $propertyAccessor;
-
-    /**
-     * Constructor.
-     *
      * @param SharingManagerInterface        $sharingManager   The sharing manager
      * @param null|PropertyAccessorInterface $propertyAccessor The property access
      */
@@ -46,12 +38,9 @@ class SharingValidator extends ConstraintValidator
         ?PropertyAccessorInterface $propertyAccessor = null
     ) {
         $this->sharingManager = $sharingManager;
-        $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
+        $this->propertyAccessor = $propertyAccessor ?? PropertyAccess::createPropertyAccessor();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
         /** @var Sharing $constraint */

@@ -31,24 +31,21 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 final class PermissionVoterTest extends TestCase
 {
     /**
-     * @var PermissionManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject|PermissionManagerInterface
      */
     protected $permManager;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|SecurityIdentityManagerInterface
+     * @var MockObject|SecurityIdentityManagerInterface
      */
     protected $sidManager;
 
     /**
-     * @var TokenInterface
+     * @var MockObject|TokenInterface
      */
     protected $token;
 
-    /**
-     * @var PermissionVoter
-     */
-    protected $voter;
+    protected ?PermissionVoter $voter = null;
 
     protected function setUp(): void
     {

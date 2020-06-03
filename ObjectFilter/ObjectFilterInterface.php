@@ -40,7 +40,7 @@ interface ObjectFilterInterface
      *
      * @throws \InvalidArgumentException When $object is not a object instance
      */
-    public function filter($object): void;
+    public function filter(object $object): void;
 
     /**
      * Restoring the object fields with old value for unauthorized access field.
@@ -49,5 +49,5 @@ interface ObjectFilterInterface
      *
      * @throws \InvalidArgumentException When $object is not a object instance
      */
-    public function restore($object): void;
+    public function restore(object $object): void;
 }

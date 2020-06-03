@@ -56,10 +56,7 @@ final class ObjectFilterListenerTest extends TestCase
      */
     protected $uow;
 
-    /**
-     * @var ObjectFilterListener
-     */
-    protected $listener;
+    protected ?ObjectFilterListener $listener = null;
 
     protected function setUp(): void
     {
@@ -97,7 +94,7 @@ final class ObjectFilterListenerTest extends TestCase
      * @param string   $method  The method
      * @param string[] $setters The setters
      */
-    public function testInvalidInit($method, array $setters): void
+    public function testInvalidInit(string $method, array $setters): void
     {
         $this->expectException(\Klipper\Component\Security\Exception\SecurityException::class);
 

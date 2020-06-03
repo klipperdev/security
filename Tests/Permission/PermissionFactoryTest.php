@@ -31,10 +31,7 @@ final class PermissionFactoryTest extends TestCase
      */
     private $loader;
 
-    /**
-     * @var PermissionFactory
-     */
-    private $factory;
+    private ?PermissionFactory $factory = null;
 
     protected function setUp(): void
     {

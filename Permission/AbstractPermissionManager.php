@@ -29,39 +29,22 @@ use Klipper\Component\Security\Sharing\SharingManagerInterface;
  */
 abstract class AbstractPermissionManager implements PermissionManagerInterface
 {
-    /**
-     * @var null|PermissionFactoryInterface
-     */
-    protected $factory;
+    protected ?PermissionFactoryInterface $factory;
+
+    protected ?SharingManagerInterface $sharingManager;
 
     /**
-     * @var null|SharingManagerInterface
+     * @var PermissionConfigInterface[]
      */
-    protected $sharingManager;
+    protected array $configs = [];
+
+    protected bool $enabled = true;
+
+    protected array $cache = [];
+
+    protected bool $initialized = false;
 
     /**
-     * @var array|PermissionConfigInterface[]
-     */
-    protected $configs = [];
-
-    /**
-     * @var bool
-     */
-    protected $enabled = true;
-
-    /**
-     * @var array
-     */
-    protected $cache = [];
-
-    /**
-     * @var bool
-     */
-    protected $initialized = false;
-
-    /**
-     * Constructor.
-     *
      * @param null|PermissionFactoryInterface $factory        The permission factory
      * @param null|SharingManagerInterface    $sharingManager The sharing manager
      */
@@ -73,17 +56,11 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         $this->sharingManager = $sharingManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEnabled(bool $enabled): self
     {
         $this->enabled = $enabled;
@@ -95,17 +72,11 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addConfig(PermissionConfigInterface $config): void
     {
         $this->configs[$config->getType()] = $config;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasConfig(string $class): bool
     {
         $this->init();
@@ -113,9 +84,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         return isset($this->configs[ClassUtils::getRealClass($class)]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConfig(string $class): PermissionConfigInterface
     {
         $class = ClassUtils::getRealClass($class);
@@ -127,9 +95,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         return $this->configs[$class];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigs(): array
     {
         $this->init();
@@ -137,9 +102,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         return $this->configs;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isManaged($subject): bool
     {
         try {
@@ -155,17 +117,11 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isFieldManaged($subject, string $field): bool
     {
         return $this->isManaged(new FieldVote($subject, $field));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isGranted(array $sids, $permissions, $subject = null): bool
     {
         try {
@@ -190,17 +146,11 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isFieldGranted(array $sids, $permissions, $subject, string $field): bool
     {
         return $this->isGranted($sids, $permissions, new FieldVote($subject, $field));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRolePermissions(RoleInterface $role, $subject = null): array
     {
         $this->init();
@@ -208,9 +158,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         return $this->doGetRolePermissions($role, $subject);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRoleFieldPermissions(RoleInterface $role, $subject, string $field): array
     {
         $this->init();
@@ -218,9 +165,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         return $this->getRolePermissions($role, new FieldVote($subject, $field));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preloadPermissions(array $objects): self
     {
         $this->init();
@@ -232,9 +176,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function resetPreloadPermissions(array $objects): self
     {
         if (null !== $this->sharingManager) {
@@ -244,9 +185,6 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function clear(): self
     {
         $this->cache = [];

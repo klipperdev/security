@@ -30,61 +30,38 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class ObjectFilter implements ObjectFilterInterface
 {
-    /**
-     * @var UnitOfWorkInterface
-     */
-    private $uow;
+    private UnitOfWorkInterface $uow;
 
-    /**
-     * @var ObjectFilterExtensionInterface
-     */
-    private $ofe;
+    private ObjectFilterExtensionInterface $ofe;
 
-    /**
-     * @var PermissionManagerInterface
-     */
-    private $pm;
+    private PermissionManagerInterface $pm;
 
-    /**
-     * @var AuthorizationCheckerInterface
-     */
-    private $ac;
+    private AuthorizationCheckerInterface $ac;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $dispatcher;
+    private EventDispatcherInterface $dispatcher;
 
     /**
      * @var string[]
      */
-    private $excludedClasses = [];
+    private array $excludedClasses = [];
 
     /**
      * If the action filtering/restoring is in a transaction, then the action
      * will be executing on the commit.
-     *
-     * @var bool
      */
-    private $isTransactional = false;
+    private bool $isTransactional = false;
 
     /**
      * The object list not analyzed (empty after commit).
-     *
-     * @var array
      */
-    private $queue = [];
+    private array $queue = [];
 
     /**
      * The object ids of object to filter (empty after commit).
-     *
-     * @var array
      */
-    private $toFilter = [];
+    private array $toFilter = [];
 
     /**
-     * Constructor.
-     *
      * @param ObjectFilterExtensionInterface $ofe        The object filter extension
      * @param PermissionManagerInterface     $pm         The permission manager
      * @param AuthorizationCheckerInterface  $ac         The authorization checker
@@ -115,25 +92,16 @@ class ObjectFilter implements ObjectFilterInterface
         $this->excludedClasses = $excludedClasses;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUnitOfWork(): UnitOfWorkInterface
     {
         return $this->uow;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function beginTransaction(): void
     {
         $this->isTransactional = true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function commit(): void
     {
         $event = new PreCommitObjectFilterEvent($this->queue);
@@ -156,10 +124,7 @@ class ObjectFilter implements ObjectFilterInterface
         $this->isTransactional = false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function filter($object): void
+    public function filter(object $object): void
     {
         if (!\is_object($object)) {
             throw new UnexpectedTypeException($object, 'object');
@@ -180,10 +145,7 @@ class ObjectFilter implements ObjectFilterInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function restore($object): void
+    public function restore(object $object): void
     {
         if (!\is_object($object)) {
             throw new UnexpectedTypeException($object, 'object');
@@ -200,11 +162,9 @@ class ObjectFilter implements ObjectFilterInterface
     /**
      * Executes the filtering.
      *
-     * @param object $object
-     *
      * @throws
      */
-    protected function doFilter($object): void
+    protected function doFilter(object $object): void
     {
         $clearAll = false;
         $id = spl_object_hash($object);
@@ -231,11 +191,9 @@ class ObjectFilter implements ObjectFilterInterface
     /**
      * Executes the restoring.
      *
-     * @param object $object
-     *
      * @throws
      */
-    protected function doRestore($object): void
+    protected function doRestore(object $object): void
     {
         $changeSet = $this->uow->getObjectChangeSet($object);
         $ref = new \ReflectionClass($object);
@@ -323,10 +281,8 @@ class ObjectFilter implements ObjectFilterInterface
 
     /**
      * Check if the object is an excluded class.
-     *
-     * @param object $object The object
      */
-    protected function isExcludedClass($object): bool
+    protected function isExcludedClass(object $object): bool
     {
         foreach ($this->excludedClasses as $excludedClass) {
             if ($object instanceof $excludedClass) {

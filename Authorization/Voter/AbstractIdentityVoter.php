@@ -24,19 +24,11 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 abstract class AbstractIdentityVoter extends Voter
 {
-    /**
-     * @var SecurityIdentityManagerInterface
-     */
-    protected $sim;
+    protected SecurityIdentityManagerInterface $sim;
+
+    protected string $prefix;
 
     /**
-     * @var string
-     */
-    protected $prefix;
-
-    /**
-     * Constructor.
-     *
      * @param SecurityIdentityManagerInterface $sim    The security identity manager
      * @param null|string                      $prefix The attribute prefix
      */
@@ -46,18 +38,12 @@ abstract class AbstractIdentityVoter extends Voter
         $this->prefix = $prefix ?? $this->getDefaultPrefix();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function supports($attribute, $subject): bool
+    protected function supports(string $attribute, $subject): bool
     {
         return \is_string($attribute) && 0 === strpos($attribute, $this->prefix);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
         $sids = $this->sim->getSecurityIdentities($token);
 
@@ -76,7 +62,7 @@ abstract class AbstractIdentityVoter extends Voter
      * @param string                    $attribute The attribute
      * @param SecurityIdentityInterface $sid       The security identity
      */
-    protected function isValidIdentity($attribute, SecurityIdentityInterface $sid): bool
+    protected function isValidIdentity(string $attribute, SecurityIdentityInterface $sid): bool
     {
         $type = $sid->getType();
         $isClass = class_exists($type) || interface_exists($type);

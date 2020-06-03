@@ -36,10 +36,7 @@ final class CacheSharingFactoryTest extends TestCase
      */
     private $configCacheFactory;
 
-    /**
-     * @var string
-     */
-    private $cacheDir;
+    private ?string $cacheDir = null;
 
     protected function setUp(): void
     {

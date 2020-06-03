@@ -20,14 +20,9 @@ use Klipper\Component\Security\Identity\SecurityIdentityInterface;
  */
 class PostLoadPermissionsEvent extends AbstractLoadPermissionsEvent
 {
-    /**
-     * @var array
-     */
-    protected $permissionMap;
+    protected array $permissionMap;
 
     /**
-     * Constructor.
-     *
      * @param SecurityIdentityInterface[] $sids          The security identities
      * @param string[]                    $roles         The role names
      * @param array                       $permissionMap The map of permissions

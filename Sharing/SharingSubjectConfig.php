@@ -21,19 +21,11 @@ use Klipper\Component\Security\SharingVisibilities;
  */
 class SharingSubjectConfig implements SharingSubjectConfigInterface
 {
-    /**
-     * @var string
-     */
-    protected $type;
+    protected string $type;
+
+    protected string $visibility;
 
     /**
-     * @var string
-     */
-    protected $visibility;
-
-    /**
-     * Constructor.
-     *
      * @param string $type       The type, typically, this is the PHP class name
      * @param string $visibility The sharing visibility
      */
@@ -43,25 +35,16 @@ class SharingSubjectConfig implements SharingSubjectConfigInterface
         $this->visibility = $visibility;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getVisibility(): string
     {
         return $this->visibility;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function merge(SharingSubjectConfigInterface $newConfig): void
     {
         if ($this->getType() !== $newConfig->getType()) {

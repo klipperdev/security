@@ -18,10 +18,7 @@ namespace Klipper\Component\Security\Doctrine\ORM\Listener;
  */
 abstract class AbstractPermissionListener extends AbstractListener
 {
-    /**
-     * @var array
-     */
-    protected $postResetPermissions = [];
+    protected array $postResetPermissions = [];
 
     /**
      * Reset the preloaded permissions used for the insertions.

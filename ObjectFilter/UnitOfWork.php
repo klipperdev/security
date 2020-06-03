@@ -21,25 +21,18 @@ class UnitOfWork implements UnitOfWorkInterface
     /**
      * Map of the original object data of managed objects.
      * Keys are object ids (spl_object_hash). This is used for calculating changesets.
-     *
-     * @var array
      */
-    private $originalObjectData = [];
+    private array $originalObjectData = [];
 
-    /**
-     * {@inheritdoc}
-     */
     public function getObjectIdentifiers(): array
     {
         return array_keys($this->originalObjectData);
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws
      */
-    public function attach($object): void
+    public function attach(object $object): void
     {
         $oid = spl_object_hash($object);
 
@@ -58,10 +51,7 @@ class UnitOfWork implements UnitOfWorkInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function detach($object): void
+    public function detach(object $object): void
     {
         $oid = spl_object_hash($object);
 
@@ -73,11 +63,9 @@ class UnitOfWork implements UnitOfWorkInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws
      */
-    public function getObjectChangeSet($object): array
+    public function getObjectChangeSet(object $object): array
     {
         $oid = spl_object_hash($object);
 
@@ -104,9 +92,6 @@ class UnitOfWork implements UnitOfWorkInterface
         return $changeSet;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function flush(): void
     {
         $this->originalObjectData = [];

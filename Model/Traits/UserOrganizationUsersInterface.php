@@ -26,7 +26,7 @@ interface UserOrganizationUsersInterface
      *
      * @return Collection|OrganizationUserInterface[]
      */
-    public function getUserOrganizations();
+    public function getUserOrganizations(): Collection;
 
     /**
      * Get the names of organizations associated with this user.

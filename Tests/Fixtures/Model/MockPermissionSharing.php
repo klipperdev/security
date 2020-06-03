@@ -26,9 +26,6 @@ class MockPermissionSharing implements PermissionInterface, PermissionSharingEnt
 
     protected ?int $id = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId(): ?int
     {
         return $this->id;

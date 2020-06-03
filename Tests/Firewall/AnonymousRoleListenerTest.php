@@ -33,10 +33,7 @@ final class AnonymousRoleListenerTest extends TestCase
      */
     protected $sidManager;
 
-    /**
-     * @var array
-     */
-    protected $config;
+    protected array $config = [];
 
     /**
      * @var AuthenticationTrustResolverInterface|MockObject
@@ -58,10 +55,7 @@ final class AnonymousRoleListenerTest extends TestCase
      */
     protected $event;
 
-    /**
-     * @var AnonymousRoleListener
-     */
-    protected $listener;
+    protected ?AnonymousRoleListener $listener = null;
 
     protected function setUp(): void
     {

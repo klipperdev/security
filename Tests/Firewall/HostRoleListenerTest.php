@@ -31,10 +31,7 @@ final class HostRoleListenerTest extends TestCase
      */
     protected $sidManager;
 
-    /**
-     * @var array
-     */
-    protected $config;
+    protected array $config = [];
 
     /**
      * @var MockObject|Request
@@ -47,9 +44,9 @@ final class HostRoleListenerTest extends TestCase
     protected $event;
 
     /**
-     * @var HostRoleListener
+     * @var
      */
-    protected $listener;
+    protected ?HostRoleListener $listener = null;
 
     protected function setUp(): void
     {

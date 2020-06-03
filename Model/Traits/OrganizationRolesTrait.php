@@ -35,17 +35,11 @@ trait OrganizationRolesTrait
      */
     protected ?Collection $organizationRoles = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrganizationRoles(): Collection
     {
         return $this->organizationRoles ?: $this->organizationRoles = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrganizationRoleNames(): array
     {
         $names = [];
@@ -56,17 +50,11 @@ trait OrganizationRolesTrait
         return $names;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasOrganizationRole(string $role): bool
     {
         return \in_array($role, $this->getOrganizationRoleNames(), true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addOrganizationRole(RoleInterface $role): self
     {
         if (!$this->isUserOrganization()
@@ -77,9 +65,6 @@ trait OrganizationRolesTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeOrganizationRole(RoleInterface $role): self
     {
         if ($this->getOrganizationRoles()->contains($role)) {

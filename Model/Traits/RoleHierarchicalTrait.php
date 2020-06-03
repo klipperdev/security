@@ -53,9 +53,6 @@ trait RoleHierarchicalTrait
      */
     protected ?Collection $children = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function addParent(RoleHierarchicalInterface $role): self
     {
         /** @var RoleHierarchicalInterface $self */
@@ -66,9 +63,6 @@ trait RoleHierarchicalTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeParent(RoleHierarchicalInterface $parent): self
     {
         if ($this->getParents()->contains($parent)) {
@@ -79,17 +73,11 @@ trait RoleHierarchicalTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParents(): Collection
     {
         return $this->parents ?: $this->parents = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getParentNames(): array
     {
         $names = [];
@@ -102,17 +90,11 @@ trait RoleHierarchicalTrait
         return $names;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasParent(string $name): bool
     {
         return \in_array($name, $this->getParentNames(), true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addChild(RoleHierarchicalInterface $role): self
     {
         $this->getChildren()->add($role);
@@ -120,9 +102,6 @@ trait RoleHierarchicalTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeChild(RoleHierarchicalInterface $child): self
     {
         if ($this->getChildren()->contains($child)) {
@@ -132,17 +111,11 @@ trait RoleHierarchicalTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChildren(): Collection
     {
         return $this->children ?: $this->children = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getChildrenNames(): array
     {
         $names = [];
@@ -155,9 +128,6 @@ trait RoleHierarchicalTrait
         return $names;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasChild(string $name): bool
     {
         return \in_array($name, $this->getChildrenNames(), true);

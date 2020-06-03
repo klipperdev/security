@@ -24,19 +24,11 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class ExpressionVariableStorage implements ExpressionVariableStorageInterface, EventSubscriberInterface
 {
-    /**
-     * @var null|SecurityIdentityManagerInterface
-     */
-    private $sim;
+    private ?SecurityIdentityManagerInterface $sim;
+
+    private array $variables = [];
 
     /**
-     * @var array<string, mixed>
-     */
-    private $variables = [];
-
-    /**
-     * Constructor.
-     *
      * @param array<string, mixed>                  $variables The expression variables
      * @param null|SecurityIdentityManagerInterface $sim       The security identity manager
      */
@@ -51,9 +43,6 @@ class ExpressionVariableStorage implements ExpressionVariableStorageInterface, E
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -62,7 +51,7 @@ class ExpressionVariableStorage implements ExpressionVariableStorageInterface, E
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $value
      */
     public function add(string $name, $value): self
     {
@@ -71,9 +60,6 @@ class ExpressionVariableStorage implements ExpressionVariableStorageInterface, E
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function remove(string $name): self
     {
         unset($this->variables[$name]);
@@ -81,17 +67,11 @@ class ExpressionVariableStorage implements ExpressionVariableStorageInterface, E
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function has(string $name): bool
     {
         return isset($this->variables[$name]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function get(string $name)
     {
         return $this->has($name)
@@ -99,17 +79,11 @@ class ExpressionVariableStorage implements ExpressionVariableStorageInterface, E
             : null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAll(): array
     {
         return $this->variables;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function inject(GetExpressionVariablesEvent $event): void
     {
         $token = $event->getToken();

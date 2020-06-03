@@ -21,19 +21,11 @@ use Klipper\Component\Security\Identity\SubjectUtils;
  */
 class FieldVote
 {
-    /**
-     * @var SubjectIdentityInterface
-     */
-    private $subject;
+    private SubjectIdentityInterface $subject;
+
+    private string $field;
 
     /**
-     * @var string
-     */
-    private $field;
-
-    /**
-     * Constructor.
-     *
      * @param object|string|SubjectIdentityInterface $subject The subject instance or classname
      * @param string                                 $field   The field name
      */

@@ -19,7 +19,7 @@ namespace Klipper\Component\Security\ObjectFilter;
 class MixedValue implements ObjectFilterVoterInterface
 {
     /**
-     * {@inheritdoc}
+     * @param mixed $value
      */
     public function supports($value): bool
     {
@@ -27,7 +27,7 @@ class MixedValue implements ObjectFilterVoterInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $value
      */
     public function getValue($value)
     {

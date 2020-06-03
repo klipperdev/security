@@ -18,24 +18,13 @@ namespace Klipper\Component\Security\Model;
  */
 class PermissionChecking
 {
-    /**
-     * @var PermissionInterface
-     */
-    protected $permission;
+    protected PermissionInterface $permission;
+
+    protected bool $granted;
+
+    protected bool $locked;
 
     /**
-     * @var bool
-     */
-    protected $granted;
-
-    /**
-     * @var bool
-     */
-    protected $locked;
-
-    /**
-     * Constructor.
-     *
      * @param PermissionInterface $permission The permission
      * @param bool                $granted    Check if the permission is granted
      * @param bool                $locked     Check if the permission is locked

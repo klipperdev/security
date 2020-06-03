@@ -69,7 +69,7 @@ final class OrganizationSecurityIdentityTest extends TestCase
      * @param mixed $value  The value
      * @param bool  $result The expected result
      */
-    public function testEquals($value, $result): void
+    public function testEquals($value, bool $result): void
     {
         $identity = new OrganizationSecurityIdentity(MockOrganization::class, 'identifier');
 

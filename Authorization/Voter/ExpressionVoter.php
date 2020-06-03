@@ -27,19 +27,11 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
  */
 class ExpressionVoter implements VoterInterface
 {
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $dispatcher;
+    private EventDispatcherInterface $dispatcher;
+
+    private ExpressionLanguage $expressionLanguage;
 
     /**
-     * @var ExpressionLanguage
-     */
-    private $expressionLanguage;
-
-    /**
-     * Constructor.
-     *
      * @param EventDispatcherInterface $dispatcher         The event dispatcher
      * @param ExpressionLanguage       $expressionLanguage The expression language
      */
@@ -61,9 +53,6 @@ class ExpressionVoter implements VoterInterface
         $this->expressionLanguage->registerProvider($provider);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function vote(TokenInterface $token, $subject, array $attributes): int
     {
         $result = VoterInterface::ACCESS_ABSTAIN;

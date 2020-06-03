@@ -36,8 +36,6 @@ class SharingSubjectConfigCollection extends AbstractConfigCollection
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return SharingSubjectConfigInterface[]
      */
     public function all(): array
@@ -70,8 +68,6 @@ class SharingSubjectConfigCollection extends AbstractConfigCollection
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param ConfigCollectionInterface|SharingSubjectConfigCollection $collection The collection
      */
     public function addCollection(ConfigCollectionInterface $collection): void

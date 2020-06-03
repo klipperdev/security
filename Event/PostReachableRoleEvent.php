@@ -23,8 +23,6 @@ class PostReachableRoleEvent extends AbstractSecurityEvent
     use ReachableRoleEventTrait;
 
     /**
-     * Constructor.
-     *
      * @param string[] $reachableRoles    The reachable roles
      * @param bool     $permissionEnabled Check if the permission manager is enabled
      */

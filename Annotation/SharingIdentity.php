@@ -21,20 +21,11 @@ use Klipper\Component\Config\Annotation\AbstractAnnotation;
  */
 class SharingIdentity extends AbstractAnnotation
 {
-    /**
-     * @var null|string
-     */
-    protected $alias;
+    protected ?string $alias = null;
 
-    /**
-     * @var null|bool
-     */
-    protected $roleable;
+    protected ?bool $roleable = null;
 
-    /**
-     * @var null|bool
-     */
-    protected $permissible;
+    protected ?bool $permissible = null;
 
     public function getAlias(): ?string
     {

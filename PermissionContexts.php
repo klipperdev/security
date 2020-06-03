@@ -19,8 +19,6 @@ final class PermissionContexts
     /**
      * The PermissionContexts::ROLE context check if the permission
      * can be added on a role.
-     *
-     * @var string
      */
     public const ROLE = 'role';
 
@@ -29,16 +27,12 @@ final class PermissionContexts
      * can be added on a role of organization.
      *
      * In this case, the Role model must implement Klipper\Component\Security\Model\TraitsOrganizationalInterface
-     *
-     * @var string
      */
     public const ORGANIZATION_ROLE = 'organization_role';
 
     /**
      * The PermissionContexts::SHARING context check if the permission
      * can be added on a sharing entry.
-     *
-     * @var string
      */
     public const SHARING = 'sharing';
 }

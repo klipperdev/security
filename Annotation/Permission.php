@@ -24,37 +24,25 @@ class Permission extends AbstractAnnotation
     /**
      * @var string[]
      */
-    protected $operations = [];
+    protected array $operations = [];
 
     /**
      * @var string[]
      */
-    protected $mappingPermissions = [];
+    protected array $mappingPermissions = [];
 
     /**
      * @var PermissionField[]
      */
-    protected $fields = [];
+    protected array $fields = [];
 
-    /**
-     * @var null|string
-     */
-    protected $master;
+    protected ?string $master = null;
 
-    /**
-     * @var array
-     */
-    protected $masterFieldMappingPermissions = [];
+    protected array $masterFieldMappingPermissions = [];
 
-    /**
-     * @var null|bool
-     */
-    protected $buildFields;
+    protected ?bool $buildFields = null;
 
-    /**
-     * @var null|bool
-     */
-    protected $buildDefaultFields;
+    protected ?bool $buildDefaultFields = null;
 
     /**
      * @return string[]

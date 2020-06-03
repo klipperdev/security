@@ -21,26 +21,17 @@ use Symfony\Contracts\Service\ServiceSubscriberInterface;
  */
 abstract class AbstractCacheWarmer implements CacheWarmerInterface, ServiceSubscriberInterface
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private ContainerInterface $container;
 
-    /**
-     * @var null|object
-     */
-    private $cacheService;
+    private ?object $cacheService = null;
 
-    /**
-     * Constructor.
-     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $cacheDir
      */
     public function warmUp($cacheDir): void
     {
@@ -53,9 +44,6 @@ abstract class AbstractCacheWarmer implements CacheWarmerInterface, ServiceSubsc
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isOptional(): bool
     {
         return true;

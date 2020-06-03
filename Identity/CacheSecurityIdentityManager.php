@@ -24,12 +24,9 @@ class CacheSecurityIdentityManager extends SecurityIdentityManager implements Ca
     /**
      * @var null|CacheSecurityIdentityListenerInterface[]
      */
-    private $cacheIdentityListeners;
+    private ?array $cacheIdentityListeners = null;
 
-    /**
-     * @var array
-     */
-    private $cacheExec = [];
+    private array $cacheExec = [];
 
     /**
      * Invalidate the execution cache.
@@ -39,9 +36,6 @@ class CacheSecurityIdentityManager extends SecurityIdentityManager implements Ca
         $this->cacheExec = [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSecurityIdentities(?TokenInterface $token = null): array
     {
         if (null === $token) {

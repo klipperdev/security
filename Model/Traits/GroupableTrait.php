@@ -41,17 +41,11 @@ trait GroupableTrait
      */
     protected ?Collection $groups = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getGroups(): Collection
     {
         return $this->groups ?: $this->groups = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getGroupNames(): array
     {
         $names = [];
@@ -63,9 +57,6 @@ trait GroupableTrait
         return $names;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasGroup(string $name): bool
     {
         return \in_array($name, $this->getGroupNames(), true);

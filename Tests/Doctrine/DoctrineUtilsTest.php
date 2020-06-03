@@ -16,7 +16,9 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDOPgSql\Driver;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Types\Types;
 use Klipper\Component\Security\Doctrine\DoctrineUtils;
+use Klipper\Component\Security\Exception\RuntimeException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -88,7 +90,7 @@ final class DoctrineUtilsTest extends TestCase
      * @param string     $type       The doctrine field type
      * @param int|string $validValue The valid value
      */
-    public function testGetMockZeroId($type, $validValue): void
+    public function testGetMockZeroId(string $type, $validValue): void
     {
         /** @var ClassMetadata|MockObject $targetClass */
         $targetClass = $this->getMockBuilder(ClassMetadata::class)->getMock();
@@ -190,7 +192,7 @@ final class DoctrineUtilsTest extends TestCase
             ])
         ;
 
-        $type = Type::getType(Type::GUID);
+        $type = Type::getType(Types::GUID);
 
         $targetClass->expects(static::once())
             ->method('getTypeOfField')
@@ -221,7 +223,7 @@ final class DoctrineUtilsTest extends TestCase
             ])
         ;
 
-        $type = Type::getType(Type::GUID);
+        $type = Type::getType(Types::GUID);
 
         $targetClass->expects(static::once())
             ->method('getTypeOfField')
@@ -238,7 +240,7 @@ final class DoctrineUtilsTest extends TestCase
      */
     public function testGetIdentifierTypeWithInvalidType(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('The Doctrine DBAL type is not found for "TestIdentifier::id" identifier');
 
         /** @var ClassMetadata|MockObject $targetClass */

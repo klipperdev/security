@@ -22,9 +22,6 @@ trait EditGroupableTrait
 {
     use GroupableTrait;
 
-    /**
-     * {@inheritdoc}
-     */
     public function addGroup(GroupInterface $group): self
     {
         if (!$this->getGroups()->contains($group)) {
@@ -34,9 +31,6 @@ trait EditGroupableTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeGroup(GroupInterface $group): self
     {
         if ($this->getGroups()->contains($group)) {

@@ -11,6 +11,7 @@
 
 namespace Klipper\Component\Security\Tests\Permission;
 
+use Klipper\Component\Security\Exception\UnexpectedTypeException;
 use Klipper\Component\Security\Identity\SubjectIdentityInterface;
 use Klipper\Component\Security\Permission\FieldVote;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockObject;
@@ -61,7 +62,7 @@ final class FieldVoteTest extends TestCase
 
     public function testFieldVoteWithInvalidSubject(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\UnexpectedTypeException::class);
+        $this->expectException(UnexpectedTypeException::class);
         $this->expectExceptionMessage('Expected argument of type "Klipper\\Component\\Security\\Identity\\SubjectIdentityInterface|object|string", "integer" given');
 
         $object = 42;

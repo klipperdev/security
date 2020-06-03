@@ -31,45 +31,33 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class OrganizationalContext implements OrganizationalContextInterface
 {
-    /**
-     * @var string
-     */
-    protected $optionalFilterType = OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG;
+    protected string $optionalFilterType = OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG;
 
-    /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
+    protected TokenStorageInterface $tokenStorage;
 
-    /**
-     * @var null|EventDispatcherInterface
-     */
-    protected $dispatcher;
+    protected ?EventDispatcherInterface $dispatcher;
 
     /**
      * @var null|false|OrganizationInterface
      */
     protected $organization;
 
-    /**
-     * @var null|OrganizationUserInterface
-     */
-    protected $organizationUser;
+    protected ?OrganizationUserInterface $organizationUser = null;
 
     /**
-     * Constructor.
-     *
      * @param TokenStorageInterface         $tokenStorage The token storage
      * @param null|EventDispatcherInterface $dispatcher   The event dispatcher
      */
-    public function __construct(TokenStorageInterface $tokenStorage, ?EventDispatcherInterface $dispatcher = null)
-    {
+    public function __construct(
+        TokenStorageInterface $tokenStorage,
+        ?EventDispatcherInterface $dispatcher = null
+    ) {
         $this->tokenStorage = $tokenStorage;
         $this->dispatcher = $dispatcher;
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $organization
      */
     public function setCurrentOrganization($organization): void
     {
@@ -86,9 +74,6 @@ class OrganizationalContext implements OrganizationalContextInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentOrganization(): ?OrganizationInterface
     {
         if (null === $this->organization) {
@@ -107,9 +92,6 @@ class OrganizationalContext implements OrganizationalContextInterface
         return false !== $this->organization ? $this->organization : null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setCurrentOrganizationUser(?OrganizationUserInterface $organizationUser): void
     {
         $token = $this->getToken('organization user', $organizationUser instanceof OrganizationUserInterface);
@@ -131,17 +113,11 @@ class OrganizationalContext implements OrganizationalContextInterface
         $this->setCurrentOrganization($org);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCurrentOrganizationUser(): ?OrganizationUserInterface
     {
         return $this->organizationUser;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isOrganization(): bool
     {
         return null !== $this->getCurrentOrganization()
@@ -149,9 +125,6 @@ class OrganizationalContext implements OrganizationalContextInterface
             && null !== $this->getCurrentOrganizationUser();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setOptionalFilterType(string $type): void
     {
         $old = $this->optionalFilterType;
@@ -163,17 +136,11 @@ class OrganizationalContext implements OrganizationalContextInterface
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOptionalFilterType(): string
     {
         return $this->optionalFilterType;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isOptionalFilterType(string $type): bool
     {
         return \is_string($this->optionalFilterType) && $type === $this->optionalFilterType;

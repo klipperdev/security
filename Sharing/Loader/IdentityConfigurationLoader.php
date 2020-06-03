@@ -22,14 +22,9 @@ use Symfony\Component\Config\Loader\Loader;
  */
 class IdentityConfigurationLoader extends Loader
 {
-    /**
-     * @var SharingIdentityConfigCollection
-     */
-    protected $configs;
+    protected SharingIdentityConfigCollection $configs;
 
     /**
-     * Constructor.
-     *
      * @param SharingIdentityConfigInterface[] $configs The sharing identity configs
      */
     public function __construct(array $configs = [])
@@ -41,18 +36,12 @@ class IdentityConfigurationLoader extends Loader
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function load($resource, $type = null): SharingIdentityConfigCollection
+    public function load($resource, string $type = null): SharingIdentityConfigCollection
     {
         return $this->configs;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function supports($resource, $type = null): bool
+    public function supports($resource, string $type = null): bool
     {
         return 'config' === $type;
     }

@@ -35,29 +35,15 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
  */
 class PermissionManager extends AbstractPermissionManager
 {
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $dispatcher;
+    protected EventDispatcherInterface $dispatcher;
+
+    protected PermissionProviderInterface $provider;
+
+    protected PropertyAccessorInterface $propertyAccessor;
+
+    protected ?array $cacheConfigPermissions = null;
 
     /**
-     * @var PermissionProviderInterface
-     */
-    protected $provider;
-
-    /**
-     * @var PropertyAccessorInterface
-     */
-    protected $propertyAccessor;
-
-    /**
-     * @var null|array
-     */
-    protected $cacheConfigPermissions;
-
-    /**
-     * Constructor.
-     *
      * @param EventDispatcherInterface        $dispatcher       The event dispatcher
      * @param PermissionProviderInterface     $provider         The permission provider
      * @param PropertyAccessorInterface       $propertyAccessor The property accessor
@@ -78,9 +64,6 @@ class PermissionManager extends AbstractPermissionManager
         $this->propertyAccessor = $propertyAccessor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getMaster($subject): ?SubjectIdentityInterface
     {
         if (null !== $subject) {
@@ -106,9 +89,6 @@ class PermissionManager extends AbstractPermissionManager
         return $subject;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function doIsManaged(SubjectIdentityInterface $subject, ?string $field = null): bool
     {
         if ($this->hasConfig($subject->getType())) {
@@ -122,9 +102,6 @@ class PermissionManager extends AbstractPermissionManager
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function doIsGranted(array $sids, array $permissions, ?SubjectIdentityInterface $subject = null, ?string $field = null): bool
     {
         if (null !== $subject) {
@@ -143,9 +120,6 @@ class PermissionManager extends AbstractPermissionManager
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function doGetRolePermissions(RoleInterface $role, $subject = null): array
     {
         $permissions = [];

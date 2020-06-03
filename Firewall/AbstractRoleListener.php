@@ -20,24 +20,13 @@ use Klipper\Component\Security\Identity\SecurityIdentityManagerInterface;
  */
 abstract class AbstractRoleListener
 {
-    /**
-     * @var SecurityIdentityManagerInterface
-     */
-    protected $sidManager;
+    protected SecurityIdentityManagerInterface $sidManager;
+
+    protected array $config;
+
+    protected bool $enabled = true;
 
     /**
-     * @var array
-     */
-    protected $config;
-
-    /**
-     * @var bool
-     */
-    protected $enabled = true;
-
-    /**
-     * Constructor.
-     *
      * @param SecurityIdentityManagerInterface $sidManager The security identity manager
      * @param array                            $config     The config
      */

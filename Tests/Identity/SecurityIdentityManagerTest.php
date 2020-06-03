@@ -32,10 +32,7 @@ use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
  */
 final class SecurityIdentityManagerTest extends TestCase
 {
-    /**
-     * @var EventDispatcher
-     */
-    protected $dispatcher;
+    protected ?EventDispatcher $dispatcher = null;
 
     /**
      * @var MockObject|RoleHierarchyInterface
@@ -48,9 +45,9 @@ final class SecurityIdentityManagerTest extends TestCase
     protected $authenticationTrustResolver;
 
     /**
-     * @var SecurityIdentityManager
+     * @var
      */
-    protected $sidManager;
+    protected ?SecurityIdentityManager $sidManager = null;
 
     protected function setUp(): void
     {
@@ -80,7 +77,7 @@ final class SecurityIdentityManagerTest extends TestCase
      * @param string $trustMethod  The method for the authentication trust resolver
      * @param int    $sidFinalSize The final size of security identities list
      */
-    public function testGetSecurityIdentities($trustMethod, $sidFinalSize): void
+    public function testGetSecurityIdentities(string $trustMethod, int $sidFinalSize): void
     {
         $preEventAction = false;
         $addEventAction = false;

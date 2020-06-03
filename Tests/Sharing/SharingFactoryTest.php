@@ -35,11 +35,8 @@ final class SharingFactoryTest extends TestCase
 
     /**
      * @dataProvider getConfigTypes
-     *
-     * @param string $collectionClass
-     * @param string $createMethod
      */
-    public function testCreateConfigurations($collectionClass, $createMethod): void
+    public function testCreateConfigurations(string $collectionClass, string $createMethod): void
     {
         /** @var LoaderInterface|MockObject $subjectLoader */
         $subjectLoader = $this->getMockBuilder(LoaderInterface::class)->getMock();

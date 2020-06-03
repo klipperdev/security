@@ -61,7 +61,7 @@ final class RoleSecurityIdentityTest extends TestCase
      * @param mixed $value  The value
      * @param bool  $result The expected result
      */
-    public function testEquals($value, $result): void
+    public function testEquals($value, bool $result): void
     {
         $identity = new RoleSecurityIdentity(MockRole::class, 'identifier');
 

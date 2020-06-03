@@ -12,6 +12,7 @@
 namespace Klipper\Component\Security\Tests\Event;
 
 use Klipper\Component\Security\Event\ObjectFieldViewGrantedEvent;
+use Klipper\Component\Security\Exception\UnexpectedTypeException;
 use Klipper\Component\Security\Permission\FieldVote;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -42,7 +43,7 @@ final class ObjectFieldViewGrantedEventTest extends TestCase
 
     public function testEventWithInvalidFieldVote(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\UnexpectedTypeException::class);
+        $this->expectException(UnexpectedTypeException::class);
         $this->expectExceptionMessage('Expected argument of type "object", "NULL" given');
 
         $object = MockObject::class;

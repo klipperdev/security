@@ -11,10 +11,10 @@
 
 namespace Klipper\Component\Security\Doctrine\ORM\Provider;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
 use Klipper\Component\DoctrineExtra\Util\ManagerUtils;
 use Klipper\Component\DoctrineExtra\Util\RepositoryUtils;
 use Klipper\Component\Security\Exception\InvalidArgumentException;
@@ -31,19 +31,11 @@ use Klipper\Component\Security\Permission\PermissionUtils;
  */
 class PermissionProvider implements PermissionProviderInterface
 {
-    /**
-     * @var null|EntityRepository
-     */
-    protected $permissionRepo;
+    protected ?EntityRepository $permissionRepo = null;
+
+    protected ManagerRegistry $doctrine;
 
     /**
-     * @var ManagerRegistry
-     */
-    protected $doctrine;
-
-    /**
-     * Constructor.
-     *
      * @param ManagerRegistry $doctrine The doctrine registry
      */
     public function __construct(ManagerRegistry $doctrine)
@@ -51,9 +43,6 @@ class PermissionProvider implements PermissionProviderInterface
         $this->doctrine = $doctrine;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPermissions(array $roles): array
     {
         if (empty($roles)) {
@@ -73,7 +62,8 @@ class PermissionProvider implements PermissionProviderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param null|mixed $subject
+     * @param null|mixed $contexts
      */
     public function getPermissionsBySubject($subject = null, $contexts = null): array
     {
@@ -93,9 +83,6 @@ class PermissionProvider implements PermissionProviderInterface
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigPermissions($contexts = null): array
     {
         $qb = $this->getPermissionRepository()->createQueryBuilder('p')
@@ -110,9 +97,6 @@ class PermissionProvider implements PermissionProviderInterface
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMasterClass(PermissionConfigInterface $config): ?string
     {
         $type = $config->getType();

@@ -20,10 +20,9 @@ use Symfony\Component\Config\Loader\LoaderInterface;
  */
 class PermissionFactory implements PermissionFactoryInterface
 {
-    /**
-     * @var LoaderInterface
-     */
-    protected $loader;
+    protected LoaderInterface $loader;
+
+    protected array $defaultPermissions;
 
     /**
      * @var mixed
@@ -31,13 +30,6 @@ class PermissionFactory implements PermissionFactoryInterface
     protected $resource;
 
     /**
-     * @var array
-     */
-    protected $defaultPermissions;
-
-    /**
-     * Constructor.
-     *
      * @param LoaderInterface $loader             The permission loader
      * @param mixed           $resource           The main resource to load
      * @param array           $defaultPermissions The map of the default permissions
@@ -50,8 +42,6 @@ class PermissionFactory implements PermissionFactoryInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws
      */
     public function createConfigurations(): PermissionConfigCollection
@@ -114,7 +104,7 @@ class PermissionFactory implements PermissionFactoryInterface
      *
      * @return PermissionFieldConfig[]
      */
-    private function configureNewFields(PermissionConfigInterface $config, array $defaultFields, $buildField, $buildDefaultField): array
+    private function configureNewFields(PermissionConfigInterface $config, array $defaultFields, bool $buildField, bool $buildDefaultField): array
     {
         $ref = new \ReflectionClass($config->getType());
         $newFields = [];

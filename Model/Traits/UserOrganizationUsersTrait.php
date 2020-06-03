@@ -37,17 +37,11 @@ trait UserOrganizationUsersTrait
      */
     protected ?Collection $userOrganizations = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUserOrganizations(): Collection
     {
         return $this->userOrganizations ?: $this->userOrganizations = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUserOrganizationNames(): array
     {
         $names = [];
@@ -58,17 +52,11 @@ trait UserOrganizationUsersTrait
         return $names;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasUserOrganization(string $name): bool
     {
         return \in_array($name, $this->getUserOrganizationNames(), true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUserOrganization(string $name): ?OrganizationUserInterface
     {
         $org = null;
@@ -84,9 +72,6 @@ trait UserOrganizationUsersTrait
         return $org;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addUserOrganization(OrganizationUserInterface $organizationUser): self
     {
         $org = $organizationUser->getOrganization();
@@ -99,9 +84,6 @@ trait UserOrganizationUsersTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeUserOrganization(OrganizationUserInterface $organizationUser): self
     {
         if ($this->getUserOrganizations()->contains($organizationUser)) {

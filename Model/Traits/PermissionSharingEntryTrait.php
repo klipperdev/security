@@ -33,9 +33,6 @@ trait PermissionSharingEntryTrait
      */
     protected ?Collection $sharingEntries = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSharingEntries(): Collection
     {
         return $this->sharingEntries ?: $this->sharingEntries = new ArrayCollection();

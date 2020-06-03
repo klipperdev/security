@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\UnitOfWork;
 use Klipper\Component\Security\Doctrine\ORM\Listener\PermissionCheckerListener;
+use Klipper\Component\Security\Exception\AccessDeniedException;
 use Klipper\Component\Security\Permission\PermissionManagerInterface;
 use Klipper\Component\Security\Permission\PermVote;
 use Klipper\Component\Security\Token\ConsoleToken;
@@ -56,10 +57,7 @@ final class PermissionCheckerListenerTest extends TestCase
      */
     protected $uow;
 
-    /**
-     * @var PermissionCheckerListener
-     */
-    protected $listener;
+    protected ?PermissionCheckerListener $listener = null;
 
     protected function setUp(): void
     {
@@ -97,7 +95,7 @@ final class PermissionCheckerListenerTest extends TestCase
      * @param string   $method  The method
      * @param string[] $setters The setters
      */
-    public function testInvalidInit($method, array $setters): void
+    public function testInvalidInit(string $method, array $setters): void
     {
         $this->expectException(\Klipper\Component\Security\Exception\SecurityException::class);
 
@@ -182,7 +180,7 @@ final class PermissionCheckerListenerTest extends TestCase
 
     public function testOnFLushWithInsufficientPrivilegeToCreateEntity(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\AccessDeniedException::class);
+        $this->expectException(AccessDeniedException::class);
         $this->expectExceptionMessage('Insufficient privilege to create the entity');
 
         /** @var MockObject|OnFlushEventArgs $args */
@@ -236,7 +234,7 @@ final class PermissionCheckerListenerTest extends TestCase
 
     public function testOnFLushWithInsufficientPrivilegeToUpdateEntity(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\AccessDeniedException::class);
+        $this->expectException(AccessDeniedException::class);
         $this->expectExceptionMessage('Insufficient privilege to update the entity');
 
         /** @var MockObject|OnFlushEventArgs $args */
@@ -290,7 +288,7 @@ final class PermissionCheckerListenerTest extends TestCase
 
     public function testOnFLushWithInsufficientPrivilegeToDeleteEntity(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\AccessDeniedException::class);
+        $this->expectException(AccessDeniedException::class);
         $this->expectExceptionMessage('Insufficient privilege to delete the entity');
 
         /** @var MockObject|OnFlushEventArgs $args */

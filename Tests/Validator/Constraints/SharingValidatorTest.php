@@ -18,7 +18,6 @@ use Klipper\Component\Security\Tests\Fixtures\Model\MockObject;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockPermission;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockRole;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockSharing;
-use Klipper\Component\Security\Validator\Constraints\PermissionValidator;
 use Klipper\Component\Security\Validator\Constraints\Sharing;
 use Klipper\Component\Security\Validator\Constraints\SharingValidator;
 use PHPUnit\Framework\TestCase;
@@ -33,19 +32,16 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 final class SharingValidatorTest extends TestCase
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|SharingManagerInterface
+     * @var MockObject|SharingManagerInterface
      */
     protected $sharingManager;
 
     /**
-     * @var ExecutionContextInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var ExecutionContextInterface|MockObject
      */
     protected $context;
 
-    /**
-     * @var PermissionValidator
-     */
-    protected $validator;
+    protected ?SharingValidator $validator = null;
 
     protected function setUp(): void
     {
@@ -221,7 +217,7 @@ final class SharingValidatorTest extends TestCase
      * @param string $path       The property path
      * @param array  $parameters The violation parameters
      */
-    protected function addViolation($position, $message, $path, array $parameters = []): void
+    protected function addViolation(int $position, string $message, string $path, array $parameters = []): void
     {
         $vb = $this->getMockBuilder(ConstraintViolationBuilderInterface::class)->getMock();
         $i = 0;

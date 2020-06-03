@@ -25,24 +25,13 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class PermissionVoter extends Voter
 {
-    /**
-     * @var PermissionManagerInterface
-     */
-    private $permissionManager;
+    private PermissionManagerInterface $permissionManager;
+
+    private SecurityIdentityManagerInterface $sim;
+
+    private bool $allowNotManagedSubject;
 
     /**
-     * @var SecurityIdentityManagerInterface
-     */
-    private $sim;
-
-    /**
-     * @var bool
-     */
-    private $allowNotManagedSubject;
-
-    /**
-     * Constructor.
-     *
      * @param PermissionManagerInterface       $permissionManager      The permission manager
      * @param SecurityIdentityManagerInterface $sim                    The security identity manager
      * @param bool                             $allowNotManagedSubject Check if the voter allow the not managed subject
@@ -57,9 +46,6 @@ class PermissionVoter extends Voter
         $this->allowNotManagedSubject = $allowNotManagedSubject;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function supports($attribute, $subject): bool
     {
         return $this->isAttributeSupported($attribute)
@@ -70,7 +56,7 @@ class PermissionVoter extends Voter
     /**
      * Check if the attribute is supported.
      *
-     * @param string $attribute The attribute
+     * @param mixed $attribute The attribute
      */
     protected function isAttributeSupported($attribute): bool
     {
@@ -107,9 +93,6 @@ class PermissionVoter extends Voter
             : $this->permissionManager->isManaged($this->convertSubject($subject));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
         $sids = $this->sim->getSecurityIdentities($token);

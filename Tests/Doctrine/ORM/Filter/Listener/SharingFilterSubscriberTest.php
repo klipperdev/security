@@ -67,20 +67,11 @@ final class SharingFilterSubscriberTest extends TestCase
      */
     protected $sharingManager;
 
-    /**
-     * @var string
-     */
-    protected $sharingClass;
+    protected ?string $sharingClass = null;
 
-    /**
-     * @var SharingFilter
-     */
-    protected $filter;
+    protected ?SharingFilter $filter = null;
 
-    /**
-     * @var SharingFilterSubscriber
-     */
-    protected $listener;
+    protected ?SharingFilterSubscriber $listener = null;
 
     protected function setUp(): void
     {

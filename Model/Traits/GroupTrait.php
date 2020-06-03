@@ -27,17 +27,11 @@ trait GroupTrait
      */
     protected ?string $name = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name): self
     {
         $this->name = $name;

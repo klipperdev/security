@@ -48,10 +48,7 @@ final class GetNoneFilterEventTest extends TestCase
      */
     protected $filter;
 
-    /**
-     * @var GetNoneFilterEvent
-     */
-    protected $event;
+    protected ?GetNoneFilterEvent $event = null;
 
     /**
      * @throws

@@ -23,11 +23,9 @@ abstract class AbstractCommitObjectFilterEvent extends Event
     /**
      * @var object[]
      */
-    protected $objects;
+    protected array $objects;
 
     /**
-     * Constructor.
-     *
      * @param object[] $objects The objects
      */
     public function __construct(array $objects)

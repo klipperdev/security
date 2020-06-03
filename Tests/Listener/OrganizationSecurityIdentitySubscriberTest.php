@@ -37,10 +37,7 @@ final class OrganizationSecurityIdentitySubscriberTest extends TestCase
      */
     protected $orgContext;
 
-    /**
-     * @var OrganizationSecurityIdentitySubscriber
-     */
-    protected $listener;
+    protected ?OrganizationSecurityIdentitySubscriber $listener = null;
 
     protected function setUp(): void
     {

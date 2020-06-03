@@ -19,8 +19,6 @@ namespace Klipper\Component\Security\Exception;
 class AlreadyConfigurationAliasExistingException extends InvalidArgumentException
 {
     /**
-     * Constructor.
-     *
      * @param string $alias The alias
      * @param string $class The class name
      */

@@ -21,11 +21,9 @@ class ObjectFilterExtension implements ObjectFilterExtensionInterface
     /**
      * @var ObjectFilterVoterInterface[]
      */
-    protected $voters;
+    protected array $voters;
 
     /**
-     * Constructor.
-     *
      * @param ObjectFilterVoterInterface[] $voters The object filter voters
      */
     public function __construct(array $voters)
@@ -34,7 +32,7 @@ class ObjectFilterExtension implements ObjectFilterExtensionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $value
      */
     public function filterValue($value)
     {

@@ -26,8 +26,6 @@ class MockGroup implements GroupInterface
     protected array $roles = [];
 
     /**
-     * Constructor.
-     *
      * @param string $name The group name
      * @param int    $id   The id
      */
@@ -37,25 +35,16 @@ class MockGroup implements GroupInterface
         $this->id = $id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasRole(string $role): bool
     {
         return \in_array($role, $this->roles, true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -63,9 +52,6 @@ class MockGroup implements GroupInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addRole(string $role): self
     {
         if (!$this->hasRole($role)) {
@@ -75,9 +61,6 @@ class MockGroup implements GroupInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeRole(string $role): self
     {
         if (false !== $key = array_search(strtoupper($role), $this->roles, true)) {
@@ -88,9 +71,6 @@ class MockGroup implements GroupInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRoles(): array
     {
         return $this->roles;

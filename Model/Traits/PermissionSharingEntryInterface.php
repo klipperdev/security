@@ -24,5 +24,5 @@ interface PermissionSharingEntryInterface
     /**
      * @return Collection|SharingInterface[]
      */
-    public function getSharingEntries();
+    public function getSharingEntries(): Collection;
 }

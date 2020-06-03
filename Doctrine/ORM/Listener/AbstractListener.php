@@ -23,20 +23,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 abstract class AbstractListener implements EventSubscriber
 {
-    /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
+    protected ?TokenStorageInterface $tokenStorage = null;
 
-    /**
-     * @var PermissionManagerInterface
-     */
-    protected $permissionManager;
+    protected ?PermissionManagerInterface $permissionManager = null;
 
-    /**
-     * @var bool
-     */
-    protected $initialized = false;
+    protected bool $initialized = false;
 
     /**
      * Set the token storage.

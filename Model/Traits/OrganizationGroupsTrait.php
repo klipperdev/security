@@ -35,17 +35,11 @@ trait OrganizationGroupsTrait
      */
     protected ?Collection $organizationGroups = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrganizationGroups(): Collection
     {
         return $this->organizationGroups ?: $this->organizationGroups = new ArrayCollection();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getOrganizationGroupNames(): array
     {
         $names = [];
@@ -56,17 +50,11 @@ trait OrganizationGroupsTrait
         return $names;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasOrganizationGroup(string $group): bool
     {
         return \in_array($group, $this->getOrganizationGroupNames(), true);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addOrganizationGroup(GroupInterface $group): self
     {
         if (!$this->isUserOrganization()
@@ -77,9 +65,6 @@ trait OrganizationGroupsTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function removeOrganizationGroup(GroupInterface $group): self
     {
         if ($this->getOrganizationGroups()->contains($group)) {

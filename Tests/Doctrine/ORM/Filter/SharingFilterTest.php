@@ -35,39 +35,30 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 final class SharingFilterTest extends TestCase
 {
     /**
-     * @var EntityManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var EntityManagerInterface|MockObject
      */
     protected $em;
 
-    /**
-     * @var EventManager
-     */
-    protected $eventManager;
+    protected ?EventManager $eventManager = null;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|SharingManagerInterface
+     * @var MockObject|SharingManagerInterface
      */
     protected $sharingManager;
 
     /**
-     * @var EventDispatcher
+     * @var EventDispatcher|MockObject
      */
     protected $eventDispatcher;
 
-    /**
-     * @var string
-     */
-    protected $sharingClass;
+    protected ?string $sharingClass = null;
 
     /**
-     * @var ClassMetadata|\PHPUnit\Framework\MockObject\MockObject
+     * @var ClassMetadata|MockObject
      */
     protected $targetEntity;
 
-    /**
-     * @var SharingFilter
-     */
-    protected $filter;
+    protected ?SharingFilter $filter = null;
 
     /**
      * @throws

@@ -19,8 +19,6 @@ namespace Klipper\Component\Security\Exception;
 class UnexpectedTypeException extends InvalidArgumentException
 {
     /**
-     * Constructor.
-     *
      * @param mixed  $value        The value
      * @param string $expectedType The expected type
      */

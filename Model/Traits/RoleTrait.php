@@ -27,25 +27,16 @@ trait RoleTrait
      */
     protected ?string $name = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __toString(): string
     {
         return (string) $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setName(?string $name = null): self
     {
         $this->name = $name;

@@ -20,29 +20,15 @@ use Klipper\Component\Security\Exception\InvalidArgumentException;
  */
 class SharingIdentityConfig implements SharingIdentityConfigInterface
 {
-    /**
-     * @var string
-     */
-    protected $type;
+    protected string $type;
+
+    protected string $alias;
+
+    protected ?bool $roleable;
+
+    protected ?bool $permissible;
 
     /**
-     * @var string
-     */
-    protected $alias;
-
-    /**
-     * @var null|bool
-     */
-    protected $roleable;
-
-    /**
-     * @var null|bool
-     */
-    protected $permissible;
-
-    /**
-     * Constructor.
-     *
      * @param string      $type        The type, typically, this is the PHP class name
      * @param null|string $alias       The alias of identity type
      * @param null|bool   $roleable    Check if the identity can be use the roles
@@ -56,57 +42,36 @@ class SharingIdentityConfig implements SharingIdentityConfigInterface
         $this->permissible = $permissible;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAlias(): string
     {
         return $this->alias;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRoleable(): ?bool
     {
         return $this->roleable;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRoleable(): bool
     {
         return $this->roleable ?? false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPermissible(): ?bool
     {
         return $this->permissible;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isPermissible(): bool
     {
         return $this->permissible ?? false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function merge(SharingIdentityConfigInterface $newConfig): void
     {
         if ($this->getType() !== $newConfig->getType()) {

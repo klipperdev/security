@@ -26,8 +26,6 @@ class MockRole implements RoleHierarchicalInterface
     protected ?int $id = null;
 
     /**
-     * Constructor.
-     *
      * @param string $name The unique name
      * @param int    $id   The id
      */
@@ -37,9 +35,6 @@ class MockRole implements RoleHierarchicalInterface
         $this->id = $id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId(): ?int
     {
         return $this->id;
