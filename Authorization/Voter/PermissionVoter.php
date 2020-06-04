@@ -16,14 +16,14 @@ use Klipper\Component\Security\Permission\FieldVote;
 use Klipper\Component\Security\Permission\PermissionManagerInterface;
 use Klipper\Component\Security\Permission\PermVote;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 /**
  * Permission voter.
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class PermissionVoter extends Voter
+class PermissionVoter implements VoterInterface
 {
     private PermissionManagerInterface $permissionManager;
 
@@ -46,6 +46,29 @@ class PermissionVoter extends Voter
         $this->allowNotManagedSubject = $allowNotManagedSubject;
     }
 
+    public function vote(TokenInterface $token, $subject, array $attributes)
+    {
+        $vote = self::ACCESS_ABSTAIN;
+
+        foreach ($attributes as $attribute) {
+            if (!$this->supports($attribute, $subject)) {
+                continue;
+            }
+
+            $vote = self::ACCESS_DENIED;
+
+            if ($this->voteOnAttribute($attribute, $subject, $token)) {
+                return self::ACCESS_GRANTED;
+            }
+        }
+
+        return $vote;
+    }
+
+    /**
+     * @param mixed $attribute
+     * @param mixed $subject
+     */
     protected function supports($attribute, $subject): bool
     {
         return $this->isAttributeSupported($attribute)
@@ -93,6 +116,11 @@ class PermissionVoter extends Voter
             : $this->permissionManager->isManaged($this->convertSubject($subject));
     }
 
+    /**
+     * @param PermVote|string      $attribute The attribute
+     * @param null|FieldVote|mixed $subject   The subject
+     * @param TokenInterface       $token     The security token
+     */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
         $sids = $this->sim->getSecurityIdentities($token);
