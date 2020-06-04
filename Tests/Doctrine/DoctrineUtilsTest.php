@@ -71,16 +71,16 @@ final class DoctrineUtilsTest extends TestCase
     public function getFieldTypes(): array
     {
         return [
-            [Type::GUID, '00000000-0000-0000-0000-000000000000'],
-            [Type::STRING, ''],
-            [Type::TEXT, ''],
-            [Type::INTEGER, 0],
-            [Type::SMALLINT, 0],
-            [Type::BIGINT, 0],
-            [Type::DECIMAL, 0],
-            [Type::FLOAT, 0],
-            [Type::BINARY, null],
-            [Type::BLOB, null],
+            [Types::GUID, '00000000-0000-0000-0000-000000000000'],
+            [Types::STRING, ''],
+            [Types::TEXT, ''],
+            [Types::INTEGER, 0],
+            [Types::SMALLINT, 0],
+            [Types::BIGINT, 0],
+            [Types::DECIMAL, 0],
+            [Types::FLOAT, 0],
+            [Types::BINARY, null],
+            [Types::BLOB, null],
         ];
     }
 
@@ -138,7 +138,7 @@ final class DoctrineUtilsTest extends TestCase
         $targetClass->expects(static::once())
             ->method('getTypeOfField')
             ->with('id')
-            ->willReturn(Type::GUID)
+            ->willReturn(Types::GUID)
         ;
 
         $dbPlatform = $this->getMockForAbstractClass(
