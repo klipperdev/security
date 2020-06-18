@@ -28,6 +28,14 @@ class PermVote
         $this->permission = $permission;
     }
 
+    public function __toString(): string
+    {
+        return sprintf(
+            'perm:%s',
+            $this->permission
+        );
+    }
+
     /**
      * Get the field name.
      */

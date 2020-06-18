@@ -35,6 +35,11 @@ class FieldVote
         $this->field = $field;
     }
 
+    public function __toString(): string
+    {
+        return 'fieldVote:'.$this->subject->getType().':'.$this->subject->getIdentifier().':'.$this->field;
+    }
+
     /**
      * Get the subject.
      */
