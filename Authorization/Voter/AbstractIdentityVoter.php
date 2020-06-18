@@ -40,7 +40,7 @@ abstract class AbstractIdentityVoter extends Voter
 
     protected function supports(string $attribute, $subject): bool
     {
-        return \is_string($attribute) && 0 === strpos($attribute, $this->prefix);
+        return 0 === strpos($attribute, $this->prefix);
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
