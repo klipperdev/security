@@ -28,7 +28,7 @@ class ConsoleToken extends AbstractToken
      * @param string|UserInterface $user  The user
      * @param string[]             $roles An array of roles
      */
-    public function __construct(string $key, string $user, array $roles = [])
+    public function __construct(string $key, $user, array $roles = [])
     {
         parent::__construct($roles);
 
