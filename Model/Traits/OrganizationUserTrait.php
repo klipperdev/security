@@ -35,7 +35,7 @@ trait OrganizationUserTrait
     /**
      * @ORM\ManyToOne(
      *     targetEntity="Klipper\Component\Security\Model\UserInterface",
-     *     fetch="EXTRA_LAZY",
+     *     fetch="EAGER",
      *     inversedBy="userOrganizations",
      *     cascade={"persist"}
      * )
