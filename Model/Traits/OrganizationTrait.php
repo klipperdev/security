@@ -33,6 +33,7 @@ trait OrganizationTrait
      * @ORM\OneToOne(
      *     targetEntity="Klipper\Component\Security\Model\UserInterface",
      *     inversedBy="organization",
+     *     fetch="EAGER",
      *     cascade={"persist", "remove"}
      * )
      * @ORM\JoinColumn(onDelete="CASCADE")
