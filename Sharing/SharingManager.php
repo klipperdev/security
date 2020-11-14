@@ -76,13 +76,15 @@ class SharingManager extends AbstractSharingManager
         $idSubjects = [];
 
         foreach ($subjects as $subject) {
-            $subjectId = SharingUtils::getCacheId($subject);
-            $idSubjects[$subjectId] = $subject;
+            if ($subject instanceof SubjectIdentityInterface) {
+                $subjectId = SharingUtils::getCacheId($subject);
+                $idSubjects[$subjectId] = $subject;
 
-            if (!\array_key_exists($subjectId, $this->cacheSharing)
+                if (!\array_key_exists($subjectId, $this->cacheSharing)
                     && isset($this->cacheRoleSharing[$subjectId])) {
-                $roles[] = $this->cacheRoleSharing[$subjectId];
-                $this->cacheSharing[$subjectId] = [];
+                    $roles[] = $this->cacheRoleSharing[$subjectId];
+                    $this->cacheSharing[$subjectId] = [];
+                }
             }
         }
 
@@ -171,16 +173,18 @@ class SharingManager extends AbstractSharingManager
         $subjects = [];
 
         foreach ($objects as $object) {
-            $subject = SubjectIdentity::fromObject($object);
-            $id = SharingUtils::getCacheId($subject);
+            if (\is_object($object)) {
+                $subject = SubjectIdentity::fromObject($object);
+                $id = SharingUtils::getCacheId($subject);
 
-            if (!\array_key_exists($id, $this->cacheSubjectSharing)
-                && 'class' !== $subject->getIdentifier()
-                && $this->hasIdentityPermissible()
-                && $this->hasSharingVisibility($subject)
-                && $this->hasSubjectConfig($subject->getType())) {
-                $subjects[$id] = $subject;
-                $this->cacheSubjectSharing[$id] = false;
+                if (!\array_key_exists($id, $this->cacheSubjectSharing)
+                    && 'class' !== $subject->getIdentifier()
+                    && $this->hasIdentityPermissible()
+                    && $this->hasSharingVisibility($subject)
+                    && $this->hasSubjectConfig($subject->getType())) {
+                    $subjects[$id] = $subject;
+                    $this->cacheSubjectSharing[$id] = false;
+                }
             }
         }
 
