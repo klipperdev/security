@@ -24,10 +24,10 @@ use Klipper\Component\Security\Model\Traits\RoleableTrait;
  */
 class MockOrganization implements RoleableInterface, OrganizationRolesInterface, OrganizationGroupsInterface
 {
+    use OrganizationGroupsTrait;
+    use OrganizationRolesTrait;
     use OrganizationTrait;
     use RoleableTrait;
-    use OrganizationRolesTrait;
-    use OrganizationGroupsTrait;
 
     protected ?int $id = null;
 

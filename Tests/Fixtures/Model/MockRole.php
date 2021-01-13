@@ -20,8 +20,8 @@ use Klipper\Component\Security\Model\Traits\RoleTrait;
  */
 class MockRole implements RoleHierarchicalInterface
 {
-    use RoleTrait;
     use RoleHierarchicalTrait;
+    use RoleTrait;
 
     protected ?int $id = null;
 

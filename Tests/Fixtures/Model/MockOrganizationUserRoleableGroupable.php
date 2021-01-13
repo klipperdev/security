@@ -21,6 +21,6 @@ use Klipper\Component\Security\Model\Traits\RoleableTrait;
  */
 class MockOrganizationUserRoleableGroupable extends MockOrganizationUser implements RoleableInterface, EditGroupableInterface
 {
-    use RoleableTrait;
     use EditGroupableTrait;
+    use RoleableTrait;
 }

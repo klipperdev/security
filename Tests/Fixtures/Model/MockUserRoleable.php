@@ -20,8 +20,8 @@ use Klipper\Component\Security\Model\UserInterface;
  */
 class MockUserRoleable implements UserInterface
 {
-    use UserTrait;
     use RoleableTrait;
+    use UserTrait;
 
     public function getId(): int
     {

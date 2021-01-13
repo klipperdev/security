@@ -22,9 +22,9 @@ use Klipper\Component\Security\Model\UserInterface;
  */
 class MockUserGroupable implements UserInterface, EditGroupableInterface
 {
-    use UserTrait;
-    use RoleableTrait;
     use EditGroupableTrait;
+    use RoleableTrait;
+    use UserTrait;
 
     public function __construct($mockGroups = true)
     {

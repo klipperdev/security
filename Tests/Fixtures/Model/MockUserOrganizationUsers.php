@@ -21,6 +21,6 @@ use Klipper\Component\Security\Model\Traits\UserOrganizationUsersTrait;
  */
 class MockUserOrganizationUsers extends MockUserRoleable implements OrganizationalOptionalInterface, UserOrganizationUsersInterface
 {
-    use UserOrganizationUsersTrait;
     use OrganizationalOptionalTrait;
+    use UserOrganizationUsersTrait;
 }

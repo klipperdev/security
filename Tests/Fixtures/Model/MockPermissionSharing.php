@@ -21,8 +21,8 @@ use Klipper\Component\Security\Model\Traits\PermissionTrait;
  */
 class MockPermissionSharing implements PermissionInterface, PermissionSharingEntryInterface
 {
-    use PermissionTrait;
     use PermissionSharingEntryTrait;
+    use PermissionTrait;
 
     protected ?int $id = null;
 
