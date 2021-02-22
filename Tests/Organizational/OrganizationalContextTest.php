@@ -262,18 +262,18 @@ final class OrganizationalContextTest extends TestCase
 
     public function testSetOptionalFilterType(): void
     {
-        static::assertSame(OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG, $this->context->getOptionalFilterType());
-        static::assertFalse($this->context->isOptionalFilterType(OrganizationalTypes::OPTIONAL_FILTER_ALL));
+        static::assertSame(OrganizationalTypes::OPTIONAL_FILTER_ALL, $this->context->getOptionalFilterType());
+        static::assertFalse($this->context->isOptionalFilterType(OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG));
 
         $this->dispatcher->expects(static::at(0))
             ->method('dispatch')
-            ->with(new SetOrganizationalOptionalFilterTypeEvent(OrganizationalTypes::OPTIONAL_FILTER_ALL))
+            ->with(new SetOrganizationalOptionalFilterTypeEvent(OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG))
         ;
 
-        $this->context->setOptionalFilterType(OrganizationalTypes::OPTIONAL_FILTER_ALL);
+        $this->context->setOptionalFilterType(OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG);
 
-        static::assertSame(OrganizationalTypes::OPTIONAL_FILTER_ALL, $this->context->getOptionalFilterType());
-        static::assertTrue($this->context->isOptionalFilterType(OrganizationalTypes::OPTIONAL_FILTER_ALL));
+        static::assertSame(OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG, $this->context->getOptionalFilterType());
+        static::assertTrue($this->context->isOptionalFilterType(OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG));
     }
 
     public function testValidEmptyTokenForUser(): void

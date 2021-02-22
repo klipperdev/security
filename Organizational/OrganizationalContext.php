@@ -31,7 +31,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class OrganizationalContext implements OrganizationalContextInterface
 {
-    protected string $optionalFilterType = OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG;
+    protected string $optionalFilterType = OrganizationalTypes::OPTIONAL_FILTER_ALL;
 
     protected TokenStorageInterface $tokenStorage;
 
