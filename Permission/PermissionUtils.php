@@ -67,7 +67,7 @@ abstract class PermissionUtils
     public static function getClassAndField($subject, bool $optional = false): array
     {
         /** @var null|SubjectIdentityInterface $subject */
-        list($subject, $field) = static::getSubjectAndField($subject, $optional);
+        [$subject, $field] = static::getSubjectAndField($subject, $optional);
 
         $class = null !== $subject
             ? $subject->getType()

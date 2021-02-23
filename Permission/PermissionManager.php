@@ -125,7 +125,7 @@ class PermissionManager extends AbstractPermissionManager
         $permissions = [];
         $sid = new RoleSecurityIdentity(ClassUtils::getClass($role), $role->getName());
         $contexts = $this->buildContexts($role);
-        list($class, $field) = PermissionUtils::getClassAndField($subject, true);
+        [$class, $field] = PermissionUtils::getClassAndField($subject, true);
 
         foreach ($this->provider->getPermissionsBySubject($subject, $contexts) as $permission) {
             $operation = $permission->getOperation();

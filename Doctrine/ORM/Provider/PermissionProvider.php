@@ -68,7 +68,7 @@ class PermissionProvider implements PermissionProviderInterface
     public function getPermissionsBySubject($subject = null, $contexts = null): array
     {
         /** @var null|SubjectIdentityInterface $subject */
-        list($subject, $field) = PermissionUtils::getSubjectAndField($subject, true);
+        [$subject, $field] = PermissionUtils::getSubjectAndField($subject, true);
 
         $qb = $this->getPermissionRepository()->createQueryBuilder('p')
             ->orderBy('p.class', 'asc')
