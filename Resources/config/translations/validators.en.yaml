@@ -1,0 +1,10 @@
+permission.operation.not_use_double_underscore: The permission operation cannot contain a double underscore
+permission.operation.not_use_special_character_at_end: The permission operation cannot use a special character at the end
+permission.class.invalid: This class does not exist
+permission.class.required: This value is required
+permission.class.not_managed: This class is not managed by the permission manager
+permission.field.invalid: This field does not exist
+sharing.class.invalid: This class does not exist
+sharing.class.not_managed: This class is not managed by the sharing manager
+sharing.class.identity_not_roleable: No role can be added for this identity
+sharing.class.identity_not_permissible: No permission can be added for this identity
