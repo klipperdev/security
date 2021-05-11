@@ -1,0 +1,10 @@
+permission.operation.not_use_double_underscore: L'opération d'autorisation ne peut pas contenir un double trait de soulignement
+permission.operation.not_use_special_character_at_end: L'opération d'autorisation ne peut pas utiliser un caractère spécial à la fin
+permission.class.invalid: Cette classe n'existe pas
+permission.class.required: Cette valeur est obligatoire
+permission.class.not_managed: Cette classe n'est pas gérée par le gestionnaire d'autorisations
+permission.field.invalid: Ce champ n'existe pas
+sharing.class.invalid: Cette classe n'existe pas
+sharing.class.not_managed: Cette classe n'est pas gérée par le gestionnaire de partage
+sharing.class.identity_not_roleable: Aucun rôle ne peut être ajouté pour cette identité
+sharing.class.identity_not_permissible: Aucune autorisation ne peut être ajoutée pour cette identité
