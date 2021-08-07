@@ -66,60 +66,18 @@ final class PermissionCheckerListenerTest extends TestCase
         $this->permissionManager = $this->getMockBuilder(PermissionManagerInterface::class)->getMock();
         $this->em = $this->getMockBuilder(EntityManagerInterface::class)->getMock();
         $this->uow = $this->getMockBuilder(UnitOfWork::class)->disableOriginalConstructor()->getMock();
-        $this->listener = new PermissionCheckerListener();
+        $this->listener = new PermissionCheckerListener(
+            $this->permissionManager,
+            $this->tokenStorage,
+            $this->authChecker
+        );
 
         $this->em->expects(static::any())
             ->method('getUnitOfWork')
             ->willReturn($this->uow)
         ;
 
-        $this->listener->setTokenStorage($this->tokenStorage);
-        $this->listener->setAuthorizationChecker($this->authChecker);
-        $this->listener->setPermissionManager($this->permissionManager);
-
         static::assertCount(2, $this->listener->getSubscribedEvents());
-    }
-
-    public function getInvalidInitMethods(): array
-    {
-        return [
-            ['setTokenStorage', []],
-            ['setAuthorizationChecker', ['tokenStorage']],
-            ['setPermissionManager', ['tokenStorage', 'authChecker']],
-        ];
-    }
-
-    /**
-     * @dataProvider getInvalidInitMethods
-     *
-     * @param string   $method  The method
-     * @param string[] $setters The setters
-     */
-    public function testInvalidInit(string $method, array $setters): void
-    {
-        $this->expectException(\Klipper\Component\Security\Exception\SecurityException::class);
-
-        $msg = sprintf('The "%s()" method must be called before the init of the "Klipper\Component\Security\Doctrine\ORM\Listener\PermissionCheckerListener" class', $method);
-        $this->expectExceptionMessage($msg);
-
-        $listener = new PermissionCheckerListener();
-
-        if (\in_array('tokenStorage', $setters, true)) {
-            $listener->setTokenStorage($this->tokenStorage);
-        }
-
-        if (\in_array('authChecker', $setters, true)) {
-            $listener->setAuthorizationChecker($this->authChecker);
-        }
-
-        if (\in_array('permissionManager', $setters, true)) {
-            $listener->setPermissionManager($this->permissionManager);
-        }
-
-        /** @var OnFlushEventArgs $args */
-        $args = $this->getMockBuilder(OnFlushEventArgs::class)->disableOriginalConstructor()->getMock();
-
-        $listener->onFlush($args);
     }
 
     public function testPostFlush(): void

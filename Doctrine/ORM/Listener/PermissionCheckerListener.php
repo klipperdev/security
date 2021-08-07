@@ -11,11 +11,14 @@
 
 namespace Klipper\Component\Security\Doctrine\ORM\Listener;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use Klipper\Component\Security\Exception\AccessDeniedException;
+use Klipper\Component\Security\Permission\PermissionManagerInterface;
 use Klipper\Component\Security\Permission\PermVote;
 use Klipper\Component\Security\Token\ConsoleToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
@@ -23,9 +26,25 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class PermissionCheckerListener extends AbstractPermissionListener
+class PermissionCheckerListener implements EventSubscriber
 {
-    protected ?AuthorizationCheckerInterface $authChecker = null;
+    private PermissionManagerInterface $permissionManager;
+
+    private TokenStorageInterface $tokenStorage;
+
+    private AuthorizationCheckerInterface $authChecker;
+
+    private array $postResetPermissions = [];
+
+    public function __construct(
+        PermissionManagerInterface $permissionManager,
+        TokenStorageInterface $tokenStorage,
+        AuthorizationCheckerInterface $authChecker
+    ) {
+        $this->permissionManager = $permissionManager;
+        $this->tokenStorage = $tokenStorage;
+        $this->authChecker = $authChecker;
+    }
 
     /**
      * Specifies the list of listened events.
@@ -49,11 +68,11 @@ class PermissionCheckerListener extends AbstractPermissionListener
      */
     public function onFlush(OnFlushEventArgs $args): void
     {
-        $token = $this->getTokenStorage()->getToken();
+        $token = $this->tokenStorage->getToken();
 
         if (null === $token
                 || $token instanceof ConsoleToken
-                || !$this->getPermissionManager()->isEnabled()) {
+                || !$this->permissionManager->isEnabled()) {
             return;
         }
 
@@ -63,7 +82,7 @@ class PermissionCheckerListener extends AbstractPermissionListener
         $deleteEntities = $uow->getScheduledEntityDeletions();
 
         $this->postResetPermissions = array_merge($createEntities, $updateEntities, $deleteEntities);
-        $this->getPermissionManager()->preloadPermissions($this->postResetPermissions);
+        $this->permissionManager->preloadPermissions($this->postResetPermissions);
 
         $this->checkAllScheduledByAction($createEntities, 'create');
         $this->checkAllScheduledByAction($updateEntities, 'update');
@@ -71,29 +90,12 @@ class PermissionCheckerListener extends AbstractPermissionListener
     }
 
     /**
-     * Set the authorization checker.
-     *
-     * @param AuthorizationCheckerInterface $authorizationChecker The authorization checker
-     *
-     * @return static
+     * Reset the preloaded permissions used for the insertions.
      */
-    public function setAuthorizationChecker(AuthorizationCheckerInterface $authorizationChecker): self
+    public function postFlush(): void
     {
-        $this->authChecker = $authorizationChecker;
-
-        return $this;
-    }
-
-    /**
-     * Gets security authorization checker.
-     *
-     * @throws
-     */
-    protected function getAuthorizationChecker(): AuthorizationCheckerInterface
-    {
-        $this->init();
-
-        return $this->authChecker;
+        $this->permissionManager->resetPreloadPermissions($this->postResetPermissions);
+        $this->postResetPermissions = [];
     }
 
     /**
@@ -105,18 +107,9 @@ class PermissionCheckerListener extends AbstractPermissionListener
     protected function checkAllScheduledByAction(array $objects, string $action): void
     {
         foreach ($objects as $object) {
-            if (!$this->getAuthorizationChecker()->isGranted(new PermVote($action), $object)) {
+            if (!$this->authChecker->isGranted(new PermVote($action), $object)) {
                 throw new AccessDeniedException('Insufficient privilege to '.$action.' the entity');
             }
         }
-    }
-
-    protected function getInitProperties(): array
-    {
-        return [
-            'tokenStorage' => 'setTokenStorage',
-            'authChecker' => 'setAuthorizationChecker',
-            'permissionManager' => 'setPermissionManager',
-        ];
     }
 }

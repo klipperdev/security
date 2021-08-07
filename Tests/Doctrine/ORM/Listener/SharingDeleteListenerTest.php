@@ -19,11 +19,11 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\UnitOfWork;
 use Klipper\Component\Security\Doctrine\ORM\Listener\SharingDeleteListener;
+use Klipper\Component\Security\Model\SharingInterface;
 use Klipper\Component\Security\Sharing\SharingManagerInterface;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockGroup;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockObject;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockRole;
-use Klipper\Component\Security\Tests\Fixtures\Model\MockSharing;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -69,9 +69,7 @@ final class SharingDeleteListenerTest extends TestCase
         $this->em = $this->getMockBuilder(EntityManagerInterface::class)->getMock();
         $this->uow = $this->getMockBuilder(UnitOfWork::class)->disableOriginalConstructor()->getMock();
         $this->qb = $this->getMockBuilder(QueryBuilder::class)->disableOriginalConstructor()->getMock();
-        $this->listener = new SharingDeleteListener(MockSharing::class);
-
-        $this->listener->setSharingManager($this->sharingManager);
+        $this->listener = new SharingDeleteListener($this->sharingManager);
 
         $this->em->expects(static::any())
             ->method('getUnitOfWork')
@@ -91,40 +89,6 @@ final class SharingDeleteListenerTest extends TestCase
         );
 
         static::assertCount(2, $this->listener->getSubscribedEvents());
-    }
-
-    public function getInvalidInitMethods(): array
-    {
-        return [
-            ['setSharingManager', []],
-        ];
-    }
-
-    /**
-     * @dataProvider getInvalidInitMethods
-     *
-     * @param string   $method  The method
-     * @param string[] $setters The setters
-     */
-    public function testInvalidInit(string $method, array $setters): void
-    {
-        $this->expectException(\Klipper\Component\Security\Exception\SecurityException::class);
-
-        $msg = sprintf('The "%s()" method must be called before the init of the "Klipper\Component\Security\Doctrine\ORM\Listener\SharingDeleteListener" class', $method);
-        $this->expectExceptionMessage($msg);
-
-        $listener = new SharingDeleteListener(MockSharing::class);
-
-        if (\in_array('sharingManager', $setters, true)) {
-            $listener->setSharingManager($this->sharingManager);
-        }
-
-        $listener->getSharingManager();
-    }
-
-    public function testGetSharingManager(): void
-    {
-        static::assertSame($this->sharingManager, $this->listener->getSharingManager());
     }
 
     public function testOnFlush(): void
@@ -178,7 +142,7 @@ final class SharingDeleteListenerTest extends TestCase
 
         $this->qb->expects(static::at(0))
             ->method('delete')
-            ->with(MockSharing::class, 's')
+            ->with(SharingInterface::class, 's')
             ->willReturn($this->qb)
         ;
 

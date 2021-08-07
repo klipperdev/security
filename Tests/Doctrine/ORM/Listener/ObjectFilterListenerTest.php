@@ -65,60 +65,18 @@ final class ObjectFilterListenerTest extends TestCase
         $this->objectFilter = $this->getMockBuilder(ObjectFilterInterface::class)->getMock();
         $this->em = $this->getMockBuilder(EntityManagerInterface::class)->getMock();
         $this->uow = $this->getMockBuilder(UnitOfWork::class)->disableOriginalConstructor()->getMock();
-        $this->listener = new ObjectFilterListener();
+        $this->listener = new ObjectFilterListener(
+            $this->permissionManager,
+            $this->tokenStorage,
+            $this->objectFilter
+        );
 
         $this->em->expects(static::any())
             ->method('getUnitOfWork')
             ->willReturn($this->uow)
         ;
 
-        $this->listener->setTokenStorage($this->tokenStorage);
-        $this->listener->setPermissionManager($this->permissionManager);
-        $this->listener->setObjectFilter($this->objectFilter);
-
         static::assertCount(3, $this->listener->getSubscribedEvents());
-    }
-
-    public function getInvalidInitMethods(): array
-    {
-        return [
-            ['setTokenStorage', []],
-            ['setPermissionManager', ['tokenStorage']],
-            ['setObjectFilter', ['tokenStorage', 'permissionManager']],
-        ];
-    }
-
-    /**
-     * @dataProvider getInvalidInitMethods
-     *
-     * @param string   $method  The method
-     * @param string[] $setters The setters
-     */
-    public function testInvalidInit(string $method, array $setters): void
-    {
-        $this->expectException(\Klipper\Component\Security\Exception\SecurityException::class);
-
-        $msg = sprintf('The "%s()" method must be called before the init of the "Klipper\Component\Security\Doctrine\ORM\Listener\ObjectFilterListener" class', $method);
-        $this->expectExceptionMessage($msg);
-
-        $listener = new ObjectFilterListener();
-
-        if (\in_array('tokenStorage', $setters, true)) {
-            $listener->setTokenStorage($this->tokenStorage);
-        }
-
-        if (\in_array('permissionManager', $setters, true)) {
-            $listener->setPermissionManager($this->permissionManager);
-        }
-
-        if (\in_array('objectFilter', $setters, true)) {
-            $listener->setObjectFilter($this->objectFilter);
-        }
-
-        /** @var LifecycleEventArgs $args */
-        $args = $this->getMockBuilder(LifecycleEventArgs::class)->disableOriginalConstructor()->getMock();
-
-        $listener->postLoad($args);
     }
 
     public function testPostFlush(): void

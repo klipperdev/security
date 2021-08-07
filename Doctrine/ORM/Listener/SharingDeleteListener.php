@@ -20,7 +20,6 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Klipper\Component\DoctrineExtra\Util\ClassUtils;
-use Klipper\Component\Security\Exception\SecurityException;
 use Klipper\Component\Security\Identity\SubjectIdentity;
 use Klipper\Component\Security\Model\SharingInterface;
 use Klipper\Component\Security\Sharing\SharingManagerInterface;
@@ -32,22 +31,15 @@ use Klipper\Component\Security\Sharing\SharingManagerInterface;
  */
 class SharingDeleteListener implements EventSubscriber
 {
-    protected string $sharingClass;
+    private SharingManagerInterface $sharingManager;
 
-    protected ?SharingManagerInterface $sharingManager = null;
+    private array $deleteSharingSubjects = [];
 
-    protected array $deleteSharingSubjects = [];
+    private array $deleteSharingIdentities = [];
 
-    protected array $deleteSharingIdentities = [];
-
-    protected bool $initialized = false;
-
-    /**
-     * @param string $sharingClass The classname of sharing model
-     */
-    public function __construct(string $sharingClass = SharingInterface::class)
+    public function __construct(SharingManagerInterface $sharingManager)
     {
-        $this->sharingClass = $sharingClass;
+        $this->sharingManager = $sharingManager;
     }
 
     /**
@@ -75,10 +67,10 @@ class SharingDeleteListener implements EventSubscriber
         foreach ($uow->getScheduledEntityDeletions() as $entity) {
             $class = ClassUtils::getClass($entity);
 
-            if ($this->getSharingManager()->hasSubjectConfig($class)) {
+            if ($this->sharingManager->hasSubjectConfig($class)) {
                 $subject = SubjectIdentity::fromObject($entity);
                 $this->deleteSharingSubjects[$subject->getType()][] = $subject->getIdentifier();
-            } elseif ($this->getSharingManager()->hasIdentityConfig($class)) {
+            } elseif ($this->sharingManager->hasIdentityConfig($class)) {
                 $subject = SubjectIdentity::fromObject($entity);
                 $this->deleteSharingIdentities[$subject->getType()][] = $subject->getIdentifier();
             }
@@ -101,50 +93,6 @@ class SharingDeleteListener implements EventSubscriber
     }
 
     /**
-     * Set the sharing manager.
-     *
-     * @param SharingManagerInterface $sharingManager The sharing manager
-     *
-     * @return static
-     */
-    public function setSharingManager(SharingManagerInterface $sharingManager): SharingDeleteListener
-    {
-        $this->sharingManager = $sharingManager;
-
-        return $this;
-    }
-
-    /**
-     * Get the sharing manager.
-     *
-     * @throws
-     */
-    public function getSharingManager(): SharingManagerInterface
-    {
-        $this->init();
-
-        return $this->sharingManager;
-    }
-
-    /**
-     * Init listener.
-     *
-     * @throws SecurityException
-     */
-    protected function init(): void
-    {
-        if (!$this->initialized) {
-            $msg = 'The "%s()" method must be called before the init of the "%s" class';
-
-            if (null === $this->sharingManager) {
-                throw new SecurityException(sprintf($msg, 'setSharingManager', static::class));
-            }
-
-            $this->initialized = true;
-        }
-    }
-
-    /**
      * Build the delete query.
      *
      * @param EntityManagerInterface $em The entity manager
@@ -154,7 +102,7 @@ class SharingDeleteListener implements EventSubscriber
     private function buildDeleteQuery(EntityManagerInterface $em): AbstractQuery
     {
         $qb = $em->createQueryBuilder()
-            ->delete($this->sharingClass, 's')
+            ->delete(SharingInterface::class, 's')
         ;
 
         $this->buildCriteria($qb, $this->deleteSharingSubjects, 'subjectClass', 'subjectId');

@@ -11,21 +11,40 @@
 
 namespace Klipper\Component\Security\Doctrine\ORM\Listener;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use Klipper\Component\Security\Exception\AccessDeniedException;
 use Klipper\Component\Security\ObjectFilter\ObjectFilterInterface;
+use Klipper\Component\Security\Permission\PermissionManagerInterface;
 use Klipper\Component\Security\Token\ConsoleToken;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * This class listens to all database activity and automatically adds constraints as permissions.
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class ObjectFilterListener extends AbstractPermissionListener
+class ObjectFilterListener implements EventSubscriber
 {
-    protected ?ObjectFilterInterface $objectFilter = null;
+    private PermissionManagerInterface $permissionManager;
+
+    private TokenStorageInterface $tokenStorage;
+
+    private ObjectFilterInterface $objectFilter;
+
+    private array $postResetPermissions = [];
+
+    public function __construct(
+        PermissionManagerInterface $permissionManager,
+        TokenStorageInterface $tokenStorage,
+        ObjectFilterInterface $objectFilter
+    ) {
+        $this->permissionManager = $permissionManager;
+        $this->tokenStorage = $tokenStorage;
+        $this->objectFilter = $objectFilter;
+    }
 
     /**
      * Specifies the list of listened events.
@@ -46,14 +65,14 @@ class ObjectFilterListener extends AbstractPermissionListener
      */
     public function postLoad(LifecycleEventArgs $args): void
     {
-        $token = $this->getTokenStorage()->getToken();
+        $token = $this->tokenStorage->getToken();
 
-        if (null === $token || $token instanceof ConsoleToken || !$this->getPermissionManager()->isEnabled()) {
+        if (null === $token || $token instanceof ConsoleToken || !$this->permissionManager->isEnabled()) {
             return;
         }
 
         $object = $args->getEntity();
-        $this->getObjectFilter()->filter($object);
+        $this->objectFilter->filter($object);
     }
 
     /**
@@ -65,46 +84,29 @@ class ObjectFilterListener extends AbstractPermissionListener
      */
     public function onFlush(OnFlushEventArgs $args): void
     {
-        $token = $this->getTokenStorage()->getToken();
+        $token = $this->tokenStorage->getToken();
 
-        if (null === $token || $token instanceof ConsoleToken || !$this->getPermissionManager()->isEnabled()) {
+        if (null === $token || $token instanceof ConsoleToken || !$this->permissionManager->isEnabled()) {
             return;
         }
 
         $uow = $args->getEntityManager()->getUnitOfWork();
-        $this->getObjectFilter()->beginTransaction();
+        $this->objectFilter->beginTransaction();
 
         $this->checkAllScheduledByAction($uow->getScheduledEntityInsertions(), 'create');
         $this->checkAllScheduledByAction($uow->getScheduledEntityUpdates(), 'edit');
         $this->checkAllScheduledByAction($uow->getScheduledEntityDeletions(), 'delete');
 
-        $this->getObjectFilter()->commit();
+        $this->objectFilter->commit();
     }
 
     /**
-     * Set the object filter.
-     *
-     * @param ObjectFilterInterface $objectFilter The object filter
-     *
-     * @return static
+     * Reset the preloaded permissions used for the insertions.
      */
-    public function setObjectFilter(ObjectFilterInterface $objectFilter): self
+    public function postFlush(): void
     {
-        $this->objectFilter = $objectFilter;
-
-        return $this;
-    }
-
-    /**
-     * Get the Object Filter.
-     *
-     * @throws
-     */
-    protected function getObjectFilter(): ObjectFilterInterface
-    {
-        $this->init();
-
-        return $this->objectFilter;
+        $this->permissionManager->resetPreloadPermissions($this->postResetPermissions);
+        $this->postResetPermissions = [];
     }
 
     /**
@@ -119,17 +121,8 @@ class ObjectFilterListener extends AbstractPermissionListener
             $this->postResetPermissions[] = $object;
 
             if ('delete' !== $action) {
-                $this->getObjectFilter()->restore($object);
+                $this->objectFilter->restore($object);
             }
         }
-    }
-
-    protected function getInitProperties(): array
-    {
-        return [
-            'tokenStorage' => 'setTokenStorage',
-            'permissionManager' => 'setPermissionManager',
-            'objectFilter' => 'setObjectFilter',
-        ];
     }
 }
