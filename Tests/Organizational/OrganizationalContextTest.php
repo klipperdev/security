@@ -199,7 +199,7 @@ final class OrganizationalContextTest extends TestCase
         ;
 
         $user->expects(static::atLeast(2))
-            ->method('getUsername')
+            ->method('getUserIdentifier')
             ->willReturn('user.test')
         ;
 
@@ -245,7 +245,7 @@ final class OrganizationalContextTest extends TestCase
         ;
 
         $user->expects(static::atLeast(2))
-            ->method('getUsername')
+            ->method('getUserIdentifier')
             ->willReturn('user.test')
         ;
 

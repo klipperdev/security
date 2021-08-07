@@ -39,6 +39,18 @@ interface UserInterface extends BaseUserInterface, RoleableInterface
     public function setPassword(?string $password);
 
     /**
+     * Get the user identifier.
+     */
+    public function getUserIdentifier(): ?string;
+
+    /**
+     * Sets the user identifier used to authenticate the user.
+     *
+     * @return static
+     */
+    public function setUserIdentifier(?string $userIdentifier);
+
+    /**
      * Sets the username used to authenticate the user.
      *
      * @return static

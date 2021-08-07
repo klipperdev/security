@@ -32,6 +32,25 @@ trait UserTrait
     protected ?string $password = null;
 
     /**
+     * Set the user identifier.
+     *
+     * @param null|string $userIdentifier The user identifier
+     *
+     * @return static
+     */
+    public function setUserIdentifier(?string $userIdentifier): self
+    {
+        $this->username = $userIdentifier;
+
+        return $this;
+    }
+
+    public function getUserIdentifier(): ?string
+    {
+        return $this->username;
+    }
+
+    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface::getUsername()
@@ -60,7 +79,7 @@ trait UserTrait
      */
     public function getPassword(): ?string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(?string $password): self
@@ -73,9 +92,11 @@ trait UserTrait
     /**
      * @see UserInterface::getSalt()
      */
-    public function getSalt(): void
+    public function getSalt(): ?string
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
+
+        return null;
     }
 
     /**

@@ -208,7 +208,7 @@ final class OrganizationSecurityIdentityTest extends TestCase
     public function testFormTokenWithUserOrganizationalContext(): void
     {
         $user = new MockUserOrganizationUsersGroupable();
-        $org = new MockOrganization($user->getUsername());
+        $org = new MockOrganization($user->getUserIdentifier());
         $org->setUser($user);
 
         $org->addRole('ROLE_ORG_TEST');

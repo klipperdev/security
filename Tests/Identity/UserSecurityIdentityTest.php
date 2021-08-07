@@ -73,7 +73,7 @@ final class UserSecurityIdentityTest extends TestCase
         /** @var MockObject|UserInterface $user */
         $user = $this->getMockBuilder(UserInterface::class)->getMock();
         $user->expects(static::once())
-            ->method('getUsername')
+            ->method('getUserIdentifier')
             ->willReturn('user.test')
         ;
 
@@ -88,7 +88,7 @@ final class UserSecurityIdentityTest extends TestCase
         /** @var MockObject|UserInterface $user */
         $user = $this->getMockBuilder(UserInterface::class)->getMock();
         $user->expects(static::once())
-            ->method('getUsername')
+            ->method('getUserIdentifier')
             ->willReturn('user.test')
         ;
 

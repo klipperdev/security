@@ -126,7 +126,7 @@ final class OrganizationTest extends TestCase
         /** @var MockObject|UserInterface $user */
         $user = $this->getMockBuilder(UserInterface::class)->getMock();
         $user->expects(static::atLeastOnce())
-            ->method('getUsername')
+            ->method('getUserIdentifier')
             ->willReturn('user.test')
         ;
 
@@ -141,19 +141,19 @@ final class OrganizationTest extends TestCase
 
         static::assertCount(0, $org->getOrganizationUsers());
         static::assertCount(0, $org->getOrganizationUserNames());
-        static::assertFalse($org->hasOrganizationUser($user->getUsername()));
+        static::assertFalse($org->hasOrganizationUser($user->getUserIdentifier()));
 
         $org->addOrganizationUser($orgUser);
 
         static::assertCount(1, $org->getOrganizationUsers());
         static::assertCount(1, $org->getOrganizationUserNames());
-        static::assertTrue($org->hasOrganizationUser($user->getUsername()));
-        static::assertSame($user->getUsername(), current($org->getOrganizationUserNames()));
+        static::assertTrue($org->hasOrganizationUser($user->getUserIdentifier()));
+        static::assertSame($user->getUserIdentifier(), current($org->getOrganizationUserNames()));
 
         $org->removeOrganizationUser($orgUser);
 
         static::assertCount(0, $org->getOrganizationUsers());
         static::assertCount(0, $org->getOrganizationUserNames());
-        static::assertFalse($org->hasOrganizationUser($user->getUsername()));
+        static::assertFalse($org->hasOrganizationUser($user->getUserIdentifier()));
     }
 }

@@ -45,7 +45,7 @@ trait OrganizationUserTrait
 
     public function __toString(): string
     {
-        return $this->organization->getName().':'.$this->user->getUsername();
+        return $this->organization->getName().':'.$this->user->getUserIdentifier();
     }
 
     public function setOrganization(?OrganizationInterface $organization): self

@@ -28,7 +28,7 @@ final class UserSecurityIdentity extends AbstractSecurityIdentity
      */
     public static function fromAccount(UserInterface $user): UserSecurityIdentity
     {
-        return new self(ClassUtils::getClass($user), $user->getUsername());
+        return new self(ClassUtils::getClass($user), $user->getUserIdentifier());
     }
 
     /**

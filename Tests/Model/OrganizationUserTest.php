@@ -36,7 +36,7 @@ final class OrganizationUserTest extends TestCase
         /** @var MockObject|UserInterface $user */
         $user = $this->getMockBuilder(UserInterface::class)->getMock();
         $user->expects(static::atLeastOnce())
-            ->method('getUsername')
+            ->method('getUserIdentifier')
             ->willReturn('user.test')
         ;
 

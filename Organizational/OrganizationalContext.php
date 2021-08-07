@@ -184,6 +184,6 @@ class OrganizationalContext implements OrganizationalContextInterface
     private function isSameUser(UserInterface $user, OrganizationUserInterface $organizationUser): bool
     {
         return null !== $organizationUser->getUser()
-            && $user->getUsername() === $organizationUser->getUser()->getUsername();
+            && $user->getUserIdentifier() === $organizationUser->getUser()->getUserIdentifier();
     }
 }

@@ -95,7 +95,7 @@ trait OrganizationTrait
     {
         $names = [];
         foreach ($this->getOrganizationUsers() as $orgUser) {
-            $names[] = $orgUser->getUser()->getUsername();
+            $names[] = $orgUser->getUser()->getUserIdentifier();
         }
 
         return $names;

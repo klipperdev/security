@@ -38,17 +38,22 @@ class MockUserGroupable implements UserInterface, EditGroupableInterface
         return null;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return 'password';
     }
 
-    public function getSalt(): string
+    public function getSalt(): ?string
     {
         return 'salt';
     }
 
     public function getUsername(): string
+    {
+        return 'user.test';
+    }
+
+    public function getUserIdentifier(): string
     {
         return 'user.test';
     }

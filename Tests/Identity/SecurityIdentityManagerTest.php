@@ -108,7 +108,7 @@ final class SecurityIdentityManagerTest extends TestCase
 
         $user = $this->getMockBuilder(UserInterface::class)->getMock();
         $user->expects(static::once())
-            ->method('getUsername')
+            ->method('getUserIdentifier')
             ->willReturn('user.test')
         ;
 
