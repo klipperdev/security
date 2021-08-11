@@ -103,16 +103,12 @@ final class PermissionValidatorTest extends TestCase
             ->willReturn($vb)
         ;
 
-        $vb->expects(static::at(1))
+        $vb->expects(static::exactly(2))
             ->method('setParameter')
-            ->with('%class_property%', 'class')
-            ->willReturn($vb)
-        ;
-
-        $vb->expects(static::at(2))
-            ->method('setParameter')
-            ->with('%class%', 'FooBar')
-            ->willReturn($vb)
+            ->willReturnMap([
+                ['%class_property%', 'class', $vb],
+                ['%class%', 'FooBar', $vb],
+            ])
         ;
 
         $vb->expects(static::once())
@@ -149,16 +145,12 @@ final class PermissionValidatorTest extends TestCase
             ->willReturn($vb)
         ;
 
-        $vb->expects(static::at(1))
+        $vb->expects(static::exactly(2))
             ->method('setParameter')
-            ->with('%class_property%', 'class')
-            ->willReturn($vb)
-        ;
-
-        $vb->expects(static::at(2))
-            ->method('setParameter')
-            ->with('%class%', MockObject::class)
-            ->willReturn($vb)
+            ->willReturnMap([
+                ['%class_property%', 'class', $vb],
+                ['%class%', MockObject::class, $vb],
+            ])
         ;
 
         $vb->expects(static::once())
@@ -187,22 +179,18 @@ final class PermissionValidatorTest extends TestCase
             ->willReturn($vb)
         ;
 
-        $vb->expects(static::at(0))
+        $vb->expects(static::once())
             ->method('atPath')
             ->with('class')
             ->willReturn($vb)
         ;
 
-        $vb->expects(static::at(1))
+        $vb->expects(static::exactly(2))
             ->method('setParameter')
-            ->with('%field_property%', 'field')
-            ->willReturn($vb)
-        ;
-
-        $vb->expects(static::at(2))
-            ->method('setParameter')
-            ->with('%field%', 'name')
-            ->willReturn($vb)
+            ->willReturnMap([
+                ['%field_property%', 'field', $vb],
+                ['%field%', 'name', $vb],
+            ])
         ;
 
         $vb->expects(static::once())
@@ -234,34 +222,20 @@ final class PermissionValidatorTest extends TestCase
             ->willReturn($vb)
         ;
 
-        $vb->expects(static::at(0))
+        $vb->expects(static::once())
             ->method('atPath')
             ->with('field')
             ->willReturn($vb)
         ;
 
-        $vb->expects(static::at(1))
+        $vb->expects(static::exactly(4))
             ->method('setParameter')
-            ->with('%class_property%', 'class')
-            ->willReturn($vb)
-        ;
-
-        $vb->expects(static::at(2))
-            ->method('setParameter')
-            ->with('%field_property%', 'field')
-            ->willReturn($vb)
-        ;
-
-        $vb->expects(static::at(3))
-            ->method('setParameter')
-            ->with('%class%', MockObject::class)
-            ->willReturn($vb)
-        ;
-
-        $vb->expects(static::at(4))
-            ->method('setParameter')
-            ->with('%field%', 'name2')
-            ->willReturn($vb)
+            ->willReturnMap([
+                ['%class_property%', 'class', $vb],
+                ['%field_property%', 'field', $vb],
+                ['%class%', MockObject::class, $vb],
+                ['%field%', 'name2', $vb],
+            ])
         ;
 
         $vb->expects(static::once())

@@ -108,10 +108,10 @@ final class CachePermissionFactoryTest extends TestCase
         ;
 
         $cache = $this->getMockBuilder(ConfigCacheInterface::class)->getMock();
-        $cache->expects(static::at(0))
+        $cache->expects(static::once())
             ->method('write')
         ;
-        $cache->expects(static::at(1))
+        $cache->expects(static::once())
             ->method('getPath')
             ->willReturn($cacheFileConfigs)
         ;

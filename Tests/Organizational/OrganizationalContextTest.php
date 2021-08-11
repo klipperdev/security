@@ -173,14 +173,15 @@ final class OrganizationalContextTest extends TestCase
         /** @var MockObject|UserInterface $user */
         $user = $this->getMockBuilder(UserInterface::class)->getMock();
 
-        $this->dispatcher->expects(static::at(0))
+        $this->dispatcher->expects(static::exactly(2))
             ->method('dispatch')
-            ->with(new SetCurrentOrganizationEvent($org))
-        ;
+            ->willReturnCallback(static function ($event) {
+                if (!$event instanceof SetCurrentOrganizationEvent && !$event instanceof SetCurrentOrganizationUserEvent) {
+                    throw new \Exception('Invalid call dispatch method');
+                }
 
-        $this->dispatcher->expects(static::at(1))
-            ->method('dispatch')
-            ->with(new SetCurrentOrganizationUserEvent($orgUser))
+                return static::returnSelf();
+            })
         ;
 
         $this->token->expects(static::once())
@@ -219,14 +220,15 @@ final class OrganizationalContextTest extends TestCase
         /** @var MockObject|UserInterface $user */
         $user = $this->getMockBuilder(UserInterface::class)->getMock();
 
-        $this->dispatcher->expects(static::at(0))
+        $this->dispatcher->expects(static::exactly(2))
             ->method('dispatch')
-            ->with(new SetCurrentOrganizationEvent($org))
-        ;
+            ->willReturnCallback(static function ($event) {
+                if (!$event instanceof SetCurrentOrganizationEvent && !$event instanceof SetCurrentOrganizationUserEvent) {
+                    throw new \Exception('Invalid call dispatch method');
+                }
 
-        $this->dispatcher->expects(static::at(1))
-            ->method('dispatch')
-            ->with(new SetCurrentOrganizationUserEvent($orgUser))
+                return static::returnSelf();
+            })
         ;
 
         $this->token->expects(static::once())
@@ -265,7 +267,7 @@ final class OrganizationalContextTest extends TestCase
         static::assertSame(OrganizationalTypes::OPTIONAL_FILTER_ALL, $this->context->getOptionalFilterType());
         static::assertFalse($this->context->isOptionalFilterType(OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG));
 
-        $this->dispatcher->expects(static::at(0))
+        $this->dispatcher->expects(static::once())
             ->method('dispatch')
             ->with(new SetOrganizationalOptionalFilterTypeEvent(OrganizationalTypes::OPTIONAL_FILTER_WITH_ORG))
         ;

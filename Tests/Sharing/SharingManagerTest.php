@@ -68,14 +68,15 @@ final class SharingManagerTest extends TestCase
 
     public function testIsEnabled(): void
     {
-        $this->dispatcher->expects(static::at(0))
+        $this->dispatcher->expects(static::exactly(2))
             ->method('dispatch')
-            ->with(new SharingDisabledEvent())
-        ;
+            ->willReturnCallback(function ($event) {
+                if (!$event instanceof SharingDisabledEvent && !$event instanceof SharingEnabledEvent) {
+                    throw new \Exception('Invalid call dispatch method');
+                }
 
-        $this->dispatcher->expects(static::at(1))
-            ->method('dispatch')
-            ->with(new SharingEnabledEvent())
+                return $this->sm;
+            })
         ;
 
         static::assertTrue($this->sm->isEnabled());

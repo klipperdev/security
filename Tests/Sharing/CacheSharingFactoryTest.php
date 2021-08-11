@@ -125,19 +125,21 @@ final class CacheSharingFactoryTest extends TestCase
         ;
 
         $cache = $this->getMockBuilder(ConfigCacheInterface::class)->getMock();
-        $cache->expects(static::at(0))
+        $cache->expects(static::exactly(2))
             ->method('write')
         ;
-        $cache->expects(static::at(1))
+        $getPathPos = 0;
+        $cache->expects(static::exactly(2))
             ->method('getPath')
-            ->willReturn($cacheFileSubjects)
-        ;
-        $cache->expects(static::at(2))
-            ->method('write')
-        ;
-        $cache->expects(static::at(3))
-            ->method('getPath')
-            ->willReturn($cacheFileIdentities)
+            ->willReturnCallback(static function () use (&$getPathPos, $cacheFileSubjects, $cacheFileIdentities) {
+                ++$getPathPos;
+
+                if (1 === $getPathPos) {
+                    return $cacheFileSubjects;
+                }
+
+                return $cacheFileIdentities;
+            })
         ;
 
         $this->configCacheFactory->expects(static::atLeastOnce())

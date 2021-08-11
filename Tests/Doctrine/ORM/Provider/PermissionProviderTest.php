@@ -95,43 +95,39 @@ final class PermissionProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('leftJoin')
             ->with('p.roles', 'r')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::once())
             ->method('where')
             ->with('UPPER(r.name) IN (:roles)')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(2))
+        $this->qb->expects(static::once())
             ->method('setParameter')
             ->with('roles', $roles)
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::once())
             ->method('orderBy')
             ->with('p.class', 'asc')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(4))
+        $this->qb->expects(static::exactly(2))
             ->method('addOrderBy')
-            ->with('p.field', 'asc')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.field', 'asc', $this->qb],
+                ['p.operation', 'asc', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(5))
-            ->method('addOrderBy')
-            ->with('p.operation', 'asc')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(6))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
@@ -167,7 +163,7 @@ final class PermissionProviderTest extends TestCase
             ->willReturn(MockOrganizationUser::class)
         ;
 
-        $permConfig->expects(static::atLeast(2))
+        $permConfig->expects(static::exactly(2))
             ->method('getMaster')
             ->willReturn('organization')
         ;
@@ -203,7 +199,7 @@ final class PermissionProviderTest extends TestCase
         /** @var MockObject|PermissionConfigInterface $permConfig */
         $permConfig = $this->getMockBuilder(PermissionConfigInterface::class)->getMock();
 
-        $permConfig->expects(static::atLeast(2))
+        $permConfig->expects(static::exactly(2))
             ->method('getType')
             ->willReturn(MockObject::class)
         ;
@@ -228,7 +224,7 @@ final class PermissionProviderTest extends TestCase
         /** @var MockObject|PermissionConfigInterface $permConfig */
         $permConfig = $this->getMockBuilder(PermissionConfigInterface::class)->getMock();
 
-        $permConfig->expects(static::atLeast(2))
+        $permConfig->expects(static::exactly(2))
             ->method('getType')
             ->willReturn(MockObject::class)
         ;
@@ -260,49 +256,37 @@ final class PermissionProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('orderBy')
             ->with('p.class', 'asc')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::exactly(2))
             ->method('addOrderBy')
-            ->with('p.field', 'asc')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.field', 'asc', $this->qb],
+                ['p.operation', 'asc', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(2))
-            ->method('addOrderBy')
-            ->with('p.operation', 'asc')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::exactly(2))
             ->method('andWhere')
-            ->with('p.class = :class')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.class = :class', $this->qb],
+                ['p.field = :field', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(4))
+        $this->qb->expects(static::exactly(2))
             ->method('setParameter')
-            ->with('class', $subject->getSubject()->getType())
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['class', $subject->getSubject()->getType(), null, $this->qb],
+                ['field', $subject->getField(), null, $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(5))
-            ->method('andWhere')
-            ->with('p.field = :field')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(6))
-            ->method('setParameter')
-            ->with('field', $subject->getField())
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(7))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
@@ -331,73 +315,41 @@ final class PermissionProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('orderBy')
             ->with('p.class', 'asc')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::exactly(2))
             ->method('addOrderBy')
-            ->with('p.field', 'asc')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.field', 'asc', $this->qb],
+                ['p.operation', 'asc', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(2))
-            ->method('addOrderBy')
-            ->with('p.operation', 'asc')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::exactly(5))
             ->method('setParameter')
-            ->with('context_role', '%"'.PermissionContexts::ROLE.'"%')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['context_role', '%"'.PermissionContexts::ROLE.'"%', null, $this->qb],
+                ['context_organization_role', '%"'.PermissionContexts::ORGANIZATION_ROLE.'"%', null, $this->qb],
+                ['context_sharing', '%"'.PermissionContexts::SHARING.'"%', null, $this->qb],
+                ['class', $subject->getSubject()->getType(), null, $this->qb],
+                ['field', $subject->getField(), null, $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(4))
-            ->method('setParameter')
-            ->with('context_organization_role', '%"'.PermissionContexts::ORGANIZATION_ROLE.'"%')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(5))
-            ->method('setParameter')
-            ->with('context_sharing', '%"'.PermissionContexts::SHARING.'"%')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(6))
+        $this->qb->expects(static::exactly(3))
             ->method('andWhere')
-            ->with('p.contexts IS NULL OR p.contexts LIKE :context_role OR p.contexts LIKE :context_organization_role OR p.contexts LIKE :context_sharing')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.contexts IS NULL OR p.contexts LIKE :context_role OR p.contexts LIKE :context_organization_role OR p.contexts LIKE :context_sharing', $this->qb],
+                ['p.class = :class', $this->qb],
+                ['p.field = :field', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(7))
-            ->method('andWhere')
-            ->with('p.class = :class')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(8))
-            ->method('setParameter')
-            ->with('class', $subject->getSubject()->getType())
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(9))
-            ->method('andWhere')
-            ->with('p.field = :field')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(10))
-            ->method('setParameter')
-            ->with('field', $subject->getField())
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(11))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
@@ -430,37 +382,29 @@ final class PermissionProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('orderBy')
             ->with('p.class', 'asc')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::exactly(2))
             ->method('addOrderBy')
-            ->with('p.field', 'asc')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.field', 'asc', $this->qb],
+                ['p.operation', 'asc', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(2))
-            ->method('addOrderBy')
-            ->with('p.operation', 'asc')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::exactly(2))
             ->method('andWhere')
-            ->with('p.class IS NULL')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.class IS NULL', $this->qb],
+                ['p.field IS NULL', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(4))
-            ->method('andWhere')
-            ->with('p.field IS NULL')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(5))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
@@ -488,37 +432,33 @@ final class PermissionProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('orderBy')
             ->with('p.class', 'asc')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::exactly(2))
             ->method('addOrderBy')
-            ->with('p.field', 'asc')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.field', 'asc', $this->qb],
+                ['p.operation', 'asc', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(2))
-            ->method('addOrderBy')
-            ->with('p.operation', 'asc')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::once())
             ->method('andWhere')
             ->with('p.class = :class')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(4))
+        $this->qb->expects(static::once())
             ->method('setParameter')
             ->with('class', PermissionProviderInterface::CONFIG_CLASS)
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(5))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;

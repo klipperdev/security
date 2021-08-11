@@ -98,12 +98,12 @@ final class SharingDeleteListenerTest extends TestCase
         /** @var MockObject|PostFlushEventArgs $postArgs */
         $postArgs = $this->getMockBuilder(PostFlushEventArgs::class)->disableOriginalConstructor()->getMock();
 
-        $args->expects(static::atLeast(1))
+        $args->expects(static::exactly(1))
             ->method('getEntityManager')
             ->willReturn($this->em)
         ;
 
-        $postArgs->expects(static::atLeast(1))
+        $postArgs->expects(static::exactly(1))
             ->method('getEntityManager')
             ->willReturn($this->em)
         ;
@@ -140,61 +140,33 @@ final class SharingDeleteListenerTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('delete')
             ->with(SharingInterface::class, 's')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::exactly(2))
             ->method('andWhere')
-            ->with('(s.subjectClass = :subjectClass_0 AND s.subjectId IN (:subjectIds_0))')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['(s.subjectClass = :subjectClass_0 AND s.subjectId IN (:subjectIds_0))', $this->qb],
+                ['(s.identityClass = :identityClass_0 AND s.identityName IN (:identityNames_0)) OR (s.identityClass = :identityClass_1 AND s.identityName IN (:identityNames_1))', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(2))
+        $this->qb->expects(static::exactly(6))
             ->method('setParameter')
-            ->with('subjectClass_0', MockObject::class)
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['subjectClass_0', MockObject::class, null, $this->qb],
+                ['subjectIds_0', [42, 50], null, $this->qb],
+                ['identityClass_0', MockRole::class, null, $this->qb],
+                ['identityNames_0', [23], null, $this->qb],
+                ['identityClass_1', MockGroup::class, null, $this->qb],
+                ['identityNames_1', [32], null, $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(3))
-            ->method('setParameter')
-            ->with('subjectIds_0', [42, 50])
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(4))
-            ->method('andWhere')
-            ->with('(s.identityClass = :identityClass_0 AND s.identityName IN (:identityNames_0)) OR (s.identityClass = :identityClass_1 AND s.identityName IN (:identityNames_1))')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(5))
-            ->method('setParameter')
-            ->with('identityClass_0', MockRole::class)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(6))
-            ->method('setParameter')
-            ->with('identityNames_0', [23])
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(7))
-            ->method('setParameter')
-            ->with('identityClass_1', MockGroup::class)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(8))
-            ->method('setParameter')
-            ->with('identityNames_1', [32])
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(9))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;

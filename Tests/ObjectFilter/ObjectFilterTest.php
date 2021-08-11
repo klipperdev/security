@@ -290,19 +290,22 @@ final class ObjectFilterTest extends TestCase
             ],
         ]);
 
-        $this->ac->expects(static::at(0))
+        $this->ac->expects(static::exactly($allowView ? 2 : 1))
             ->method('isGranted')
-            ->with(new PermVote('read'), $fv)
-            ->willReturn($allowView)
-        ;
+            ->willReturnCallback(static function ($attribute, $subject = null) use ($fv, $allowView, $allowEdit): bool {
+                if ((string) $subject === (string) $fv) {
+                    if ((string) (new PermVote('read')) === (string) $attribute) {
+                        return $allowView;
+                    }
 
-        if ($allowView) {
-            $this->ac->expects(static::at(1))
-                ->method('isGranted')
-                ->with(new PermVote('edit'), $fv)
-                ->willReturn($allowEdit)
-            ;
-        }
+                    if ((string) (new PermVote('edit')) === (string) $attribute) {
+                        return $allowEdit;
+                    }
+                }
+
+                throw new \Exception('Invalid call of isGranted method');
+            })
+        ;
 
         $this->of->restore($object);
 

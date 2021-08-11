@@ -117,49 +117,45 @@ final class SharingProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('addSelect')
             ->with('p')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::once())
             ->method('leftJoin')
             ->with('r.permissions', 'p')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(2))
+        $this->qb->expects(static::once())
             ->method('where')
             ->with('UPPER(r.name) IN (:roles)')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::once())
             ->method('setParameter')
             ->with('roles', $roles)
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(4))
+        $this->qb->expects(static::once())
             ->method('orderBy')
             ->with('p.class', 'asc')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(5))
+        $this->qb->expects(static::exactly(2))
             ->method('addOrderBy')
-            ->with('p.field', 'asc')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.field', 'asc', $this->qb],
+                ['p.operation', 'asc', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(6))
-            ->method('addOrderBy')
-            ->with('p.operation', 'asc')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(7))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
@@ -197,73 +193,55 @@ final class SharingProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('addSelect')
             ->with('p')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::once())
             ->method('leftJoin')
             ->with('s.permissions', 'p')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(2))
+        $this->qb->expects(static::once())
             ->method('where')
             ->with('(s.subjectClass = :subject0_class AND s.subjectId = :subject0_id) OR (s.subjectClass = :subject1_class AND s.subjectId = :subject1_id)')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::exactly(4))
             ->method('setParameter')
-            ->with('subject0_class', MockObject::class)
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['subject0_class', MockObject::class, null, $this->qb],
+                ['subject0_id', 42, null, $this->qb],
+                ['subject1_class', MockObject::class, null, $this->qb],
+                ['subject1_id', 23, null, $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(4))
-            ->method('setParameter')
-            ->with('subject0_id', 42)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(5))
-            ->method('setParameter')
-            ->with('subject1_class', MockObject::class)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(6))
-            ->method('setParameter')
-            ->with('subject1_id', 23)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(7))
+        $this->qb->expects(static::once())
             ->method('andWhere')
             ->with('s.enabled = TRUE AND (s.startedAt IS NULL OR s.startedAt <= CURRENT_TIMESTAMP()) AND (s.endedAt IS NULL OR s.endedAt >= CURRENT_TIMESTAMP())')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(8))
+        $this->qb->expects(static::once())
             ->method('orderBy')
             ->with('p.class', 'asc')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(9))
+        $this->qb->expects(static::exactly(2))
             ->method('addOrderBy')
-            ->with('p.field', 'asc')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.field', 'asc', $this->qb],
+                ['p.operation', 'asc', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(10))
-            ->method('addOrderBy')
-            ->with('p.operation', 'asc')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(11))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
@@ -299,16 +277,12 @@ final class SharingProviderTest extends TestCase
         ];
         $result = [];
 
-        $this->sharingManager->expects(static::at(0))
+        $this->sharingManager->expects(static::exactly(2))
             ->method('getIdentityConfig')
-            ->with(MockRole::class)
-            ->willReturn(new SharingIdentityConfig(MockRole::class, 'role'))
-        ;
-
-        $this->sharingManager->expects(static::at(1))
-            ->method('getIdentityConfig')
-            ->with(MockUserRoleable::class)
-            ->willReturn(new SharingIdentityConfig(MockUserRoleable::class, 'role'))
+            ->willReturnMap([
+                [MockRole::class, new SharingIdentityConfig(MockRole::class, 'role')],
+                [MockUserRoleable::class, new SharingIdentityConfig(MockUserRoleable::class, 'role')],
+            ])
         ;
 
         $this->sharingRepo->expects(static::once())
@@ -317,103 +291,61 @@ final class SharingProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('addSelect')
             ->with('p')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::once())
             ->method('leftJoin')
             ->with('s.permissions', 'p')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(2))
+        $this->qb->expects(static::once())
             ->method('where')
             ->with('(s.subjectClass = :subject0_class AND s.subjectId = :subject0_id) OR (s.subjectClass = :subject1_class AND s.subjectId = :subject1_id)')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::exactly(8))
             ->method('setParameter')
-            ->with('subject0_class', MockObject::class)
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['subject0_class', MockObject::class, null, $this->qb],
+                ['subject0_id', 42, null, $this->qb],
+                ['subject1_class', MockObject::class, null, $this->qb],
+                ['subject1_id', 23, null, $this->qb],
+                ['sid0_class', MockRole::class, null, $this->qb],
+                ['sid0_ids', ['ROLE_USER'], null, $this->qb],
+                ['sid1_class', MockUserRoleable::class, null, $this->qb],
+                ['sid1_ids', ['user.test'], null, $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(4))
-            ->method('setParameter')
-            ->with('subject0_id', 42)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(5))
-            ->method('setParameter')
-            ->with('subject1_class', MockObject::class)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(6))
-            ->method('setParameter')
-            ->with('subject1_id', 23)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(7))
+        $this->qb->expects(static::exactly(2))
             ->method('andWhere')
-            ->with('(s.identityClass = :sid0_class AND s.identityName IN (:sid0_ids)) OR (s.identityClass = :sid1_class AND s.identityName IN (:sid1_ids))')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['(s.identityClass = :sid0_class AND s.identityName IN (:sid0_ids)) OR (s.identityClass = :sid1_class AND s.identityName IN (:sid1_ids))', $this->qb],
+                ['s.enabled = TRUE AND (s.startedAt IS NULL OR s.startedAt <= CURRENT_TIMESTAMP()) AND (s.endedAt IS NULL OR s.endedAt >= CURRENT_TIMESTAMP())', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(8))
-            ->method('setParameter')
-            ->with('sid0_class', MockRole::class)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(9))
-            ->method('setParameter')
-            ->with('sid0_ids', ['ROLE_USER'])
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(10))
-            ->method('setParameter')
-            ->with('sid1_class', MockUserRoleable::class)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(11))
-            ->method('setParameter')
-            ->with('sid1_ids', ['user.test'])
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(12))
-            ->method('andWhere')
-            ->with('s.enabled = TRUE AND (s.startedAt IS NULL OR s.startedAt <= CURRENT_TIMESTAMP()) AND (s.endedAt IS NULL OR s.endedAt >= CURRENT_TIMESTAMP())')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(13))
+        $this->qb->expects(static::once())
             ->method('orderBy')
             ->with('p.class', 'asc')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(14))
+        $this->qb->expects(static::exactly(2))
             ->method('addOrderBy')
-            ->with('p.field', 'asc')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.field', 'asc', $this->qb],
+                ['p.operation', 'asc', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(15))
-            ->method('addOrderBy')
-            ->with('p.operation', 'asc')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(16))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
@@ -448,73 +380,55 @@ final class SharingProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('addSelect')
             ->with('p')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::once())
             ->method('leftJoin')
             ->with('s.permissions', 'p')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(2))
+        $this->qb->expects(static::once())
             ->method('where')
             ->with('(s.subjectClass = :subject0_class AND s.subjectId = :subject0_id) OR (s.subjectClass = :subject1_class AND s.subjectId = :subject1_id)')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::exactly(4))
             ->method('setParameter')
-            ->with('subject0_class', MockObject::class)
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['subject0_class', MockObject::class, null, $this->qb],
+                ['subject0_id', 42, null, $this->qb],
+                ['subject1_class', MockObject::class, null, $this->qb],
+                ['subject1_id', 23, null, $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(4))
-            ->method('setParameter')
-            ->with('subject0_id', 42)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(5))
-            ->method('setParameter')
-            ->with('subject1_class', MockObject::class)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(6))
-            ->method('setParameter')
-            ->with('subject1_id', 23)
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(7))
+        $this->qb->expects(static::once())
             ->method('andWhere')
             ->with('s.enabled = TRUE AND (s.startedAt IS NULL OR s.startedAt <= CURRENT_TIMESTAMP()) AND (s.endedAt IS NULL OR s.endedAt >= CURRENT_TIMESTAMP())')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(8))
+        $this->qb->expects(static::once())
             ->method('orderBy')
             ->with('p.class', 'asc')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(9))
+        $this->qb->expects(static::exactly(2))
             ->method('addOrderBy')
-            ->with('p.field', 'asc')
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['p.field', 'asc', $this->qb],
+                ['p.operation', 'asc', $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(10))
-            ->method('addOrderBy')
-            ->with('p.operation', 'asc')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(11))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
@@ -548,13 +462,13 @@ final class SharingProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('addSelect')
             ->with('p')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::once())
             ->method('leftJoin')
             ->with('s.permissions', 'p')
             ->willReturn($this->qb)
@@ -572,49 +486,40 @@ final class SharingProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('update')
             ->with(MockSharing::class, 's')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::once())
             ->method('set')
             ->with('s.identityName', ':newName')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(2))
+        $this->qb->expects(static::once())
             ->method('where')
             ->with('s.identityClass = :type')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::once())
             ->method('andWhere')
             ->with('s.identityName = :oldName')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(4))
+        $this->qb->expects(static::exactly(3))
             ->method('setParameter')
-            ->with('type', MockRole::class)
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['type', MockRole::class, null, $this->qb],
+                ['oldName', 'ROLE_FOO', null, $this->qb],
+                ['newName', 'ROLE_BAR', null, $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(5))
-            ->method('setParameter')
-            ->with('oldName', 'ROLE_FOO')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(6))
-            ->method('setParameter')
-            ->with('newName', 'ROLE_BAR')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(7))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
@@ -636,37 +541,33 @@ final class SharingProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('delete')
             ->with(MockSharing::class, 's')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::once())
             ->method('where')
             ->with('s.identityClass = :type')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(2))
+        $this->qb->expects(static::once())
             ->method('andWhere')
             ->with('s.identityName = :name')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::exactly(2))
             ->method('setParameter')
-            ->with('type', MockRole::class)
-            ->willReturn($this->qb)
+            ->willReturnMap([
+                ['type', MockRole::class, null, $this->qb],
+                ['name', 'ROLE_FOO', null, $this->qb],
+            ])
         ;
 
-        $this->qb->expects(static::at(4))
-            ->method('setParameter')
-            ->with('name', 'ROLE_FOO')
-            ->willReturn($this->qb)
-        ;
-
-        $this->qb->expects(static::at(5))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
@@ -690,25 +591,25 @@ final class SharingProviderTest extends TestCase
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(0))
+        $this->qb->expects(static::once())
             ->method('delete')
             ->with(MockSharing::class, 's')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(1))
+        $this->qb->expects(static::once())
             ->method('where')
             ->with('s.id IN (:ids)')
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(2))
+        $this->qb->expects(static::once())
             ->method('setParameter')
             ->with('ids', $ids)
             ->willReturn($this->qb)
         ;
 
-        $this->qb->expects(static::at(3))
+        $this->qb->expects(static::once())
             ->method('getQuery')
             ->willReturn($this->query)
         ;
