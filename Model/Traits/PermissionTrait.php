@@ -50,6 +50,7 @@ trait PermissionTrait
      *
      * @ORM\ManyToMany(
      *     targetEntity="Klipper\Component\Security\Model\RoleInterface",
+     *     fetch="EXTRA_LAZY",
      *     mappedBy="permissions"
      * )
      */

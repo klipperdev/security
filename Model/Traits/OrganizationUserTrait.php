@@ -25,7 +25,6 @@ trait OrganizationUserTrait
     /**
      * @ORM\ManyToOne(
      *     targetEntity="Klipper\Component\Security\Model\OrganizationInterface",
-     *     fetch="EXTRA_LAZY",
      *     inversedBy="organizationUsers"
      * )
      * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
@@ -35,7 +34,6 @@ trait OrganizationUserTrait
     /**
      * @ORM\ManyToOne(
      *     targetEntity="Klipper\Component\Security\Model\UserInterface",
-     *     fetch="EAGER",
      *     inversedBy="userOrganizations",
      *     cascade={"persist"}
      * )

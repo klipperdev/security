@@ -28,6 +28,7 @@ trait PermissionSharingEntryTrait
      *
      * @ORM\ManyToMany(
      *     targetEntity="Klipper\Component\Security\Model\SharingInterface",
+     *     fetch="EXTRA_LAZY",
      *     mappedBy="permissions"
      * )
      */

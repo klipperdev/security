@@ -28,8 +28,8 @@ trait OrganizationGroupsTrait
      *
      * @ORM\OneToMany(
      *     targetEntity="Klipper\Component\Security\Model\GroupInterface",
-     *     mappedBy="organization",
      *     fetch="EXTRA_LAZY",
+     *     mappedBy="organization",
      *     cascade={"persist", "remove"}
      * )
      */

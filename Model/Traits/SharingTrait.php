@@ -65,6 +65,7 @@ trait SharingTrait
      *
      * @ORM\ManyToMany(
      *     targetEntity="Klipper\Component\Security\Model\PermissionInterface",
+     *     fetch="EXTRA_LAZY",
      *     inversedBy="sharingEntries"
      * )
      */

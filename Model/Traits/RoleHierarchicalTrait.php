@@ -29,6 +29,7 @@ trait RoleHierarchicalTrait
      *
      * @ORM\ManyToMany(
      *     targetEntity="Klipper\Component\Security\Model\RoleInterface",
+     *     fetch="EXTRA_LAZY",
      *     mappedBy="children"
      * )
      */
@@ -39,6 +40,7 @@ trait RoleHierarchicalTrait
      *
      * @ORM\ManyToMany(
      *     targetEntity="Klipper\Component\Security\Model\RoleInterface",
+     *     fetch="EXTRA_LAZY",
      *     inversedBy="parents"
      * )
      * @ORM\JoinTable(

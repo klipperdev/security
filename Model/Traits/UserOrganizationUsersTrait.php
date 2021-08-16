@@ -28,8 +28,8 @@ trait UserOrganizationUsersTrait
      *
      * @ORM\OneToMany(
      *     targetEntity="Klipper\Component\Security\Model\OrganizationUserInterface",
-     *     mappedBy="user",
      *     fetch="EXTRA_LAZY",
+     *     mappedBy="user",
      *     orphanRemoval=true,
      *     cascade={"persist", "remove"}
      * )

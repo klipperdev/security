@@ -28,7 +28,7 @@ trait GroupableTrait
      *
      * @ORM\ManyToMany(
      *     targetEntity="Klipper\Component\Security\Model\GroupInterface",
-     *     fetch="EAGER",
+     *     fetch="EXTRA_LAZY",
      *     cascade={"persist"}
      * )
      * @ORM\JoinTable(
