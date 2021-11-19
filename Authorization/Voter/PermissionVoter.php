@@ -111,9 +111,9 @@ class PermissionVoter implements VoterInterface
      */
     protected function isSubjectManaged($subject): bool
     {
-        return null === $subject || $this->allowNotManagedSubject
-            ? true
-            : $this->permissionManager->isManaged($this->convertSubject($subject));
+        return null === $subject
+            || $this->allowNotManagedSubject
+            || $this->permissionManager->isManaged($this->convertSubject($subject));
     }
 
     /**
