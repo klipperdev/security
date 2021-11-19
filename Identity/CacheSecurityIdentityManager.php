@@ -58,7 +58,7 @@ class CacheSecurityIdentityManager extends SecurityIdentityManager implements Ca
      */
     protected function buildId(TokenInterface $token): string
     {
-        $id = spl_object_hash($token);
+        $id = (string) $token;
         $listeners = $this->getCacheIdentityListeners();
 
         foreach ($listeners as $listener) {

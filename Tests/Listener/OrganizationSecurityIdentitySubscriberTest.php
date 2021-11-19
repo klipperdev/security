@@ -17,6 +17,7 @@ use Klipper\Component\Security\Model\OrganizationInterface;
 use Klipper\Component\Security\Organizational\OrganizationalContextInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 
@@ -33,6 +34,11 @@ final class OrganizationSecurityIdentitySubscriberTest extends TestCase
     protected $roleHierarchy;
 
     /**
+     * @var MockObject|TokenStorageInterface
+     */
+    protected $tokenStorage;
+
+    /**
      * @var MockObject|OrganizationalContextInterface
      */
     protected $orgContext;
@@ -42,8 +48,13 @@ final class OrganizationSecurityIdentitySubscriberTest extends TestCase
     protected function setUp(): void
     {
         $this->roleHierarchy = $this->getMockBuilder(RoleHierarchyInterface::class)->getMock();
+        $this->tokenStorage = $this->getMockBuilder(TokenStorageInterface::class)->getMock();
         $this->orgContext = $this->getMockBuilder(OrganizationalContextInterface::class)->getMock();
-        $this->listener = new OrganizationSecurityIdentitySubscriber($this->roleHierarchy, $this->orgContext);
+        $this->listener = new OrganizationSecurityIdentitySubscriber(
+            $this->roleHierarchy,
+            $this->tokenStorage,
+            $this->orgContext
+        );
 
         static::assertCount(1, OrganizationSecurityIdentitySubscriber::getSubscribedEvents());
     }

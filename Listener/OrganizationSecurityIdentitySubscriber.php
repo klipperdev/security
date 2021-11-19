@@ -12,11 +12,17 @@
 namespace Klipper\Component\Security\Listener;
 
 use Klipper\Component\Security\Event\AddSecurityIdentityEvent;
+use Klipper\Component\Security\Exception\OrganizationUserNotFoundException;
 use Klipper\Component\Security\Identity\CacheSecurityIdentityListenerInterface;
 use Klipper\Component\Security\Identity\IdentityUtils;
 use Klipper\Component\Security\Identity\OrganizationSecurityIdentity;
+use Klipper\Component\Security\Model\UserInterface;
 use Klipper\Component\Security\Organizational\OrganizationalContextInterface;
+use Klipper\Component\Security\Organizational\OrganizationUserProviderInterface;
+use Klipper\Component\Security\Organizational\StaticOrganizationalContext;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 
 /**
@@ -28,18 +34,28 @@ class OrganizationSecurityIdentitySubscriber implements EventSubscriberInterface
 {
     private RoleHierarchyInterface $roleHierarchy;
 
+    private TokenStorageInterface $tokenStorage;
+
     private OrganizationalContextInterface $context;
 
+    private ?OrganizationUserProviderInterface $organizationUserProvider;
+
     /**
-     * @param RoleHierarchyInterface         $roleHierarchy The role hierarchy
-     * @param OrganizationalContextInterface $context       The organizational context
+     * @param RoleHierarchyInterface                 $roleHierarchy            The role hierarchy
+     * @param TokenStorageInterface                  $tokenStorage             The token storage
+     * @param OrganizationalContextInterface         $context                  The organizational context
+     * @param null|OrganizationUserProviderInterface $organizationUserProvider The organization user provider
      */
     public function __construct(
         RoleHierarchyInterface $roleHierarchy,
-        OrganizationalContextInterface $context
+        TokenStorageInterface $tokenStorage,
+        OrganizationalContextInterface $context,
+        ?OrganizationUserProviderInterface $organizationUserProvider = null
     ) {
         $this->roleHierarchy = $roleHierarchy;
+        $this->tokenStorage = $tokenStorage;
         $this->context = $context;
+        $this->organizationUserProvider = $organizationUserProvider;
     }
 
     public static function getSubscribedEvents(): array
@@ -66,12 +82,13 @@ class OrganizationSecurityIdentitySubscriber implements EventSubscriberInterface
     public function addOrganizationSecurityIdentities(AddSecurityIdentityEvent $event): void
     {
         try {
+            $token = $event->getToken();
             $sids = $event->getSecurityIdentities();
             $sids = IdentityUtils::merge(
                 $sids,
                 OrganizationSecurityIdentity::fromToken(
-                    $event->getToken(),
-                    $this->context,
+                    $token,
+                    $this->getContext($token),
                     $this->roleHierarchy
                 )
             );
@@ -79,5 +96,26 @@ class OrganizationSecurityIdentitySubscriber implements EventSubscriberInterface
         } catch (\InvalidArgumentException $e) {
             // ignore
         }
+    }
+
+    private function getContext(TokenInterface $token): OrganizationalContextInterface
+    {
+        $user = $token->getUser();
+        $org = $this->context->getCurrentOrganization();
+
+        if ($user instanceof UserInterface && null !== $org && null !== $this->organizationUserProvider && $this->tokenStorage->getToken() !== $token) {
+            try {
+                $orgUser = $this->organizationUserProvider->loadOrganizationUserByUser($org, $user);
+
+                return null === $orgUser ? $this->context : new StaticOrganizationalContext(
+                    $org,
+                    $orgUser
+                );
+            } catch (OrganizationUserNotFoundException $e) {
+                return $this->context;
+            }
+        }
+
+        return $this->context;
     }
 }
