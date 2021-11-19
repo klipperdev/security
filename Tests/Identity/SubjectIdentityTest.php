@@ -65,7 +65,11 @@ final class SubjectIdentityTest extends TestCase
     public function testInvalidSubject(): void
     {
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('must be an object or null');
+        $this->expectExceptionMessage(
+            version_compare(PHP_VERSION, '8.0', '<')
+            ? 'must be an object or null'
+            : 'must be of type ?object'
+        );
 
         new SubjectIdentity(MockObject::class, '42', 42);
     }
@@ -145,7 +149,11 @@ final class SubjectIdentityTest extends TestCase
     public function testFromObjectWithNonObject(): void
     {
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('must be an object, int given');
+        $this->expectExceptionMessage(
+            version_compare(PHP_VERSION, '8.0', '<')
+            ? 'must be an object, int given'
+            : 'must be of type object, int given'
+        );
 
         /** @var object $object */
         $object = 42;

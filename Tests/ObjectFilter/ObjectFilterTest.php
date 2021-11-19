@@ -169,7 +169,11 @@ final class ObjectFilterTest extends TestCase
     public function testFilterWithInvalidType(): void
     {
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('must be an object, int given');
+        $this->expectExceptionMessage(
+            version_compare(PHP_VERSION, '8.0', '<')
+            ? 'must be an object, int given'
+            : 'must be of type object, int given'
+        );
 
         /** @var object $object */
         $object = 42;
@@ -344,7 +348,11 @@ final class ObjectFilterTest extends TestCase
     public function testRestoreWithInvalidType(): void
     {
         $this->expectException(\TypeError::class);
-        $this->expectExceptionMessage('must be an object, int given');
+        $this->expectExceptionMessage(
+            version_compare(PHP_VERSION, '8.0', '<')
+            ? 'must be an object, int given'
+            : 'must be of type object, int given'
+        );
 
         /** @var object $object */
         $object = 42;
