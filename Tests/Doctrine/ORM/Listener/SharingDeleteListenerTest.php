@@ -95,6 +95,7 @@ final class SharingDeleteListenerTest extends TestCase
     {
         /** @var MockObject|OnFlushEventArgs $args */
         $args = $this->getMockBuilder(OnFlushEventArgs::class)->disableOriginalConstructor()->getMock();
+
         /** @var MockObject|PostFlushEventArgs $postArgs */
         $postArgs = $this->getMockBuilder(PostFlushEventArgs::class)->disableOriginalConstructor()->getMock();
 

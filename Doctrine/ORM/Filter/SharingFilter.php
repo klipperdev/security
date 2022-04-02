@@ -79,6 +79,7 @@ class SharingFilter extends AbstractFilter
     {
         $visibility = $this->sm->getSharingVisibility(SubjectUtils::getSubjectIdentity($targetEntity->getName()));
         $eventClass = DoctrineSharingVisibilities::$classMap[$visibility] ?? GetNoneFilterEvent::class;
+
         /** @var AbstractGetFilterEvent $event */
         $event = new $eventClass($this, $this->getEntityManager(), $targetEntity, $targetTableAlias, $this->sharingClass);
         $this->dispatcher->dispatch($event);

@@ -106,6 +106,7 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
     {
         try {
             $this->init();
+
             /** @var SubjectIdentityInterface $subject */
             [$subject, $field] = PermissionUtils::getSubjectAndField($subject);
 
@@ -126,6 +127,7 @@ abstract class AbstractPermissionManager implements PermissionManagerInterface
     {
         try {
             $this->init();
+
             /** @var null|SubjectIdentityInterface $subject */
             [$subject, $field] = PermissionUtils::getSubjectAndField($subject, true);
             [$permissions, $subject, $field] = $this->getMasterPermissions(

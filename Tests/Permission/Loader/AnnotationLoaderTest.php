@@ -59,6 +59,7 @@ final class AnnotationLoaderTest extends TestCase
 
         $reader = new AnnotationReader();
         $loader = new AnnotationLoader($reader, $finder);
+
         /** @var PermissionConfigInterface[] $configs */
         $configs = $loader->load(__DIR__, 'annotation');
 

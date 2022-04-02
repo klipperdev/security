@@ -294,8 +294,10 @@ final class RoleHierarchyListenerTest extends TestCase
         /** @var MockObject|OnFlushEventArgs $args */
         $args = $this->getMockBuilder(OnFlushEventArgs::class)->disableOriginalConstructor()->getMock();
         $object = $this->getMockBuilder($interface)->getMock();
+
         /** @var Collection|MockObject $collection */
         $collection = $this->getMockBuilder(Collection::class)->disableOriginalConstructor()->getMock();
+
         /** @var ClassMetadata|MockObject $meta */
         $meta = $this->getMockBuilder(ClassMetadata::class)->disableOriginalConstructor()->getMock();
         $persistCollection = new PersistentCollection($this->em, $meta, $collection);
@@ -331,8 +333,10 @@ final class RoleHierarchyListenerTest extends TestCase
         /** @var MockObject|OnFlushEventArgs $args */
         $args = $this->getMockBuilder(OnFlushEventArgs::class)->disableOriginalConstructor()->getMock();
         $object = $this->getMockBuilder(\stdClass::class)->getMock();
+
         /** @var Collection|MockObject $collection */
         $collection = $this->getMockBuilder(Collection::class)->disableOriginalConstructor()->getMock();
+
         /** @var ClassMetadata|MockObject $meta */
         $meta = $this->getMockBuilder(ClassMetadata::class)->disableOriginalConstructor()->getMock();
         $persistCollection = new PersistentCollection($this->em, $meta, $collection);

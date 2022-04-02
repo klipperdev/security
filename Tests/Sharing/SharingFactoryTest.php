@@ -40,6 +40,7 @@ final class SharingFactoryTest extends TestCase
     {
         /** @var LoaderInterface|MockObject $subjectLoader */
         $subjectLoader = $this->getMockBuilder(LoaderInterface::class)->getMock();
+
         /** @var LoaderInterface|MockObject $identityLoader */
         $identityLoader = $this->getMockBuilder(LoaderInterface::class)->getMock();
 

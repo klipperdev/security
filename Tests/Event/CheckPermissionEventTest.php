@@ -37,6 +37,7 @@ final class CheckPermissionEventTest extends TestCase
             ],
         ];
         $operation = 'test';
+
         /** @var SubjectIdentityInterface $subject */
         $subject = $this->getMockBuilder(SubjectIdentityInterface::class)->getMock();
         $field = 'name';

@@ -39,6 +39,7 @@ final class ObjectFilterTest extends TestCase
      * @var MockObject|UnitOfWorkInterface
      */
     protected $of;
+
     /**
      * @var MockObject|UnitOfWorkInterface
      */
