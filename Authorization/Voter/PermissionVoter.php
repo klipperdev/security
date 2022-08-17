@@ -46,7 +46,7 @@ class PermissionVoter implements VoterInterface
         $this->allowNotManagedSubject = $allowNotManagedSubject;
     }
 
-    public function vote(TokenInterface $token, $subject, array $attributes)
+    public function vote(TokenInterface $token, $subject, array $attributes): int
     {
         $vote = self::ACCESS_ABSTAIN;
 
