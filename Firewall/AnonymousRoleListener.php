@@ -52,7 +52,7 @@ class AnonymousRoleListener extends AbstractRoleListener
      */
     public function __invoke(RequestEvent $event): void
     {
-        if ($this->isEnabled() && $this->hasRole() && $this->isAnonymous()) {
+        if ($this->isEnabled() && $this->hasRole() && !$this->isAuthenticated()) {
             $this->sidManager->addSpecialRole($this->config['role']);
         }
     }
@@ -68,13 +68,13 @@ class AnonymousRoleListener extends AbstractRoleListener
     }
 
     /**
-     * Check if the token is a anonymous token.
+     * Check if the token is an authenticated token.
      */
-    private function isAnonymous(): bool
+    private function isAuthenticated(): bool
     {
         $token = $this->tokenStorage->getToken();
 
-        return null === $token
-            || $this->trustResolver->isAnonymous($token);
+        return null !== $token
+            && $this->trustResolver->isAuthenticated($token);
     }
 }

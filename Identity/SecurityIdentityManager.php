@@ -16,7 +16,6 @@ use Klipper\Component\Security\Event\PostSecurityIdentityEvent;
 use Klipper\Component\Security\Event\PreSecurityIdentityEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
-use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
@@ -97,14 +96,14 @@ class SecurityIdentityManager implements SecurityIdentityManagerInterface
     /**
      * Add the security identity of current user.
      *
-     * @param TokenInterface              $token The token
+     * @param null|TokenInterface         $token The token
      * @param SecurityIdentityInterface[] $sids  The security identities
      *
      * @return SecurityIdentityInterface[]
      */
-    protected function addCurrentUser(TokenInterface $token, array $sids): array
+    protected function addCurrentUser(?TokenInterface $token, array $sids): array
     {
-        if (!$token instanceof AnonymousToken) {
+        if (null !== $token) {
             try {
                 $sids[] = UserSecurityIdentity::fromToken($token);
             } catch (\InvalidArgumentException $e) {
@@ -147,13 +146,13 @@ class SecurityIdentityManager implements SecurityIdentityManagerInterface
         if ($this->authenticationTrustResolver->isFullFledged($token)) {
             $sids[] = new RoleSecurityIdentity('role', AuthenticatedVoter::IS_AUTHENTICATED_FULLY);
             $sids[] = new RoleSecurityIdentity('role', AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED);
-            $sids[] = new RoleSecurityIdentity('role', AuthenticatedVoter::IS_AUTHENTICATED_ANONYMOUSLY);
+            $sids[] = new RoleSecurityIdentity('role', AuthenticatedVoter::IS_AUTHENTICATED);
         } elseif ($this->authenticationTrustResolver->isRememberMe($token)) {
             $sids[] = new RoleSecurityIdentity('role', AuthenticatedVoter::IS_AUTHENTICATED_REMEMBERED);
-            $sids[] = new RoleSecurityIdentity('role', AuthenticatedVoter::IS_AUTHENTICATED_ANONYMOUSLY);
-        } elseif ($this->authenticationTrustResolver->isAnonymous($token)) {
-            $sids[] = new RoleSecurityIdentity('role', AuthenticatedVoter::IS_AUTHENTICATED_ANONYMOUSLY);
+            $sids[] = new RoleSecurityIdentity('role', AuthenticatedVoter::IS_AUTHENTICATED);
         }
+
+        $sids[] = new RoleSecurityIdentity('role', AuthenticatedVoter::PUBLIC_ACCESS);
 
         return $sids;
     }

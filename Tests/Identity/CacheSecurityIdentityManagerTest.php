@@ -17,7 +17,7 @@ use Klipper\Component\Security\Tests\Fixtures\Token\MockToken;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
+use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolver;
 use Symfony\Component\Security\Core\Role\RoleHierarchy;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 
@@ -36,7 +36,7 @@ final class CacheSecurityIdentityManagerTest extends TestCase
     protected $roleHierarchy;
 
     /**
-     * @var AuthenticationTrustResolverInterface|MockObject
+     * @var AuthenticationTrustResolver|MockObject
      */
     protected $authenticationTrustResolver;
 
@@ -46,7 +46,7 @@ final class CacheSecurityIdentityManagerTest extends TestCase
     {
         $this->dispatcher = new EventDispatcher();
         $this->roleHierarchy = $this->getMockBuilder(RoleHierarchy::class)->disableOriginalConstructor()->getMock();
-        $this->authenticationTrustResolver = $this->getMockBuilder(AuthenticationTrustResolverInterface::class)->getMock();
+        $this->authenticationTrustResolver = $this->getMockBuilder(AuthenticationTrustResolver::class)->getMock();
 
         $this->sidManager = new CacheSecurityIdentityManager(
             $this->dispatcher,
@@ -77,10 +77,8 @@ final class CacheSecurityIdentityManagerTest extends TestCase
             ->willReturn(false)
         ;
 
-        $this->authenticationTrustResolver->expects(static::exactly(2))
-            ->method('isAnonymous')
-            ->with($token)
-            ->willReturn(true)
+        $this->authenticationTrustResolver->expects(static::never())
+            ->method('isAuthenticated')
         ;
 
         $this->dispatcher->addSubscriber(new MockCacheSecurityIdentitySubscriber());

@@ -21,7 +21,7 @@ use Klipper\Component\Security\Tests\Fixtures\Token\MockToken;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
+use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolver;
 use Symfony\Component\Security\Core\Role\RoleHierarchy;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 
@@ -40,20 +40,17 @@ final class SecurityIdentityManagerTest extends TestCase
     protected $roleHierarchy;
 
     /**
-     * @var AuthenticationTrustResolverInterface|MockObject
+     * @var AuthenticationTrustResolver|MockObject
      */
     protected $authenticationTrustResolver;
 
-    /**
-     * @var
-     */
     protected ?SecurityIdentityManager $sidManager = null;
 
     protected function setUp(): void
     {
         $this->dispatcher = new EventDispatcher();
         $this->roleHierarchy = $this->getMockBuilder(RoleHierarchy::class)->disableOriginalConstructor()->getMock();
-        $this->authenticationTrustResolver = $this->getMockBuilder(AuthenticationTrustResolverInterface::class)->getMock();
+        $this->authenticationTrustResolver = $this->getMockBuilder(AuthenticationTrustResolver::class)->getMock();
 
         $this->sidManager = new SecurityIdentityManager(
             $this->dispatcher,
@@ -65,9 +62,9 @@ final class SecurityIdentityManagerTest extends TestCase
     public function getAuthenticationTrustResolverStatus(): array
     {
         return [
-            ['isFullFledged', 7],
-            ['isRememberMe', 6],
-            ['isAnonymous', 5],
+            ['isFullFledged', 8],
+            ['isRememberMe', 7],
+            ['isAuthenticated', 5],
         ];
     }
 
@@ -124,7 +121,7 @@ final class SecurityIdentityManagerTest extends TestCase
             ->willReturn($tokenRoles)
         ;
 
-        if (\in_array($trustMethod, ['isRememberMe', 'isAnonymous'], true)) {
+        if (\in_array($trustMethod, ['isRememberMe', 'isAuthenticated'], true)) {
             $this->authenticationTrustResolver->expects(static::once())
                 ->method('isFullFledged')
                 ->with($token)
@@ -132,7 +129,7 @@ final class SecurityIdentityManagerTest extends TestCase
             ;
         }
 
-        if ('isAnonymous' === $trustMethod) {
+        if ('isAuthenticated' === $trustMethod) {
             $this->authenticationTrustResolver->expects(static::once())
                 ->method('isRememberMe')
                 ->with($token)
@@ -140,11 +137,13 @@ final class SecurityIdentityManagerTest extends TestCase
             ;
         }
 
-        $this->authenticationTrustResolver->expects(static::once())
-            ->method($trustMethod)
-            ->with($token)
-            ->willReturn(true)
-        ;
+        if ('isAuthenticated' !== $trustMethod) {
+            $this->authenticationTrustResolver->expects(static::once())
+                ->method($trustMethod)
+                ->with($token)
+                ->willReturn(true)
+            ;
+        }
 
         $this->sidManager->addSpecialRole('ROLE_BAZ');
 

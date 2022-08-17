@@ -14,8 +14,9 @@ namespace Klipper\Component\Security\Tests\Authorization\Expression;
 use Klipper\Component\Security\Authorization\Expression\IsBasicAuthProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
+use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolver;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @author François Pluchino <francois.pluchino@klipper.dev>
@@ -26,14 +27,9 @@ final class IsBasicAuthProviderTest extends TestCase
 {
     public function testIsBasicAuth(): void
     {
-        $token = $this->getMockBuilder(UsernamePasswordToken::class)->disableOriginalConstructor()->getMock();
-        $trustResolver = $this->getMockBuilder(AuthenticationTrustResolverInterface::class)->getMock();
-
-        $trustResolver->expects(static::once())
-            ->method('isAnonymous')
-            ->with($token)
-            ->willReturn(false)
-        ;
+        $user = $this->getMockBuilder(UserInterface::class)->getMock();
+        $token = new UsernamePasswordToken($user, 'test', ['ROLE_USER']);
+        $trustResolver = new AuthenticationTrustResolver();
 
         $expressionLanguage = new ExpressionLanguage(null, [new IsBasicAuthProvider()]);
         $variables = [
@@ -43,7 +39,7 @@ final class IsBasicAuthProviderTest extends TestCase
 
         static::assertTrue($expressionLanguage->evaluate('is_basic_auth()', $variables));
 
-        $compiled = '$token && $token instanceof \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken && !$trust_resolver->isAnonymous($token)';
+        $compiled = '$token && $token instanceof \Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken && $trust_resolver->isAuthenticated($token)';
         static::assertEquals($compiled, $expressionLanguage->compile('is_basic_auth()'));
     }
 }

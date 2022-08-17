@@ -17,7 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
+use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
@@ -36,7 +36,7 @@ final class AnonymousRoleListenerTest extends TestCase
     protected array $config = [];
 
     /**
-     * @var AuthenticationTrustResolverInterface|MockObject
+     * @var AuthenticationTrustResolver|MockObject
      */
     protected $trustResolver;
 
@@ -63,7 +63,7 @@ final class AnonymousRoleListenerTest extends TestCase
         $this->config = [
             'role' => 'ROLE_CUSTOM_ANONYMOUS',
         ];
-        $this->trustResolver = $this->getMockBuilder(AuthenticationTrustResolverInterface::class)->getMock();
+        $this->trustResolver = $this->getMockBuilder(AuthenticationTrustResolver::class)->getMock();
         $this->tokenStorage = $this->getMockBuilder(TokenStorageInterface::class)->getMock();
         $this->request = $this->getMockBuilder(Request::class)->getMock();
         $this->event = $this->getMockBuilder(RequestEvent::class)->disableOriginalConstructor()->getMock();
@@ -98,7 +98,7 @@ final class AnonymousRoleListenerTest extends TestCase
         ;
 
         $this->trustResolver->expects(static::never())
-            ->method('isAnonymous')
+            ->method('isAuthenticated')
         ;
 
         $this->listener->setEnabled(false);
@@ -125,7 +125,7 @@ final class AnonymousRoleListenerTest extends TestCase
         ;
 
         $this->trustResolver->expects(static::never())
-            ->method('isAnonymous')
+            ->method('isAuthenticated')
         ;
 
         ($this->listener)($this->event);
@@ -139,7 +139,7 @@ final class AnonymousRoleListenerTest extends TestCase
         ;
 
         $this->trustResolver->expects(static::never())
-            ->method('isAnonymous')
+            ->method('isAuthenticated')
         ;
 
         $this->sidManager->expects(static::once())
@@ -160,9 +160,9 @@ final class AnonymousRoleListenerTest extends TestCase
         ;
 
         $this->trustResolver->expects(static::once())
-            ->method('isAnonymous')
+            ->method('isAuthenticated')
             ->with($token)
-            ->willReturn(true)
+            ->willReturn(false)
         ;
 
         $this->sidManager->expects(static::once())
