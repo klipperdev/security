@@ -30,7 +30,7 @@
     },
     "require-dev": {
         "doctrine/annotations": "^1.6.0",
-        "doctrine/orm": "^2.8.0",
+        "doctrine/orm": "^2.13.0",
         "klipper/cache": "^2.0.0",
         "klipper/doctrine-extensions": "^2.0.0",
         "symfony/config": "^5.4.0",
