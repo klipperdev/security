@@ -11,6 +11,7 @@
 
 namespace Klipper\Component\Security\Tests\Token;
 
+use Klipper\Component\DefaultValue\Tests\Fixtures\Object\User;
 use Klipper\Component\Security\Token\ConsoleToken;
 use PHPUnit\Framework\TestCase;
 
@@ -23,7 +24,7 @@ final class ConsoleTokenTest extends TestCase
 {
     public function testConsoleToken(): void
     {
-        $token = new ConsoleToken('key', 'username', [
+        $token = new ConsoleToken('key', new User('username', ''), [
             'ROLE_TEST',
         ]);
 
@@ -34,7 +35,7 @@ final class ConsoleTokenTest extends TestCase
         $value = \is_string($tokenSerialized);
         static::assertTrue($value);
 
-        $token2 = new ConsoleToken('', '');
+        $token2 = new ConsoleToken('', new User('test', ''));
         $token2->unserialize($tokenSerialized);
 
         static::assertEquals($token, $token2);

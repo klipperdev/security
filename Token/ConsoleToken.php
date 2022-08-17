@@ -24,17 +24,16 @@ class ConsoleToken extends AbstractToken
     private string $key;
 
     /**
-     * @param string               $key   The key shared with the authentication provider
-     * @param string|UserInterface $user  The user
-     * @param string[]             $roles An array of roles
+     * @param string        $key   The key shared with the authentication provider
+     * @param UserInterface $user  The user
+     * @param string[]      $roles An array of roles
      */
-    public function __construct(string $key, $user, array $roles = [])
+    public function __construct(string $key, UserInterface $user, array $roles = [])
     {
         parent::__construct($roles);
 
         $this->key = $key;
         $this->setUser($user);
-        $this->setAuthenticated(true);
     }
 
     public function __serialize(): array
