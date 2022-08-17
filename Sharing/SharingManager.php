@@ -53,6 +53,10 @@ class SharingManager extends AbstractSharingManager
         foreach ($subjects as $id => $subject) {
             if (isset($entries[$id])) {
                 foreach ($entries[$id] as $entrySharing) {
+                    if (!\array_key_exists($id, $this->cacheSubjectSharing) || false === $this->cacheSubjectSharing[$id]) {
+                        $this->cacheSubjectSharing[$id] = [];
+                    }
+
                     $operations = $this->cacheSubjectSharing[$id]['operations'] ?? [];
 
                     $this->cacheSubjectSharing[$id]['sharings'][] = $entrySharing;
