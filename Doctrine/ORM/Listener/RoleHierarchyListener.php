@@ -67,7 +67,7 @@ class RoleHierarchyListener implements EventSubscriber
      */
     public function onFlush(OnFlushEventArgs $args): void
     {
-        $uow = $args->getEntityManager()->getUnitOfWork();
+        $uow = $args->getObjectManager()->getUnitOfWork();
         $collection = $this->getAllCollections($uow);
         $invalidates = [];
 

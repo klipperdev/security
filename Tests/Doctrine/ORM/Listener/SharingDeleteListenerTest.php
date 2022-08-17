@@ -100,12 +100,12 @@ final class SharingDeleteListenerTest extends TestCase
         $postArgs = $this->getMockBuilder(PostFlushEventArgs::class)->disableOriginalConstructor()->getMock();
 
         $args->expects(static::exactly(1))
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
         $postArgs->expects(static::exactly(1))
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 

@@ -157,7 +157,7 @@ final class PermissionCheckerListenerTest extends TestCase
         ;
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -211,7 +211,7 @@ final class PermissionCheckerListenerTest extends TestCase
         ;
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -265,7 +265,7 @@ final class PermissionCheckerListenerTest extends TestCase
         ;
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -315,7 +315,7 @@ final class PermissionCheckerListenerTest extends TestCase
         ;
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 

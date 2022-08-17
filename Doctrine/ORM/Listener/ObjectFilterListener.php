@@ -90,7 +90,7 @@ class ObjectFilterListener implements EventSubscriber
             return;
         }
 
-        $uow = $args->getEntityManager()->getUnitOfWork();
+        $uow = $args->getObjectManager()->getUnitOfWork();
         $this->objectFilter->beginTransaction();
 
         $this->checkAllScheduledByAction($uow->getScheduledEntityInsertions(), 'create');

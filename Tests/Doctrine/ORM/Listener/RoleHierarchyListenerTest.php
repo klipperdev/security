@@ -94,7 +94,7 @@ final class RoleHierarchyListenerTest extends TestCase
         ];
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -126,7 +126,7 @@ final class RoleHierarchyListenerTest extends TestCase
         $changeSet = [];
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -166,7 +166,7 @@ final class RoleHierarchyListenerTest extends TestCase
         ];
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -203,7 +203,7 @@ final class RoleHierarchyListenerTest extends TestCase
         ];
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -251,7 +251,7 @@ final class RoleHierarchyListenerTest extends TestCase
         ;
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -310,7 +310,7 @@ final class RoleHierarchyListenerTest extends TestCase
         ]);
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -349,7 +349,7 @@ final class RoleHierarchyListenerTest extends TestCase
         ]);
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -383,7 +383,7 @@ final class RoleHierarchyListenerTest extends TestCase
         ];
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 

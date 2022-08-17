@@ -253,7 +253,7 @@ final class ObjectFilterListenerTest extends TestCase
         ;
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -301,7 +301,7 @@ final class ObjectFilterListenerTest extends TestCase
         ;
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -349,7 +349,7 @@ final class ObjectFilterListenerTest extends TestCase
         ;
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 
@@ -392,7 +392,7 @@ final class ObjectFilterListenerTest extends TestCase
         ;
 
         $args->expects(static::once())
-            ->method('getEntityManager')
+            ->method('getObjectManager')
             ->willReturn($this->em)
         ;
 

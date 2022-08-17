@@ -76,7 +76,7 @@ class PermissionCheckerListener implements EventSubscriber
             return;
         }
 
-        $uow = $args->getEntityManager()->getUnitOfWork();
+        $uow = $args->getObjectManager()->getUnitOfWork();
         $createEntities = $uow->getScheduledEntityInsertions();
         $updateEntities = $uow->getScheduledEntityUpdates();
         $deleteEntities = $uow->getScheduledEntityDeletions();

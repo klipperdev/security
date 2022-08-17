@@ -62,7 +62,7 @@ class SharingDeleteListener implements EventSubscriber
      */
     public function onFlush(OnFlushEventArgs $args): void
     {
-        $uow = $args->getEntityManager()->getUnitOfWork();
+        $uow = $args->getObjectManager()->getUnitOfWork();
 
         foreach ($uow->getScheduledEntityDeletions() as $entity) {
             $class = ClassUtils::getClass($entity);
@@ -85,7 +85,7 @@ class SharingDeleteListener implements EventSubscriber
     public function postFlush(PostFlushEventArgs $args): void
     {
         if (!empty($this->deleteSharingSubjects) || !empty($this->deleteSharingIdentities)) {
-            $this->buildDeleteQuery($args->getEntityManager())->execute();
+            $this->buildDeleteQuery($args->getObjectManager())->execute();
         }
 
         $this->deleteSharingSubjects = [];
