@@ -13,11 +13,11 @@ namespace Klipper\Component\Security\Tests\Firewall;
 
 use Klipper\Component\Security\Firewall\HostRoleListener;
 use Klipper\Component\Security\Identity\SecurityIdentityManagerInterface;
+use Klipper\Component\Security\Tests\Fixtures\Token\MockToken;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 
 /**
  * @author François Pluchino <francois.pluchino@klipper.dev>
@@ -115,7 +115,7 @@ final class HostRoleListenerTest extends TestCase
 
     public function testWithAlreadyRoleIncluded(): void
     {
-        $token = new AnonymousToken('secret', 'user', [
+        $token = new MockToken([
             'ROLE_HOST',
         ]);
 
@@ -157,7 +157,7 @@ final class HostRoleListenerTest extends TestCase
      */
     public function testInvoke($host, $validRole): void
     {
-        $token = new AnonymousToken('secret', 'user', [
+        $token = new MockToken([
             'ROLE_FOO',
         ]);
 
