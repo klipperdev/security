@@ -71,7 +71,7 @@ class ObjectFilterListener implements EventSubscriber
             return;
         }
 
-        $object = $args->getEntity();
+        $object = $args->getObject();
         $this->objectFilter->filter($object);
     }
 

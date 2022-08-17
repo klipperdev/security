@@ -165,7 +165,7 @@ final class ObjectFilterListenerTest extends TestCase
         ;
 
         $args->expects(static::once())
-            ->method('getEntity')
+            ->method('getObject')
             ->willReturn($entity)
         ;
 
