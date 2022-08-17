@@ -87,7 +87,7 @@ final class SubjectIdentity extends AbstractBaseIdentity implements SubjectIdent
     public static function fromClassname(?string $class): SubjectIdentityInterface
     {
         try {
-            if (!class_exists($class)) {
+            if (null === $class || !class_exists($class)) {
                 throw new InvalidArgumentException(sprintf('The class "%s" does not exist', $class));
             }
 

@@ -155,7 +155,7 @@ class SharingValidator extends ConstraintValidator
      */
     private function validateClass(Sharing $constraint, ?string $class, string $propertyPath): bool
     {
-        if (!class_exists($class)) {
+        if (null === $class || !class_exists($class)) {
             $this->context->buildViolation($constraint->invalidClassMessage)
                 ->atPath($propertyPath)
                 ->setParameter('%class_property%', $propertyPath)
