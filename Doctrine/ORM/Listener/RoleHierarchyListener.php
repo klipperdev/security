@@ -16,7 +16,6 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\UnitOfWork;
-use Klipper\Component\Cache\Adapter\AdapterInterface;
 use Klipper\Component\Security\Identity\CacheSecurityIdentityManagerInterface;
 use Klipper\Component\Security\Identity\SecurityIdentityManagerInterface;
 use Klipper\Component\Security\Model\GroupInterface;
@@ -27,6 +26,7 @@ use Klipper\Component\Security\Model\Traits\GroupableInterface;
 use Klipper\Component\Security\Model\UserInterface;
 use Klipper\Component\Security\Organizational\OrganizationalContextInterface;
 use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 /**
  * Invalidate the role hierarchy cache when users, roles or groups is inserted,
@@ -92,7 +92,9 @@ class RoleHierarchyListener implements EventSubscriber
     {
         if (\count($invalidates) > 0) {
             if ($this->cache instanceof AdapterInterface && null !== $this->context) {
-                $this->cache->clearByPrefixes($invalidates);
+                foreach ($invalidates as $invalidate) {
+                    $this->cache->clear($invalidate);
+                }
             } elseif (null !== $this->cache) {
                 $this->cache->clear();
             }

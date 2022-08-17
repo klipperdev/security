@@ -17,7 +17,6 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\UnitOfWork;
-use Klipper\Component\Cache\Adapter\AdapterInterface;
 use Klipper\Component\Security\Doctrine\ORM\Listener\RoleHierarchyListener;
 use Klipper\Component\Security\Identity\CacheSecurityIdentityManagerInterface;
 use Klipper\Component\Security\Model\GroupInterface;
@@ -29,6 +28,7 @@ use Klipper\Component\Security\Model\UserInterface;
 use Klipper\Component\Security\Organizational\OrganizationalContextInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 /**
  * @author François Pluchino <francois.pluchino@klipper.dev>
@@ -107,8 +107,8 @@ final class RoleHierarchyListenerTest extends TestCase
         ;
 
         $this->cache->expects(static::once())
-            ->method('clearByPrefixes')
-            ->with(['user__'])
+            ->method('clear')
+            ->with('user__')
         ;
 
         $this->sidManager->expects(static::once())
@@ -140,10 +140,6 @@ final class RoleHierarchyListenerTest extends TestCase
 
         $this->cache->expects(static::never())
             ->method('clear')
-        ;
-
-        $this->cache->expects(static::never())
-            ->method('clearByPrefixes')
         ;
 
         $this->sidManager->expects(static::never())
@@ -179,8 +175,8 @@ final class RoleHierarchyListenerTest extends TestCase
         ;
 
         $this->cache->expects(static::once())
-            ->method('clearByPrefixes')
-            ->with(['user__'])
+            ->method('clear')
+            ->with('user__')
         ;
 
         $this->sidManager->expects(static::once())
@@ -216,8 +212,8 @@ final class RoleHierarchyListenerTest extends TestCase
         ;
 
         $this->cache->expects(static::once())
-            ->method('clearByPrefixes')
-            ->with(['user__'])
+            ->method('clear')
+            ->with('user__')
         ;
 
         $this->sidManager->expects(static::once())
@@ -264,8 +260,8 @@ final class RoleHierarchyListenerTest extends TestCase
         ;
 
         $this->cache->expects(static::once())
-            ->method('clearByPrefixes')
-            ->with(['42__'])
+            ->method('clear')
+            ->with('42__')
         ;
 
         $this->sidManager->expects(static::once())
@@ -317,8 +313,8 @@ final class RoleHierarchyListenerTest extends TestCase
         $this->allScheduledCollections([$persistCollection]);
 
         $this->cache->expects(static::once())
-            ->method('clearByPrefixes')
-            ->with(['user__'])
+            ->method('clear')
+            ->with('user__')
         ;
 
         $this->sidManager->expects(static::once())
@@ -357,10 +353,6 @@ final class RoleHierarchyListenerTest extends TestCase
 
         $this->cache->expects(static::never())
             ->method('clear')
-        ;
-
-        $this->cache->expects(static::never())
-            ->method('clearByPrefixes')
         ;
 
         $this->sidManager->expects(static::never())
