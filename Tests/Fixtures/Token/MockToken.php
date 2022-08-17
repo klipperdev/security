@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
  */
 class MockToken extends AbstractToken
 {
-    public function getCredentials()
+    public function getCredentials(): string
     {
         return '';
     }
