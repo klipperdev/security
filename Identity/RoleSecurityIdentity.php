@@ -62,4 +62,9 @@ final class RoleSecurityIdentity extends AbstractSecurityIdentity
 
         throw new InvalidArgumentException('The user class must implement "Klipper\Component\Security\Model\Traits\RoleableInterface"');
     }
+
+    public function isRole(): bool
+    {
+        return 0 !== strpos($this->getIdentifier(), 'IS_') && 0 !== strpos($this->getIdentifier(), 'PUBLIC_ACCESS');
+    }
 }

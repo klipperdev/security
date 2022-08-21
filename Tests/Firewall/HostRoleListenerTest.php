@@ -11,7 +11,7 @@
 
 namespace Klipper\Component\Security\Tests\Firewall;
 
-use Klipper\Component\Security\Firewall\HostRoleListener;
+use Klipper\Component\Security\Firewall\HostRoleFirewallListener;
 use Klipper\Component\Security\Identity\SecurityIdentityManagerInterface;
 use Klipper\Component\Security\Tests\Fixtures\Token\MockToken;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -46,7 +46,7 @@ final class HostRoleListenerTest extends TestCase
     /**
      * @var
      */
-    protected ?HostRoleListener $listener = null;
+    protected ?HostRoleFirewallListener $listener = null;
 
     protected function setUp(): void
     {
@@ -64,7 +64,7 @@ final class HostRoleListenerTest extends TestCase
             ->willReturn($this->request)
         ;
 
-        $this->listener = new HostRoleListener($this->sidManager, $this->config);
+        $this->listener = new HostRoleFirewallListener($this->sidManager, $this->config);
     }
 
     public function testBasic(): void

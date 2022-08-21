@@ -18,7 +18,7 @@ use Klipper\Component\Security\Identity\SecurityIdentityManagerInterface;
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-abstract class AbstractRoleListener
+abstract class AbstractRoleFirewallListener
 {
     protected SecurityIdentityManagerInterface $sidManager;
 

@@ -60,7 +60,7 @@ abstract class IdentityUtils
         $roles = [];
 
         foreach ($sids as $sid) {
-            if ($sid instanceof RoleSecurityIdentity && false === strpos($sid->getIdentifier(), 'IS_')) {
+            if ($sid instanceof RoleSecurityIdentity && $sid->isRole()) {
                 $roles[] = OrganizationalUtil::format($sid->getIdentifier());
             }
         }
@@ -76,6 +76,6 @@ abstract class IdentityUtils
     public static function isValid(SecurityIdentityInterface $sid): bool
     {
         return !$sid instanceof RoleSecurityIdentity
-            || ($sid instanceof RoleSecurityIdentity && false === strpos($sid->getIdentifier(), 'IS_'));
+            || ($sid instanceof RoleSecurityIdentity && $sid->isRole());
     }
 }

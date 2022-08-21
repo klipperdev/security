@@ -33,6 +33,7 @@ use Klipper\Component\Security\Tests\Fixtures\Model\MockSharing;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockUserRoleable;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter;
 
 /**
  * @author François Pluchino <francois.pluchino@klipper.dev>
@@ -362,7 +363,7 @@ final class SharingProviderTest extends TestCase
     public function testGetPermissionRolesWithEmptySecurityIdentities(): void
     {
         $sids = [
-            new RoleSecurityIdentity(MockRole::class, 'IS_AUTHENTICATED_ANONYMOUSLY'),
+            new RoleSecurityIdentity(MockRole::class, AuthenticatedVoter::PUBLIC_ACCESS),
         ];
         $subjects = [
             SubjectIdentity::fromObject(new MockObject('foo', 42)),

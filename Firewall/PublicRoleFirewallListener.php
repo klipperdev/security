@@ -17,11 +17,11 @@ use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverIn
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Inject the host role in security identity manager.
+ * Inject the public role in security identity manager.
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class AnonymousRoleListener extends AbstractRoleListener
+class PublicRoleFirewallListener extends AbstractRoleFirewallListener
 {
     protected AuthenticationTrustResolverInterface $trustResolver;
 
@@ -46,7 +46,7 @@ class AnonymousRoleListener extends AbstractRoleListener
     }
 
     /**
-     * Handles anonymous authentication.
+     * Handles public authentication.
      *
      * @param RequestEvent $event A RequestEvent instance
      */
@@ -58,7 +58,7 @@ class AnonymousRoleListener extends AbstractRoleListener
     }
 
     /**
-     * Check if the anonymous role is present in config.
+     * Check if the public role is present in config.
      */
     private function hasRole(): bool
     {

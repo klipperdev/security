@@ -18,10 +18,10 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class HostRoleListener extends AbstractRoleListener
+class HostRoleFirewallListener extends AbstractRoleFirewallListener
 {
     /**
-     * Handles anonymous authentication.
+     * Handles host authentication.
      *
      * @param RequestEvent $event A RequestEvent instance
      */

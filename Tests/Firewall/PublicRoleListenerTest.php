@@ -11,7 +11,7 @@
 
 namespace Klipper\Component\Security\Tests\Firewall;
 
-use Klipper\Component\Security\Firewall\AnonymousRoleListener;
+use Klipper\Component\Security\Firewall\PublicRoleFirewallListener;
 use Klipper\Component\Security\Identity\SecurityIdentityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  *
  * @internal
  */
-final class AnonymousRoleListenerTest extends TestCase
+final class PublicRoleListenerTest extends TestCase
 {
     /**
      * @var MockObject|SecurityIdentityManagerInterface
@@ -55,13 +55,13 @@ final class AnonymousRoleListenerTest extends TestCase
      */
     protected $event;
 
-    protected ?AnonymousRoleListener $listener = null;
+    protected ?PublicRoleFirewallListener $listener = null;
 
     protected function setUp(): void
     {
         $this->sidManager = $this->getMockBuilder(SecurityIdentityManagerInterface::class)->getMock();
         $this->config = [
-            'role' => 'ROLE_CUSTOM_ANONYMOUS',
+            'role' => 'ROLE_CUSTOM_PUBLIC',
         ];
         $this->trustResolver = $this->getMockBuilder(AuthenticationTrustResolver::class)->getMock();
         $this->tokenStorage = $this->getMockBuilder(TokenStorageInterface::class)->getMock();
@@ -72,7 +72,7 @@ final class AnonymousRoleListenerTest extends TestCase
             ->willReturn($this->request)
         ;
 
-        $this->listener = new AnonymousRoleListener(
+        $this->listener = new PublicRoleFirewallListener(
             $this->sidManager,
             $this->config,
             $this->trustResolver,
@@ -105,9 +105,9 @@ final class AnonymousRoleListenerTest extends TestCase
         ($this->listener)($this->event);
     }
 
-    public function testInvokeWithoutAnonymousRole(): void
+    public function testInvokeWithoutPublicRole(): void
     {
-        $this->listener = new AnonymousRoleListener(
+        $this->listener = new PublicRoleFirewallListener(
             $this->sidManager,
             [
                 'role' => null,
@@ -144,7 +144,7 @@ final class AnonymousRoleListenerTest extends TestCase
 
         $this->sidManager->expects(static::once())
             ->method('addSpecialRole')
-            ->with('ROLE_CUSTOM_ANONYMOUS')
+            ->with('ROLE_CUSTOM_PUBLIC')
         ;
 
         ($this->listener)($this->event);
@@ -167,7 +167,7 @@ final class AnonymousRoleListenerTest extends TestCase
 
         $this->sidManager->expects(static::once())
             ->method('addSpecialRole')
-            ->with('ROLE_CUSTOM_ANONYMOUS')
+            ->with('ROLE_CUSTOM_PUBLIC')
         ;
 
         ($this->listener)($this->event);
