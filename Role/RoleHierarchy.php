@@ -169,9 +169,9 @@ class RoleHierarchy extends BaseRoleHierarchy
      * @param string                  $id   The cache id
      * @param null|CacheItemInterface $item The cache item variable passed by reference
      *
-     * @throws
-     *
      * @return null|string[]
+     *
+     * @throws
      */
     private function getCachedReachableRoleNames(string $id, ?CacheItemInterface &$item): ?array
     {
@@ -241,9 +241,9 @@ class RoleHierarchy extends BaseRoleHierarchy
      * @param string[] $reachableRoles The reachable roles
      * @param string[] $roles          The role names
      *
-     * @throws
-     *
      * @return string[]
+     *
+     * @throws
      */
     private function findRecords(array $reachableRoles, array $roles): array
     {

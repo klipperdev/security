@@ -43,9 +43,6 @@ final class HostRoleListenerTest extends TestCase
      */
     protected $event;
 
-    /**
-     * @var
-     */
     protected ?HostRoleFirewallListener $listener = null;
 
     protected function setUp(): void

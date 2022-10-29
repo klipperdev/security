@@ -152,9 +152,9 @@ class OrganizationalContext implements OrganizationalContextInterface
      * @param string $type          The type name
      * @param bool   $tokenRequired Check if the token is required
      *
-     * @throws
-     *
      * @return TokenInterface
+     *
+     * @throws
      */
     protected function getToken(string $type, bool $tokenRequired = true): ?TokenInterface
     {

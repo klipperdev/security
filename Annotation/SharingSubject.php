@@ -17,6 +17,7 @@ use Klipper\Component\Config\Annotation\AbstractAnnotation;
  * @author François Pluchino <francois.pluchino@klipper.dev>
  *
  * @Annotation
+ *
  * @Target({"CLASS"})
  */
 class SharingSubject extends AbstractAnnotation

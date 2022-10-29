@@ -20,26 +20,21 @@ use Klipper\Component\Security\Annotation as KlipperSecurity;
  *         "id": @KlipperSecurity\PermissionField(operations={"read"})
  *     }
  * )
- *
  * @KlipperSecurity\Permission(
  *     master="foo",
  *     fields={
  *         "id": @KlipperSecurity\PermissionField(operations={"view"})
  *     }
  * )
- *
  * @KlipperSecurity\SharingSubject(
  *     visibility="public"
  * )
- *
  * @KlipperSecurity\SharingSubject(
  *     visibility="private"
  * )
- *
  * @KlipperSecurity\SharingIdentity(
  *     alias="object"
  * )
- *
  * @KlipperSecurity\SharingIdentity(
  *     roleable="true",
  *     permissible="true"
@@ -53,7 +48,6 @@ class MockObjectWithAnnotation extends MockObject
      * @var string
      *
      * @KlipperSecurity\PermissionField(operations={"read"})
-     *
      * @KlipperSecurity\PermissionField(operations={"edit"})
      */
     protected ?string $name;

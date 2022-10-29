@@ -100,9 +100,9 @@ class PermissionFactory implements PermissionFactoryInterface
      * @param bool                      $buildField        Check if the field must be created
      * @param bool                      $buildDefaultField Check if the field must be created with the default permissions
      *
-     * @throws
-     *
      * @return PermissionFieldConfig[]
+     *
+     * @throws
      */
     private function configureNewFields(PermissionConfigInterface $config, array $defaultFields, bool $buildField, bool $buildDefaultField): array
     {

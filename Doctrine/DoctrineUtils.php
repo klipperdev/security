@@ -71,9 +71,9 @@ abstract class DoctrineUtils
      *
      * @param ClassMetadata $targetEntity The target entity
      *
-     * @throws
-     *
      * @return null|int|string
+     *
+     * @throws
      */
     public static function getMockZeroId(ClassMetadata $targetEntity)
     {

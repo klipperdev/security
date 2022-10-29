@@ -134,10 +134,10 @@ abstract class AbstractGetFilterEvent extends Event
      *
      * @param string $name The name of the parameter
      *
+     * @return null|bool|bool[]|float|float[]|int|int[]|string|string[]
+     *
      * @throws \InvalidArgumentException
      * @throws \ReflectionException
-     *
-     * @return null|bool|bool[]|float|float[]|int|int[]|string|string[]
      */
     public function getRealParameter(string $name)
     {

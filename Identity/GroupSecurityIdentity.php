@@ -39,9 +39,9 @@ final class GroupSecurityIdentity extends AbstractSecurityIdentity
      *
      * @param TokenInterface $token The token
      *
-     * @throws InvalidArgumentException When the user class not implements "Klipper\Component\Security\Model\Traits\GroupableInterface"
-     *
      * @return static[]
+     *
+     * @throws InvalidArgumentException When the user class not implements "Klipper\Component\Security\Model\Traits\GroupableInterface"
      */
     public static function fromToken(TokenInterface $token): array
     {

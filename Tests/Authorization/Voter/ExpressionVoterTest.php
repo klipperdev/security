@@ -72,9 +72,6 @@ final class ExpressionVoterTest extends TestCase
 
     protected ?ExpressionVariableStorage $variableStorage = null;
 
-    /**
-     * @var
-     */
     protected ?ExpressionVoter $voter = null;
 
     protected function setUp(): void

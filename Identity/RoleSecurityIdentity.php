@@ -41,9 +41,9 @@ final class RoleSecurityIdentity extends AbstractSecurityIdentity
      *
      * @param TokenInterface $token The token
      *
-     * @throws InvalidArgumentException When the user class not implements "Klipper\Component\Security\Model\Traits\RoleableInterface"
-     *
      * @return static[]
+     *
+     * @throws InvalidArgumentException When the user class not implements "Klipper\Component\Security\Model\Traits\RoleableInterface"
      */
     public static function fromToken(TokenInterface $token): array
     {
