@@ -34,6 +34,7 @@ class ConsoleToken extends AbstractToken
 
         $this->key = $key;
         $this->setUser($user);
+        $this->setAuthenticated(true, false);
     }
 
     public function __serialize(): array
